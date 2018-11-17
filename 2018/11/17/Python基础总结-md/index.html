@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>HTML5/CSS3新特性、移除的元素及兼容问题 | Hexo</title>
+  <title>Python基础总结.md | Hexo</title>
   <meta name="author" content="John Doe">
   
   <meta name="description" content="小白指路">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="HTML5/CSS3新特性、移除的元素及兼容问题"/>
+  <meta property="og:title" content="Python基础总结.md"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -51,27 +51,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2018-10-14T03:32:35.000Z"><a href="/2018/10/14/HTML5CSS3_001/">2018-10-14</a></time>
+        <time datetime="2018-11-17T03:49:16.000Z"><a href="/2018/11/17/Python基础总结-md/">2018-11-17</a></time>
       
       
   
-    <h1 class="title">HTML5/CSS3新特性、移除的元素及兼容问题</h1>
+    <h1 class="title">Python基础总结.md</h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h3 id="HTML5现在已经不是SGML的子集，主要是关于图像、位置、存储、地理定位等功能的增加。新特性有："><a href="#HTML5现在已经不是SGML的子集，主要是关于图像、位置、存储、地理定位等功能的增加。新特性有：" class="headerlink" title="HTML5现在已经不是SGML的子集，主要是关于图像、位置、存储、地理定位等功能的增加。新特性有："></a>HTML5现在已经不是SGML的子集，主要是关于图像、位置、存储、地理定位等功能的增加。新特性有：</h3><ul>
-<li>绘画canvas元素</li>
-<li>用于媒介回放的 video 和 audio 元素</li>
-<li>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；</li>
-<li>sessionStorage 的数据在浏览器关闭后自动删除</li>
-<li>语意化更好的内容元素，比如 article、footer、header、nav、section</li>
-<li>表单控件，calendar、date、time、email、url、search<h3 id="CSS3实现圆角、，阴影、对文字加特效，增加了更多的CSS选择器，多背景rgba，新的技术有webworker、websockt、Geolocation。"><a href="#CSS3实现圆角、，阴影、对文字加特效，增加了更多的CSS选择器，多背景rgba，新的技术有webworker、websockt、Geolocation。" class="headerlink" title="CSS3实现圆角、，阴影、对文字加特效，增加了更多的CSS选择器，多背景rgba，新的技术有webworker、websockt、Geolocation。"></a>CSS3实现圆角、，阴影、对文字加特效，增加了更多的CSS选择器，多背景rgba，新的技术有webworker、websockt、Geolocation。</h3><h3 id="移除的元素包括："><a href="#移除的元素包括：" class="headerlink" title="移除的元素包括："></a>移除的元素包括：</h3></li>
-<li>纯表现的元素  basefont、big、center、font、 s、strike、tt、u；</li>
-<li>对可用性产生负面影响的元素  frame、frameset、noframes。<h3 id="浏览器兼容问题解决方案："><a href="#浏览器兼容问题解决方案：" class="headerlink" title="浏览器兼容问题解决方案："></a>浏览器兼容问题解决方案：</h3>IE8/IE7/IE6支持通过document.createElement方法产生的标签，可以利用这一特性让这些浏览器支持HTML5新标签，浏览器支持新标签后，还需要添加标签默认的样式，当然最好的方式是直接使用成熟的框架：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--[if lt IE 9]&gt; </span><br><span class="line">&lt;script&gt; src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&lt;/script&gt; </span><br><span class="line">&lt;![endif]--&gt;</span><br></pre></td></tr></table></figure>
+        <p>一、注释<br>1、 注释的排错性<br>    先注释一部分代码，然后执行另外一部分代码，查看报错，用于调试。<br>2、注释的注意点<br>    多行注释的嵌套：<br>        如果外面是三个单引号，则里面要用三个双引号；如果外面是三个双引号，则里面要用三个单引号。<br>二、变量<br>1、概念：可以改变的量，具体是指内存中的一段存储空间。<br>2、变量的三种声明方式：<br>a = 1<br>b = 2</p>
+<p>a, b = 1, 2</p>
+<p>a = b = 3 (注意：这种方式的id(a) == id(b))</p>
+<p>3、变量的命名规范：<br>字母数字下划线，首字母不能为数字。<br>严格区分大小写，且不能使用关键字。<br>变量命名有意义，且不能使用中文哦。<br>import keyword<br>print(keyword.kwlist) # 打印出33个关键字<br>4、变量的交换<br>a = 3<br>b = 10<br>a, b = b, a<br>print(a, b) # 10 3<br>三、Python的六大数据类型<br>包括：Number型、字符串型、列表型、元组型、集合型、字典型。其中后五种是容器类型数据，Number型又包括int型、float型、bool型、complex型。</p>
 
       
     </div>
@@ -81,7 +74,7 @@
         
   
   <div class="tags">
-    <a href="/tags/HTML5-CSS3/">HTML5/CSS3</a>
+    <a href="/tags/Python基础/">Python基础</a>
   </div>
 
         
@@ -124,7 +117,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://yoursite.com/2018/10/14/HTML5CSS3_001/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://yoursite.com/2018/11/17/Python基础总结-md/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
