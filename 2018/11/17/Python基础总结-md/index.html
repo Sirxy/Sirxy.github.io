@@ -62,11 +62,118 @@
     <div class="entry">
       
         <p>一、注释<br>1、 注释的排错性<br>    先注释一部分代码，然后执行另外一部分代码，查看报错，用于调试。<br>2、注释的注意点<br>    多行注释的嵌套：<br>        如果外面是三个单引号，则里面要用三个双引号；如果外面是三个双引号，则里面要用三个单引号。</p>
-<p>二、变量<br>1、概念：可以改变的量，具体是指内存中的一段存储空间。<br>2、变量的三种声明方式：<br>a = 1<br>b = 2</p>
-<p>a, b = 1, 2</p>
-<p>a = b = 3 (注意：这种方式的id(a) == id(b))</p>
-<p>3、变量的命名规范：<br>字母数字下划线，首字母不能为数字。<br>严格区分大小写，且不能使用关键字。<br>变量命名有意义，且不能使用中文哦。<br>import keyword<br>print(keyword.kwlist) # 打印出33个关键字<br>4、变量的交换<br>a = 3<br>b = 10<br>a, b = b, a<br>print(a, b) # 10 3</p>
-<p>三、Python的六大数据类型<br>包括：Number型、字符串型、列表型、元组型、集合型、字典型。其中后五种是容器类型数据，Number型又包括int型、float型、bool型、complex型。</p>
+<p>二、变量<br>1、概念：可以改变的量，具体是指内存中的一段存储空间。<br>    house305 = “张三”<br>    print(house305)<br>    house305 = “李四”<br>    print(house305)<br>2、变量的三种声明方式：<br>    方式一<br>        a = 1<br>        b = 2<br>    方式二<br>        a, b = 1, 2<br>    方式三<br>        a = b = 3 (注意：这种方式的id(a) == id(b))</p>
+<p>3、变量的命名规范：<br>字母数字下划线，首字母不能为数字。<br>严格区分大小写，且不能使用关键字。<br>变量命名有意义，且不能使用中文哦。<br>import keyword<br>print(keyword.kwlist) # [‘False’, ‘None’, ‘True’, ‘and’, ‘as’, ‘assert’, ‘break’, ‘class’, ‘continue’, ‘def’, ‘del’, ‘elif’, ‘else’, ‘except’, ‘finally’, ‘for’, ‘from’, ‘global’, ‘if’, ‘import’, ‘in’, ‘is’, ‘lambda’, ‘nonlocal’, ‘not’, ‘or’, ‘pass’, ‘raise’, ‘return’, ‘try’, ‘while’, ‘with’, ‘yield’]<br>4、变量的交换<br>a = 3<br>b = 10<br>a, b = b, a<br>print(a, b) # 10 3</p>
+<p>三、Python的六大数据类型<br>分为：Number型、容器类型（字符串型、列表型、元组型、集合型、字典型）。<br>(1)Number数字类型(int  float  bool  complex)<br>    ①Number类型之int 整型(正整数 0 负整数)<br>        intvar = 37<br>        print(intvar)</p>
+<pre><code>    # type() 查看一个值的数据类型
+    res = type(intvar)
+    print(res) #&lt;class &apos;int&apos;&gt;
+    # id() 查看一个变量所指向值的地址
+    res = id(intvar)
+    print(res)  #10915520
+
+    # 二进制整型
+    intvar = 0b1010101
+    # 八进制整型
+    intvar = 0o127
+    # 十六进制整型
+    intvar = 0xFF
+
+    # 变量声明的第三种方式 特点
+    a = b = 89
+    res1 = id(a)
+    res2 = id(b)
+    print(res1)
+    print(res2)
+②Number类型之float 浮点型 （小数：1普通小数 2科学计数法表示的小数。例:a = 3e-5  #3e-05 ）
+    (1)表示方式一
+        floatvar = 3.14
+    (2)表示方式二
+        floatvar = 3.14e-2  # 小数点向左移动2位
+        floatvar = 3.14e04  # 小数点向右移动4位
+③Number类型之bool 布尔型 （True 真的 False 假的）
+    boolvar = True
+    boolvar = False    
+④Number类型之complex 复数类型（实数+虚数 组成）
+    ‘&apos;&apos; 如果有一个数，它的平方是-1，那么这个数就是j
+        (科学家认为有，表达一个高精度的类型)
+    &apos;&apos;&apos;
+    (1) 表达方式一
+        complexvar = 3 + 4j
+        complexvar = 4j
+    (2)表达方式二
+        &apos;&apos;&apos; var1 = complex(实数,虚数)
+            通过complex强制转换成复数类型
+        &apos;&apos;&apos;
+        complexvar = complex(3, 5)
+</code></pre><p>（2）String字符串型<br>特征：可获取，不可修改的有序容器类型数据。</p>
+<pre><code># error
+strvar=&quot;这是真的字符串&quot;
+strvar[-3] = &quot;假&quot;
+print(strvar)
+</code></pre><p>字符串有三种类型：通过单引号、双引号、三引号（可以支持跨行,不需要对单双引号进行转义）引起来的字符串。<br>转义字符：<br>    语法: \ + 字符<br>    (1)将无意义的字符变得有意义<br>    (2)将有意义的字符变得无意义<br>    例如：<br>        \n 或者 \r\n : 代表换行<br>        \t   : 代表一个tab缩进(水平制表符)<br>        \r   : 把\r后面的字符提到行首<br>        strvar = “处处\r蚊子咬”<br>        print(strvar)<br>元字符串：r+字符串：作用在于让转义字符失效，原型化输出<br>        strvar = r’夜来\n大狗熊’<br>        print(strvar)<br>        strvar = r”夜来\n大狗熊”<br>        print(strvar)<br>        strvar = r’’’夜来\n大狗熊’’’<br>        print(strvar)<br>        strvar = r”””夜来\n大狗\r熊\t”””<br>        print(strvar)<br>（3）List列表类型<br>特征：可获取，可修改de有序容器类型数据。<br>定义空列表：<br>    listvar = []<br>    print(listvar)<br>列表值的获取：<br>    listvar = [‘a’, ‘b’, ‘c’, ‘d’, ‘e’, ‘f’]<br>    res = listvar[1]<br>    res = listvar[len(listvar) - 1]<br>列表的修改：<br>    listvar = [‘a’, 14, 3,14, True, 4 + 3j]<br>    listvar[1] = “15”<br>（4）Tuple元组类型<br>特征：可获取，不可修改的有序的容器类型数据<br>定义空元组：<br>    tuplevar = ()<br>tuple类型的获取：<br>    tuplevar = (‘a’, ‘c’, ‘b’, ‘s’, 15 - 9j, False)<br>    res = tuplevar[-3]<br>tuple类型不支持修改</p>
+<pre><code># error
+tuplevar[0] = 1234
+print(tuplevar)
+</code></pre><p>(5)Set集合类型<br>特征：自动去重，无序的容器类型数据。<br>作用：集合类型是用来做交集、差集、并集、补集操作的。<br>注意点：<br>无法通过索引来获取其中的数据。<br>    setvar = {True, “你好”, 34, 9.2, 3 + 4j}<br>    print(setvar)<br>    print(setvar[1]) # error<br>无法修改集合当中的值<br>    setvar[0] = “999” # error<br>    print(setvar)<br>单独定义一个{} 它代表的不是集合 而是字典<br>    var = {} # 空字典<br>    print(type(var)) #dict<br>    var = set() # 空集合<br>    print(type(var))<br>(6)Dict字典类型<br>特征：键值对存储的，无序容器类型数据。<br>dictvar = {‘top’: ‘程咬金’, ‘middle’: ‘貂蝉’, ‘bottm’: ‘鲁班七号’, ‘support’: ‘蔡文姬’, ‘jungle’: ‘韩信’}<br>字典的获取：通过键获取值<br>    res = dictvar[‘jungle’]<br>    print(res)<br>字典的修改<br>    dictvar[‘middle’] = ‘小乔’<br>    print(dictvar)</p>
+<p>四、类型转换<br>–&gt;自动类型转换<br>当2个不同类型的数据进行运算的时候,默认向更高精度转换数据类型精度从低到高:bool、int、float、complex。<br>–&gt;强制类型转换<br>Number类型强制转换<br>通过int()、float()、complex()可以将整型、浮点型、布尔型以及纯数字字符串强转为对应的类型数据，而通过bool()则可以将Number类型数据和容器类型数据强转为bool类型数据。（扩展：布尔类型为假的时候，一共有10种情况：0, 0.0, False, 0j, ‘’, [], (), {}, set(), None）<br>容器类型强制转换<br>通过str()可以将Number类型和容器类型强制转为String型。<br>通过list()可以将字符串、列表、元组、集合、字典类型强制转换为List类型，把字典强转成列表,只要其中的键,忽略其中的值。<br>通过tuple()可以将容器类型数据强转为tuple类型数据，把字典强转成列表,只要其中的键,忽略其中的值。<br>通过set()可以将容器类型数据强制转换为集合类型数据，把字典强转成集合,只要其中的键,忽略其中的值。<br>dict()<br>使用 二级列表 或 二级元组   (二级集合语法上不错,但是无序,不建议使用)<br>‘’’强转成字典的条件：需要等长的二级容器’’’</p>
+<h1 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h1><p>var1 = [(“a”: 1), (“b”, 2)]<br>var2 = [[‘a’: 3], [‘b’: 4]]<br>var3 = [(‘a’: 5), [‘b’: 6]]</p>
+<h1 id="var4-‘a’-7-‘b’-8"><a href="#var4-‘a’-7-‘b’-8" class="headerlink" title="var4 = [{‘a’: 7}, {‘b’: 8}]"></a>var4 = [{‘a’: 7}, {‘b’: 8}]</h1><h1 id="res-print-var4"><a href="#res-print-var4" class="headerlink" title="res = print(var4)"></a>res = print(var4)</h1><p>print(res, type(res))</p>
+<h1 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h1><p>var1 = ((‘a’, 1), (‘b’, 2))<br>var2 = ([‘a’, 3], [‘b’, 4])<br>var3 = ((‘a’, 5), [‘b’, 6])</p>
+<h1 id="var4-‘a’-7-‘b’-8-切记不要使用"><a href="#var4-‘a’-7-‘b’-8-切记不要使用" class="headerlink" title="var4 = [{‘a’,7},{‘b’,8}] 切记不要使用"></a>var4 = [{‘a’,7},{‘b’,8}] 切记不要使用</h1><h1 id="res-dict-var4"><a href="#res-dict-var4" class="headerlink" title="res = dict(var4)"></a>res = dict(var4)</h1><p>print(res)</p>
+<h1 id="方式三"><a href="#方式三" class="headerlink" title="方式三"></a>方式三</h1><p>var = {(‘a’, 1), (‘b’, 2)}<br>res = dict(var)<br>print(res)</p>
+<p>五、以下数据类型存储规律仅对当前linux 64位的python3.x版本负责<br>–&gt;Number 部分<br>1.对于整型而言，-5~正无穷范围内的相同值 id一致<br>2.对于浮点数而言，非负数范围内的相同值 id一致<br>3.布尔值而言,值相同情况下，id一致<br>4.复数的id标识都不相同(在 实数+虚数 这样的结构中)<br>–&gt;容器类型部分<br>5.字符串而言，字符串值相同情况下，id一致<br>6.列表，元组，字典，集合无论什么情况 id标识都不同(但空元组的id标识一样)</p>
+<p>六、Python运算符<br>(1)算数运算符:  + - <em> / // % **<br>(2)比较运算符:  &gt; &lt; &gt;= &lt;= == !=<br>(3)赋值运算符:  = += -= </em>= /= //= %= **=<br>(4)成员运算符:  in 和 not in (针对于容器型数据)<br>(5)身份运算符:  is 和 is not (检测两个数据在内存当中是否是同一个值)<br>(6)逻辑运算符:  and or not<br>True and print(1)<br>False and print(2) # 逻辑与短路<br>True or print(3) # 逻辑或短路<br>False or print(4)<br>(7)位运算符:    &amp; | ~ ^ &lt;&lt; &gt;&gt;<br>按位非是对补码进行操作的，每一位按位取反，包括高位符号位(注意：原码和补码之间的互相转换，符号位不动)<br>运算规律：公式：-(x + 1)<br>例如：<br>~19<br>补码:   00000000  10011<br>按位非: 11111111  01100<br>给补码求原码:<br>取反:1111111  10011<br>加1 :1111111  10100 (原码)<br>最终: -20<br>~(-19)<br>原码：11111111   10011<br>给原码求补码：<br>取反：11111111   01100<br>加一：11111111     01101<br>按位非运算：<br>      00000000   10010<br>最终：18<br>运算符的优先级：<br>一元运算符优先级 大于 二元运算符<br>    一元运算符（~按位非  -负号）<br>    例：~19只对一个数进行操作的运算符叫做一元运算符<br>    二元运算符<br>    例：1 + 2 对两个数 进行操作的运算符叫做二元运算符<br>运算符优先级最低的是 赋值运算符当中的=<br>运算符整体的优先顺序如下：<br>    算数运算符 &gt; 位运算符 &gt; 比较运算符 &gt; 赋值运算符 &gt; 身份运算符 &gt; 成员运算符 &gt; 逻辑运算符</p>
+<p>七、流程控制<br>大致分为三种控制结构：顺序结构、分支结构、循环结构。<br>分支结构分为：单项分支、双项分支、多项分支、巢状分支，通过if elif else关键字来构建。<br>循环结构分为while / for… in…，通过循环结构可以减少代码的冗余，提高执行效率。for…in…循环多用于遍历容器类型数据，而while则不能遍历无序的容器类型数据。在遍历字典时，默认遍历字典的键。遍历等长的二级列表：<br>    listvar = [[‘a’, ‘b’, ‘c’], [‘d’, ‘e’, ‘f’], [‘g’, ‘h’, ‘j’]]<br>    for i, j, k in listvar:<br>        print(i, j, k)<br>字符串的拼接：<br>–&gt;正常拼接：通过“+”来拼接。<br>    a = ‘1’<br>    b = ‘2’<br>    print(a + b)<br>–&gt;跨行拼接：通过\来衔接不同的多行。<br>    strvar = “123456”\<br>             “7890”<br>–&gt;重复拼接：通过字符 <em> 次数。<br>    strvar = ‘love’ </em> 10</p>
+<p>pass用来占位 / break终止当前循环，只能用在循环当中 / continue跳过当前循环，后面的代码不执行，直接从下一次循环开始</p>
+<p>八、函数<br>关于函数<br>(1)函数的含义:功能 (包裹一部分代码 实现某一个功能 达成某一个目的)<br>(2)函数特点:可以反复调用,提高代码的复用性,提高开发效率,便于维护管理<br>(3)函数基本格式<br>    def func():<br>        pass<br>(4)驼峰命名法：（便于程序员更为方便的阅读代码）<br>大驼峰命名法：MyCar（用在类的命名中）；<br>小驼峰命名法：myCar（一般用在函数命名中）；<br>普通情况下，一般用_来分割不同的词。</p>
+<pre><code># 99乘法表的定义
+def multiplication99_table():
+    for i in range(1, 10):;
+        for j in range(1, i + 1):
+            print(&quot;%d*%d=%2d &quot; % (i, j, i*j), end=&quot;&quot;)
+        print()
+# 99乘法表的调用
+multiplication99_table()
+</code></pre><p>关于函数参数<br>(1)函数参数概念及分类<br>    函数参数:调用时需要传递的数据.<br>    函数参数大类分为形参和实参:<br>        形参: 在函数定义时，括号里面的参数，叫形参（形式参数）<br>        实参: 在函数调用时，括号里面的参数，叫实参（实际参数）<br>    形参与实参的关系:函数调用时,形参和实参个数需要一一对应<br>    形参种类:普通参数,默认参数,普通收集参数,命名关键字参数,关键字收集参数<br>    实参种类:普通实参,关键字实参<br>  默认形参和关键字实参区别：默认形参和关键字实参写法上一样，只不过默认形参在函数的定义处，关键字实参在函数的调用处。<br>(2)收集参数:<br>    普通收集参数:在形参当中，<em>号后面的参数是收集参数，用于专门收集多余的普通参数,形成一个新的元组。语法:参数前面加</em>    例:*args。</p>
+<pre><code># 例子：计算任意个数的累加和
+def my_sum(*args):
+    total = 0
+    for i in args:
+        total += i
+    print(total)
+my_sum(1, 2, 3, 77, 11)
+关键字收集参数:用于专门收集多余关键字实参的是关键字收集参数,形成一个新的字典。语法:参数前面加**    例:**kwargs。
+# 例子：任意参数的拼接
+def link_str(**kwargs):
+    print(kwargs)#{&apos;monitor&apos;:&apos;zhangbojin&apos;,&apos;zhangsan&apos;:&apos;zhangsan&apos;,&apos;school_beauty&apos;:&apos;wangitechui&apos;}
+    strvar1 = &apos;&apos;
+    strvar2 = &apos;&apos;
+    keydict = {&apos;monitor&apos;:&apos;班长&apos;,&apos;school_beauty&apos;:&apos;校花&apos;}
+    for key,val in kwargs.items():
+        if key in keydict:
+            strvar1 += keydict[key] + val + &apos;\n&apos;
+        else: 
+            strvar2 += val
+    print(strvar1+&quot;今天结婚,喜结良缘&quot;+&quot;,到场的吃瓜群众是&quot;+strvar2)
+link_str(monitor=&quot; 张铂金 &quot;,school_beauty=&quot; 王铁锤 &quot;,zhangsan = &apos;张三&apos; )
+</code></pre><p>(3)命名关键字参数:定义时放在<em>号后面的参数,调用时强制必须指定关键字实参才能调。<br>在函数定义时，写在</em>后面的参数2是命名关键字参数（假定参数3是关键字收集参数）<br>语法:(*,x) x是命名关键字参数。<br>作用：在函数调用的时候，必须使用关键字实参进行调用**保证参数3不是关键字收集参数时，那么此刻参数2，参数3都是命名关键字参数</p>
+<p>(4)关于<em>和**的 实参 调用:在调用时,容器类型数据前面加</em> 或者 <strong><br>在函数的调用处：例：func2(*listvar, </strong>dictvar)</p>
+<ul>
+<li>用在修改容器类型的数据，把容器里面的数据，一个一个拿出来，当成参数传递给函数<br>** 用在修饰字典类型的数据，意味着把字典中的{键: 值} =&gt;变成键=值,一个个当成参数赋值给函数调用<h1 id="小案例"><a href="#小案例" class="headerlink" title="小案例"></a>小案例</h1>  def func(a,b,*args,c,d):<pre><code>print(a,b)
+print(args)
+print(c)
+print(d)
+</code></pre>  func(1,2,3,4,5,c=6,d=999)<h1 id="号用法"><a href="#号用法" class="headerlink" title="*号用法"></a>*号用法</h1>  print(“======”)<br>  listvar = [1, 2, 3]<br>  func1(*listvar)<h1 id="func1-listvar-等价于-func1-1-2-3"><a href="#func1-listvar-等价于-func1-1-2-3" class="headerlink" title="func1(*listvar) 等价于 func1(1, 2, 3)"></a>func1(*listvar) 等价于 func1(1, 2, 3)</h1><h1 id="号用法-1"><a href="#号用法-1" class="headerlink" title="**号用法"></a>**号用法</h1>  dictvar = {‘d’: 4}<br>  func2(1, 2, 3, **dictvar)<h1 id="func2-1-2-3-dictvar-等价于-func2-1-2-3-d-4"><a href="#func2-1-2-3-dictvar-等价于-func2-1-2-3-d-4" class="headerlink" title="func2(1,2,3,**dictvar) 等价于 func2(1,2,3,d=4)"></a>func2(1,2,3,**dictvar) 等价于 func2(1,2,3,d=4)</h1><h1 id="函数的调用处"><a href="#函数的调用处" class="headerlink" title="函数的调用处"></a>函数的调用处</h1>  func2(<em>listvar,**dictvar)<br>(5)形参声明的位置顺序:<br>  普通参数 -&gt; 默认参数 -&gt; 收集参数 -&gt; 命名关键字参数 -&gt; 关键字收集参数<br>(6)对于任意函数，都可以通过 def func(</em>args, **kw) 来获取所有参数<h1 id="参数练习："><a href="#参数练习：" class="headerlink" title="参数练习："></a>参数练习：</h1>def f1(a, b, c=0, <em>args, **kwargs):<br>  print(‘a =’, a, ‘b =’, b, ‘c =’, c, ‘args =’, args, ‘kw =’, kw)<br>def f2(a, b, c=0, </em>, d, *kw):<br>  print(‘a =’, a, ‘b =’, b, ‘c =’, c, ‘d =’, d, ‘kw =’, kw)<h1 id="以上两个函数-打印结果"><a href="#以上两个函数-打印结果" class="headerlink" title="以上两个函数 打印结果"></a>以上两个函数 打印结果</h1>#(一)<br>f1(1, 2) #a = 1 b = 2 c = 0 args = () kw = {}<br>f1(1, 2, c=3) #a = 1 b = 2 c = 3 args = () kw = {}<br>f1(1, 2, 3, ‘a’, ‘b’) #a = 1 b = 2 c = 3 args = (‘a’, ‘b’) kw = {}<br>f1(1, 2, 3, ‘a’, ‘b’, x=99) #a = 1 b = 2 c = 3 args = (‘a’, ‘b’) kw = {‘x’: 99}<br>f2(1, 2, d=99, ext=None) #a = 1 b = 2 c = 0 d = 99 kw = {‘ext’: None}<br>#(二)<br>args = (1, 2, 3, 4)<br>kw = {‘d’: 99, ‘x’: ‘#’}<br>f1(*args, **kw)  #a = 1 b = 2 c = 3 args = (4,) kw = {‘d’: 99, ‘x’: ‘#’}<h1 id="f1-1-2-3-4-d-99-x-’-’"><a href="#f1-1-2-3-4-d-99-x-’-’" class="headerlink" title="f1(1,2,3,4,d=99,x=’#’)"></a>f1(1,2,3,4,d=99,x=’#’)</h1>#(三)<br>myargs = (1, 2, 3)<br>mykw = {‘d’: 88, ‘x’: ‘#’}<br>f2(*myargs, **mykw) #a = 1 b = 2 c = 3 args = (4,) kw = {‘d’: 99, ‘x’: ‘#’}<h1 id="f2-1-2-3-d-88-x-’-’"><a href="#f2-1-2-3-d-88-x-’-’" class="headerlink" title="f2(1,2,3,d=88,x=’#’)"></a>f2(1,2,3,d=88,x=’#’)</h1>#(四)<br>def f1(a, b, c=0, *args,d,**kw):<br>  print(‘a =’, a, ‘b =’, b, ‘c =’, c, ‘args =’, args, ‘kw =’, kw)<br>  print(d)<br>f1(1,2,3, ‘a’, ‘b’,d=67, x=99,y=77) #a = 1 b = 2 c = 3 args = (‘a’, ‘b’) kw = {‘x’: 99, ‘y’: 77}</li>
+</ul>
+<p>return返回值<br>为这个函数返回一个结果 (return返回值可有可无 按照需求选择)注意:执行return语句之后,函数执行结束</p>
+<p><strong><strong>doc</strong></strong>：<strong>doc</strong>或者help查看文档</p>
+<p>全局变量、局部变量及其关键字的使用<br>– global   关键字:声明全局变量,作用在于修改全局变量<br>– nonlocal 关键字:声明函数内部的局部变量,作用在于修改局部变量(当前函数上一层的局部变量)</p>
+<p>内部函数<br>(1)内部函数可以直接在函数外部调用么<br>(2)调用外部函数后,内部函数可以在函数外部调用吗<br>(3)内部函数可以在函数内部调用吗<br>(4)内部函数在函数内部调用时,是否有先后顺序</p>
+<p>闭包<br>闭包的定义:<br>内函数使用外函数的局部变量，并且外函数将内函数返回出来的方法叫闭包,返回的内函数叫闭包函数。<br>闭包的特点:<br>外函数的临时变量会在将来的内部函数中用到,自己调用结束后会把外函数的临时变量与内函数绑定,不释放将来调用内函数的时候仍可使用外函数变量。<br>闭包的意义:<br>闭包可以优先使用外函数中的变量,并对闭包中的值起到了封装保护的作用.外部无法访问。</p>
+<p>递归函数<br>递归的定义：自己调用自己就是递归函数。<br>递归的注意事项：<br>函数调用的过程就是开辟栈帧和释放栈帧的过程，调用结束时开辟栈帧空间，结束时释放（话外之意是不结束这层栈帧不释放）。<br>递归每次调用都会开辟一个栈帧，如果递归的层数过多，不建议使用，容易内存溢出。<br>每次开辟的栈帧空间，代码必须全部执行完毕之后才释放空间，在回到上一个栈帧执行没结束的代码。<br>如果使用递归，需要给予一个跳出的条件，不能无限递归。</p>
+<p>匿名函数<br>实际上就是通过lambda表达式来书写的。一般只用来实现一些简单的函数功能，写法非常方便。</p>
+<p>迭代器：<br>定义：能被next()函数调用并且不断返回下一个值的对象称为迭代器（Iterator 迭代器对象）。<br>特征：迭代器会生成惰性序列，它通过计算把值依次地返回，一边循环一边计算而不是一次性得到所有数据。<br>优点：需要数据的时候，一次取一个，可以大大节省内存空间，而不是一股脑地把所有数据放进内存。‘<br>惰性序列：没有一次性的把所有数据都放在序列中，而是遍历一个放一个，这样的序列叫做惰性序列。<br>Iterable可迭代性    Iterator迭代器<br>range是可迭代对象<br>range和迭代器能够产生惰性序列</p>
 
       
     </div>
@@ -141,6 +248,8 @@
   <ul class="entry">
   
     <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
   
     <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
   
