@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Python OS模块常用方法总结 | Hexo</title>
+  <title>Hello World | Hexo</title>
   <meta name="author" content="John Doe">
   
   <meta name="description" content="小白指路">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Python OS模块常用方法总结"/>
+  <meta property="og:title" content="Hello World"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -51,50 +51,25 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2018-10-14T10:42:29.000Z"><a href="/2018/10/14/Python OS模块常用方法总结/">2018-10-14</a></time>
+        <time datetime="2019-02-13T02:36:41.753Z"><a href="/2019/02/13/hello-world/">2019-02-13</a></time>
       
       
   
-    <h1 class="title">Python OS模块常用方法总结</h1>
+    <h1 class="title">Hello World</h1>
   
 
     </header>
     <div class="entry">
       
-        <ul>
-<li><p>操作               说明</p>
-</li>
-<li><p>os.getcwd()    得到当前工作目录，即当前Python脚本工作的目录路径</p>
-</li>
-<li>os.listdir()    返回指定目录下的所有文件和目录名</li>
-<li>os.remove()    函数用来删除一个文件</li>
-<li>os.removedirs(r”c\python”)    删除多个目录</li>
-<li>os.path.isfile()    检验给出的路径是否是一个文件</li>
-<li>os.path.isdir()    检验给出的路径是否是一个目录</li>
-<li>os.path.isabs()    判断是否是绝对路径</li>
-<li>os.path.exists()    检验给出的路径是否真地存</li>
-<li>os.path.split()    返回一个路径的目录名和文件名</li>
-<li>os.path.splitext()    分离扩展名</li>
-<li>os.path.dirname()    获取路径名</li>
-<li>os.path.basename()    获取文件名</li>
-<li>os.system()    运行shell命令</li>
-<li>os.getenv()与os.putenv()    读取和设置环境变量</li>
-<li>os.linesep     给出当前平台使用的行终止符，Windows使用’rn’，Linux使用’n’而Mac使用’r’</li>
-<li>os.name    指示你正在使用的平台，对于Windows，它是’nt’，而对于Linux/Unix用户，它是’posix’</li>
-<li>os.rename(old, new)    重命名：</li>
-<li>os.makedirs(r”c：\python\test”)    创建多级目录</li>
-<li>os.mkdir(“test”)    创建单个目录</li>
-<li>os.stat(file)    获取文件属性</li>
-<li>os.chmod(file)    修改文件权限与时间戳</li>
-<li>os.exit()    终止当前进程</li>
-<li>os.path.getsize(filename)    获取文件大小</li>
-<li>os.mkdir(“file”)    创建目录</li>
-<li>os.rename(“oldname”,”newname”)    重命名文件（目录）,文件或目录都是使用这条命令</li>
-<li>os.remove(“file”)    删除文件</li>
-<li>os.rmdir(“dir”)    删除目录, 只能删除空目录</li>
-<li>os.chdir(“path”)    转换目录, 换路径</li>
-<li>os.mknod(“test.txt”)    创建空文件</li>
-</ul>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
     </div>
@@ -102,11 +77,6 @@
       
         
         
-  
-  <div class="tags">
-    <a href="/tags/Python基础/">Python基础</a>
-  </div>
-
         
   <div class="addthis addthis_toolbox addthis_default_style">
     
@@ -147,7 +117,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://sirxy.github.io/2018/10/14/Python OS模块常用方法总结/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/02/13/hello-world/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
