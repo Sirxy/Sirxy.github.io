@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux基础 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="小白指路">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Linux基础"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/">Hexo-沐雨橙风</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-11-19T12:43:32.000Z"><a href="/2018/11/19/Linux基础/">2018-11-19</a></time>
+      
+      
+  
+    <h1 class="title">Linux基础</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>一、Linux与Windows的区别<br>体现在目录的结构和安全性上，Linux所有的命令是以文件形式存储的，在Linux系统当中一切皆为文件（常用的比如：普通文件、目录文件、链接文件、设备文件等）。</p>
+<p>二、目录含义<br>/bin 存放普通用户的命令文件<br>/boot 存放系统启动文件<br>/cdrom 存放读取光盘<br>/dev 存放设备相关文件<br>/etc 存放配置文件<br>/home 家目录<br>/lib 库文件相关<br>/lib64 64位库文件<br>/lost+found 系统异常产生错误时，丢失文件放在这里<br>/media 媒体文件<br>/mnt 挂载目录<br>/opt 安装软件时的默认目录<br>/proc 内存中相关数据文件<br>/root root用户登录的家目录<br>/run 系统运行的时候用到的文件<br>/sbin 超级管理员运行的文件<br>/srv 服务启动之后需要访问的数据目录<br>/sys 系统文件<br>/tmp 临时文件<br>/usr 应用程序存放目录<br>/var 放置系统执行过程中经常变化的文件，如随时更改的日志文件</p>
+<p>三、相关命令<br>查看命令（目录结构、路径）：<br>.     当前路径<br>..  上一级路径<br>cd ..  回到上一级<br>cd  切换到家目录<br>cd ~  切换到家目录<br>cd - 回到上一个你操作的那一个目录<br>pwd 查看当前所在的目录是哪里<br>ls  查看当前文件夹里面有什么<br>    .bash_history 但凡是点开头的文件，都是隐藏文件<br>    -a  所有文件（包括隐藏文件）<br>    -l  以列表的形式呈现<br>    -h  可以让文件大小带上单位<br>ll 相当于ls -al<br>man 是帮助命令，比如：man ls或man cp<br>nano 内置自带的文本编辑器（编辑文件用的）<br>cat 查看文件内容<br>more 对于内容较多的情况下用more支持分页，空格下一页<br>head 加上-2是查看前几条<br>tail 加上-2是查看后几条<br>dmesg 查看系统接入设备信息<br>top 查看运行状态<br>sudo service network-manager restart 网络有线未托管<br>sudo apt-get install vim<br>操作命令（新建、复制粘贴剪切、删除）：<br>mkdir 要创建的文件夹名字<br>touch 要创建的文件名<br>ln -s 创建软链接，ln -s 指定你想要创建的连接  放到哪个目录下面，ln -s 需要使用绝对路径的方式来创建。<br>mv /路径/文件夹或文件 新名称  功能：既可以剪切也可以改名<br>cp 路径 路径（从哪里~到哪里去）<br>cp 默认只能够复制文件<br>cp -r 可以复制文件夹<br>cp -a 可以复制权限和所有属性<br>rm -rf 指定文件夹或者文件名称 功能：用于删除文件或者目录<br>查找命令（找文件、文件内容）：<br>find 搜索文件的命令<br>find 查找位置 -name 文件名<br>find    /     -iname index.php<br>grep 搜索文件里面符合条件的内容<br>grep “字符串” 文件名<br>grep  -i   “root”<br>grep  -v   “root”<br>挂载操作命令：<br>sudo fdisk -l         查看当前系统有哪些挂载设备<br>sudo mount 找到的设备路径 /mnt/cdrom           挂载<br>sudo umount /mnt/cdrom(umount + 挂载的目录)    取消挂载</p>
+<p>四、权限结构<br>在Linux中，无论文件夹还是文件都是有权限的，通过在终端键入ls -l命令行可以看到每一行开始都有类似drwxrwxr-x的一串字符码，当中就包含有权限的标识。其中：第一位表示类型，即说明是文件夹(d)、文件(-)以及链接(l)中的哪一类型；后面的9位，每三位划分为一组作为权限位，从前往后这三个权限位分别标识所属主、所属组、其他用户的权限。<br>指定类型(dl-) 权限位1(rwx) 权限位2(rwx) 权限位3(rwx)，其中r=&gt;read w=&gt;write x=&gt;可执行，r =&gt; 4, w =&gt; 2, x =&gt; 1。<br>d rwx rwx r-x<br>文件类型-所属主 所属组 其他<br>   d     rwx     rwx    rwx<br>位数1,2,3 代表当前文件或者文件夹的所有者的权限设定:(所有者的权限  u,user)<br>    1: r 或者 -  r表示可以读取  - 表示不可以读取<br>    2: w 或者 -  w表示可以写入  - 表示不可以写入<br>    3: x 或者 -  x表示可以执行  - 表示不可以执行<br>位数4,5,6 代表当前文件或者文件夹的所属组的权限设定:(所属组的权限 g ,group)<br>    1: r 或者 -  r表示可以读取  - 表示不可以读取<br>    2: w 或者 -  w表示可以写入  - 表示不可以写入<br>    3: x 或者 -  x表示可以执行  - 表示不可以执行<br>位数7,8,9 代表其他用户对当前文件或者文件夹的的权限设定:(其他人的权限 o,other)<br>    1: r 或者 -  r表示可以读取  - 表示不可以读取<br>    2: w 或者 -  w表示可以写入  - 表示不可以写入<br>    3: x 或者 -  x表示可以执行  - 表示不可以执行<br>更改权限<br>rwx的任意组合共 8 种 情况：<br>rwx    =&gt; 7<br>rw-    =&gt; 6<br>r-x    =&gt; 5<br>r–    =&gt; 4<br>-wx    =&gt; 3<br>-w-    =&gt; 2<br>–x    =&gt; 1<br>—    =&gt; 0<br>其中r =&gt; 4, w =&gt; 2, x =&gt; 1。例如：根目录下默认的文件夹权限为755（rwx  r-x  r-x） ，根目录下默认的文件权限为644（rw-  r–  r–），所有权限为777（rwx  rwx  rwx）<br>关于权限更改的各种写法<br>chmod 755 1.txt<br>chmod -R 777 ceshi100(chmod -R 777 文件夹) # 递归更改这个文件夹里面的所有文件权限<br>chmod u+r,g-w,o+x 1.txt<br>chmod u=rwx 1.txt<br>其中：<br>u代表所有者   加一个r权限 (user)<br>g代表所属组   减一个w权限 (group)<br>o代表其他     加一个执行权限 (other)<br>=&gt;对于目录来讲<br>r   是否呈现里面的文件<br>w   是否可以在里面创建文件或文件夹<br>x   cd 切不进来  不能访问这个目录<br>=&gt;对于文件来讲<br>r  可以看到文件内容<br>w  可以更改删除文件及内容<br>x  是否可以执行这个文件 ./abc.sh</p>
+<p>(*扩展)<br>sudo useradd a01    添加新用户账号<br>sudo passwd a01     为新用户设置密码<br>sudo su a01            切换用户账号<br>exit                  退出当前用户  </p>
+<p><a href="http://www.xuetangx.com/courses/course-v1:MITx+6_00_1x+sp/courseware/Week_1/videosequence:Lecture_1/" target="_blank" rel="noopener">http://www.xuetangx.com/courses/course-v1:MITx+6_00_1x+sp/courseware/Week_1/videosequence:Lecture_1/</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/Linux/">Linux</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://sirxy.github.io/2018/11/19/Linux基础/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:sirxy.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

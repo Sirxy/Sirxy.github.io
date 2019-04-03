@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTTP协议简介 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="小白指路">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTTP协议简介"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/">Hexo-沐雨橙风</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-03T03:06:37.000Z"><a href="/2019/04/03/HTTP学习01/">2019-04-03</a></time>
+      
+      
+  
+    <h1 class="title">HTTP协议简介</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="一、Web服务基础"><a href="#一、Web服务基础" class="headerlink" title="一、Web服务基础"></a>一、Web服务基础</h3><p>用户访问网站的基本流程：<br>1、双击浏览器，输入<a href="http://www.baidu.com网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在www.baidu.com域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用" target="_blank" rel="noopener">www.baidu.com网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在www.baidu.com域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用</a><br>2、如果本地dns缓存和hosts文件都没有域名解析记录，系统就会把访问的网址解析请求发送给客户端设置的DNS服务器去解析，也叫做Local DNS，如果LDNS服务器的本地缓存有对应的解析记录就会直接返回给客户端IP地址，如果没有LDNS就会继续请求其他的DNS服务器<br>3、LDNS继续从DNS系统的”.”(根)开始请求<a href="http://www.baidu.com域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到www.baidu.com域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。" target="_blank" rel="noopener">www.baidu.com域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到www.baidu.com域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。</a><br>4、此时授权的DNS服务器就会把<a href="http://www.baidu.com对应的IP解析记录，例如（1.1.1.1）发送给LDNS" target="_blank" rel="noopener">www.baidu.com对应的IP解析记录，例如（1.1.1.1）发送给LDNS</a><br>5、此时LDNS会把解析记录发给浏览器，并且缓存域名和IP的解析记录，便于下一次更快的返回请求<br>6、浏览器获得ip，请求对应的服务器，网站服务器接收到客户端的请求开始响应处理，将内容返回给浏览器。</p>
+<h3 id="二、HTTP协议"><a href="#二、HTTP协议" class="headerlink" title="二、HTTP协议"></a>二、HTTP协议</h3><p>全称是HyperText Tansfer Protocol,中文叫超文本传输协议，是互联网最常见的协议。<br>Http最重要的是www(World Wide Web)服务，也叫web服务器，中文叫“万维网”。<br>web服务端口默认是80，另外一个加密的www服务应用https默认端口是443，主要用于支付，网银相关业务。</p>
+<h3 id="三、HTTP协议的特点"><a href="#三、HTTP协议的特点" class="headerlink" title="三、HTTP协议的特点"></a>三、HTTP协议的特点</h3><p>　　1.HTTP协议是无状态的<br>　　就是说每次HTTP请求都是独立的，任何两个请求之间没有什么必然的联系。但是在实际应用当中并不是完全这样的，引入了Cookie和Session机制来关联请求。</p>
+<p>　　2.多次HTTP请求<br>　　在客户端请求网页时多数情况下并不是一次请求就能成功的，服务端首先是响应HTML页面，然后浏览器收到响应之后发现HTML页面还引用了其他的资源，例如，CSS，JS文件，图片等等，还会自动发送HTTP请求这些需要的资源。现在的HTTP版本支持管道机制，可以同时请求和响应多个请求，大大提高了效率。</p>
+<p>　　3.基于TCP协议<br>　　HTTP协议目的是规定客户端和服务端数据传输的格式和数据交互行为，并不负责数据传输的细节。底层是基于TCP实现的。现在使用的版本当中是默认持久连接的，也就是多次HTTP请求使用一个TCP连接。</p>
+<h3 id="四、版本"><a href="#四、版本" class="headerlink" title="四、版本"></a>四、版本</h3><pre><code>http协议诞生以来有若干个版本，主要是http/1.0 http/1.1
+http/1.0规定浏览器和服务器只能保持短暂的连接，浏览器的每次请求都需要和服务器建立一个TCP连接，服务器完成请求后即断开TCP连接，服务器不跟踪每个链接，也不记录请求
+http/1.1是对HTTP的缺陷进行重点修复，从可扩展性，缓存，带宽优化，持久连接，host头，错误通知等访问改进。
+http/1.1支持长连接，增加了更多的请求头和响应头信息，例如配置请求头的Connection的值为keep-alive，表示请求结果返回后保持连接
+</code></pre><h3 id="五、Http请求方法"><a href="#五、Http请求方法" class="headerlink" title="五、Http请求方法"></a>五、Http请求方法</h3><pre><code>在HTTP通信中，每个请求报文都包含一个方法，以告诉web服务器端需要执行哪些操作，这些动作被称为HTTP的请求方法。
+GET    请求指定的页面信息，并返回实体主体。
+HEAD    类似于get请求，只不过返回的响应中没有具体的内容，用于获取报头
+POST    向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有资源的修改。
+PUT    从客户端向服务器传送的数据取代指定的文档的内容。
+DELETE    请求服务器删除指定的页面。
+CONNECT    HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。
+OPTIONS    允许客户端查看服务器的性能。
+TRACE    回显服务器收到的请求，主要用于测试或诊断。
+</code></pre><h3 id="六、HTTP状态码"><a href="#六、HTTP状态码" class="headerlink" title="六、HTTP状态码"></a>六、HTTP状态码</h3><pre><code>HTTP状态码表示web服务器响应http请求状态的数字代码。
+常见状态码以及作用：
+1**    信息，服务器收到请求，需要请求者继续执行操作
+2**    成功，操作被成功接收并处理
+3**    重定向，需要进一步的操作以完成请求
+4**    客户端错误，请求包含语法错误或无法完成请求
+5**    服务器错误，服务器在处理请求的过程中发生了错误
+</code></pre><h3 id="七、HTTP状态码的命令查看"><a href="#七、HTTP状态码的命令查看" class="headerlink" title="七、HTTP状态码的命令查看"></a>七、HTTP状态码的命令查看</h3><pre><code>$ curl -I www.oldboyedu.com
+</code></pre><ul>
+<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/</a><pre><code>https://www.cnblogs.com/wxisme/p/6212797.html
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/HTTP学习/">HTTP学习</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/03/HTTP学习01/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:sirxy.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
