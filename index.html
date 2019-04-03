@@ -52,6 +52,54 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2019-04-03T00:52:04.000Z"><a href="/2019/04/03/nginx学习总结02/">2019-04-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2019/04/03/nginx学习总结02/">nginx学习总结02</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h3 id="一、nginx软件目录"><a href="#一、nginx软件目录" class="headerlink" title="一、nginx软件目录"></a>一、nginx软件目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yc-virtual-machine /opt/nginx1-12 11:44:02]#ls</span><br><span class="line">client_body_temp  conf  fastcgi_temp  html  logs  proxy_temp  sbin  scgi_temp  static  uwsgi_temp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>conf 存放nginx所有配置文件的目录,主要nginx.conf</li>
+<li>html 存放nginx默认站点的目录，如index.html、error.html等</li>
+<li>logs 存放nginx默认日志的目录，如error.log access.log</li>
+<li>sbin 存放nginx主命令的目录,sbin/nginx</li>
+</ul>
+<p>Nginx主配置文件/etc/nginx/nginx.conf是一个纯文本类型的文件，整个配置文件是以区块的形式组织的。一般，每个区块以一对大括号{}来表示开始与结束。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CoreModule核心模块</span><br><span class="line"></span><br><span class="line">user www;                       #Nginx进程所使用的用户</span><br><span class="line">worker_processes 1;             #Nginx运行的work进程数量(建议与CPU数量一致或auto)</span><br><span class="line">error_log /log/nginx/error.log  #Nginx错误日志存放路径</span><br><span class="line">pid /var/run/nginx.pid          #Nginx服务运行后产生的pid进程号</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">events事件模块</span><br><span class="line"></span><br><span class="line">events &#123;            </span><br><span class="line">    worker_connections  //每个worker进程支持的最大连接数</span><br><span class="line">    use epool;          //事件驱动模型, epoll默认</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">http内核模块</span><br><span class="line"></span><br><span class="line">// 公共的配置定义在http&#123;&#125;</span><br><span class="line">http &#123;  //http层开始</span><br><span class="line">...    </span><br><span class="line">    // 使用Server配置网站, 每个Server&#123;&#125;代表一个网站(简称虚拟主机)</span><br><span class="line">    &apos;server&apos; &#123;</span><br><span class="line">        listen       80;        // 监听端口, 默认80</span><br><span class="line">        server_name  localhost; // 提供服务的域名或主机名</span><br><span class="line">        access_log host.access.log  // 访问日志</span><br><span class="line">        // 控制网站访问路径</span><br><span class="line">        &apos;location&apos; / &#123;</span><br><span class="line">            root   /usr/share/nginx/html;   // 存放网站代码路径</span><br><span class="line">            index  index.html index.htm;    // 服务器返回的默认页面文件</span><br><span class="line">        &#125;</span><br><span class="line">        // 指定错误代码, 统一定义错误页面, 错误代码重定向到新的Locaiton</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    //第二个虚拟主机配置</span><br><span class="line">    &apos;server&apos; &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#125;</span><br><span class="line">    include /etc/nginx/conf.d/*.conf;  // 包含/etc/nginx/conf.d/目录下所有以.conf结尾的文件</span><br><span class="line">&#125;   // http层结束</span><br></pre></td></tr></table></figure>
+<h3 id="二、部署nginx站点"><a href="#二、部署nginx站点" class="headerlink" title="二、部署nginx站点"></a>二、部署nginx站点</h3><p>nginx默认站点是Nginx目录下的html文件夹，这里可以从nginx.conf中查到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /&#123;</span><br><span class="line">        root   html;  #这里是默认的站点html文件夹，也就是              /opt/nginx1-12/html/文件夹下的内容</span><br><span class="line">        index  index.html index.htm; #站点首页文件名是index.html</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果要部署网站业务数据，只需要把开发好的程序全放到html目录下即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yc-virtual-machine /tmp 11:34:52]#ls /opt/nginx1-12/html/</span><br><span class="line">index.html  jssts.jpeg  lhy.mp4  man.jpg  wget-log</span><br></pre></td></tr></table></figure></p>
+<p>至此，只需要通过域名/资源，即可访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.pyyuc.cn/index.html</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2019-04-02T10:01:56.000Z"><a href="/2019/04/02/nginx学习总结01/">2019-04-02</a></time>
       
       
@@ -75,6 +123,9 @@
 </ul>
 <h3 id="三、安装配置nginx"><a href="#三、安装配置nginx" class="headerlink" title="三、安装配置nginx"></a>三、安装配置nginx</h3><h4 id="安装nginx前的依赖环境解决"><a href="#安装nginx前的依赖环境解决" class="headerlink" title="安装nginx前的依赖环境解决"></a>安装nginx前的依赖环境解决</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#执行第一条语句即可</span><br><span class="line">yum install gcc patch libffi-devel python-devel  zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel openssl openssl-devel -y</span><br><span class="line">#依赖简单介绍</span><br><span class="line">一. gcc 安装</span><br><span class="line">安装 nginx 需要先将官网下载的源码进行编译，编译依赖 gcc 环境，如果没有 gcc 环境，则需要安装：</span><br><span class="line">yum install gcc-c++</span><br><span class="line">二. PCRE pcre-devel 安装</span><br><span class="line">PCRE(Perl Compatible Regular Expressions) 是一个Perl库，包括 perl 兼容的正则表达式库。nginx 的 http 模块使用 pcre 来解析正则表达式，所以需要在 linux 上安装 pcre 库，pcre-devel 是使用 pcre 开发的一个二次开发库。nginx也需要此库。命令：</span><br><span class="line">yum install -y pcre pcre-devel</span><br><span class="line">三. zlib 安装</span><br><span class="line">zlib 库提供了很多种压缩和解压缩的方式， nginx 使用 zlib 对 http 包的内容进行 gzip ，所以需要在 Centos 上安装 zlib 库。</span><br><span class="line">yum install -y zlib zlib-devel</span><br><span class="line">四. OpenSSL 安装</span><br><span class="line">OpenSSL 是一个强大的安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及 SSL 协议，并提供丰富的应用程序供测试或其它目的使用。</span><br><span class="line">nginx 不仅支持 http 协议，还支持 https（即在ssl协议上传输http），所以需要在 Centos 安装 OpenSSL 库。</span><br></pre></td></tr></table></figure>
 <h4 id="编译安装nginx"><a href="#编译安装nginx" class="headerlink" title="编译安装nginx"></a>编译安装nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.下载源码包</span><br><span class="line">wget -c https://nginx.org/download/nginx-1.12.0.tar.gz</span><br><span class="line">2.解压缩源码</span><br><span class="line">tar -zxvf nginx-1.12.0.tar.gz</span><br><span class="line">3.配置，编译安装  开启nginx状态监测功能</span><br><span class="line">./configure --prefix=/opt/nginx112/ </span><br><span class="line">make &amp;&amp; make install </span><br><span class="line">4.启动nginx，进入sbin目录,找到nginx启动命令</span><br><span class="line">cd sbin</span><br><span class="line">./nginx #启动</span><br><span class="line">./nginx -s stop #关闭</span><br><span class="line">./nginx -s reload #重新加载</span><br><span class="line">5.修改PATH</span><br><span class="line">PATH=$PATH:/opt/nginx112/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/</a></li>
+</ul>
 
       
     </div>
@@ -449,7 +500,7 @@ print(d)
   
     <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
   
-    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>1</small></li>
+    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>2</small></li>
   
     <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
   

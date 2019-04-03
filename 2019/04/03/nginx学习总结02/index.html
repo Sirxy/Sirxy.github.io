@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>nginx学习总结02 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="小白指路">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="nginx学习总结02"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/">Hexo-沐雨橙风</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-03T00:52:04.000Z"><a href="/2019/04/03/nginx学习总结02/">2019-04-03</a></time>
+      
+      
+  
+    <h1 class="title">nginx学习总结02</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h3 id="一、nginx软件目录"><a href="#一、nginx软件目录" class="headerlink" title="一、nginx软件目录"></a>一、nginx软件目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yc-virtual-machine /opt/nginx1-12 11:44:02]#ls</span><br><span class="line">client_body_temp  conf  fastcgi_temp  html  logs  proxy_temp  sbin  scgi_temp  static  uwsgi_temp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>conf 存放nginx所有配置文件的目录,主要nginx.conf</li>
+<li>html 存放nginx默认站点的目录，如index.html、error.html等</li>
+<li>logs 存放nginx默认日志的目录，如error.log access.log</li>
+<li>sbin 存放nginx主命令的目录,sbin/nginx</li>
+</ul>
+<p>Nginx主配置文件/etc/nginx/nginx.conf是一个纯文本类型的文件，整个配置文件是以区块的形式组织的。一般，每个区块以一对大括号{}来表示开始与结束。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CoreModule核心模块</span><br><span class="line"></span><br><span class="line">user www;                       #Nginx进程所使用的用户</span><br><span class="line">worker_processes 1;             #Nginx运行的work进程数量(建议与CPU数量一致或auto)</span><br><span class="line">error_log /log/nginx/error.log  #Nginx错误日志存放路径</span><br><span class="line">pid /var/run/nginx.pid          #Nginx服务运行后产生的pid进程号</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">events事件模块</span><br><span class="line"></span><br><span class="line">events &#123;            </span><br><span class="line">    worker_connections  //每个worker进程支持的最大连接数</span><br><span class="line">    use epool;          //事件驱动模型, epoll默认</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">http内核模块</span><br><span class="line"></span><br><span class="line">// 公共的配置定义在http&#123;&#125;</span><br><span class="line">http &#123;  //http层开始</span><br><span class="line">...    </span><br><span class="line">    // 使用Server配置网站, 每个Server&#123;&#125;代表一个网站(简称虚拟主机)</span><br><span class="line">    &apos;server&apos; &#123;</span><br><span class="line">        listen       80;        // 监听端口, 默认80</span><br><span class="line">        server_name  localhost; // 提供服务的域名或主机名</span><br><span class="line">        access_log host.access.log  // 访问日志</span><br><span class="line">        // 控制网站访问路径</span><br><span class="line">        &apos;location&apos; / &#123;</span><br><span class="line">            root   /usr/share/nginx/html;   // 存放网站代码路径</span><br><span class="line">            index  index.html index.htm;    // 服务器返回的默认页面文件</span><br><span class="line">        &#125;</span><br><span class="line">        // 指定错误代码, 统一定义错误页面, 错误代码重定向到新的Locaiton</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    //第二个虚拟主机配置</span><br><span class="line">    &apos;server&apos; &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#125;</span><br><span class="line">    include /etc/nginx/conf.d/*.conf;  // 包含/etc/nginx/conf.d/目录下所有以.conf结尾的文件</span><br><span class="line">&#125;   // http层结束</span><br></pre></td></tr></table></figure>
+<h3 id="二、部署nginx站点"><a href="#二、部署nginx站点" class="headerlink" title="二、部署nginx站点"></a>二、部署nginx站点</h3><p>nginx默认站点是Nginx目录下的html文件夹，这里可以从nginx.conf中查到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /&#123;</span><br><span class="line">        root   html;  #这里是默认的站点html文件夹，也就是              /opt/nginx1-12/html/文件夹下的内容</span><br><span class="line">        index  index.html index.htm; #站点首页文件名是index.html</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果要部署网站业务数据，只需要把开发好的程序全放到html目录下即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yc-virtual-machine /tmp 11:34:52]#ls /opt/nginx1-12/html/</span><br><span class="line">index.html  jssts.jpeg  lhy.mp4  man.jpg  wget-log</span><br></pre></td></tr></table></figure></p>
+<p>至此，只需要通过域名/资源，即可访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.pyyuc.cn/index.html</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/Nginx学习/">Nginx学习</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/03/nginx学习总结02/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:sirxy.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>2</small></li>
+  
+    <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
