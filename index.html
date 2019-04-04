@@ -52,19 +52,99 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2019-04-03T03:06:37.000Z"><a href="/2019/04/03/HTTP学习01/">2019-04-03</a></time>
+        <time datetime="2019-04-04T01:46:13.000Z"><a href="/2019/04/04/HTTP学习03/">2019-04-04</a></time>
       
       
   
-    <h1 class="title"><a href="/2019/04/03/HTTP学习01/">HTTP协议简介</a></h1>
+    <h1 class="title"><a href="/2019/04/04/HTTP学习03/">网站流量术语</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <h3 id="一、Web服务基础"><a href="#一、Web服务基础" class="headerlink" title="一、Web服务基础"></a>一、Web服务基础</h3><p>用户访问网站的基本流程：<br>1、双击浏览器，输入<a href="http://www.baidu.com网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在www.baidu.com域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用" target="_blank" rel="noopener">www.baidu.com网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在www.baidu.com域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用</a><br>2、如果本地dns缓存和hosts文件都没有域名解析记录，系统就会把访问的网址解析请求发送给客户端设置的DNS服务器去解析，也叫做Local DNS，如果LDNS服务器的本地缓存有对应的解析记录就会直接返回给客户端IP地址，如果没有LDNS就会继续请求其他的DNS服务器<br>3、LDNS继续从DNS系统的”.”(根)开始请求<a href="http://www.baidu.com域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到www.baidu.com域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。" target="_blank" rel="noopener">www.baidu.com域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到www.baidu.com域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。</a><br>4、此时授权的DNS服务器就会把<a href="http://www.baidu.com对应的IP解析记录，例如（1.1.1.1）发送给LDNS" target="_blank" rel="noopener">www.baidu.com对应的IP解析记录，例如（1.1.1.1）发送给LDNS</a><br>5、此时LDNS会把解析记录发给浏览器，并且缓存域名和IP的解析记录，便于下一次更快的返回请求<br>6、浏览器获得ip，请求对应的服务器，网站服务器接收到客户端的请求开始响应处理，将内容返回给浏览器。</p>
-<h3 id="二、HTTP协议"><a href="#二、HTTP协议" class="headerlink" title="二、HTTP协议"></a>二、HTTP协议</h3><p>全称是HyperText Tansfer Protocol,中文叫超文本传输协议，是互联网最常见的协议。<br>Http最重要的是www(World Wide Web)服务，也叫web服务器，中文叫“万维网”。<br>web服务端口默认是80，另外一个加密的www服务应用https默认端口是443，主要用于支付，网银相关业务。</p>
-<h3 id="三、HTTP协议的特点"><a href="#三、HTTP协议的特点" class="headerlink" title="三、HTTP协议的特点"></a>三、HTTP协议的特点</h3><p>　　1.HTTP协议是无状态的<br>　　就是说每次HTTP请求都是独立的，任何两个请求之间没有什么必然的联系。但是在实际应用当中并不是完全这样的，引入了Cookie和Session机制来关联请求。</p>
+        <p>网站统计一般以数值较大的IP,PV统计，比较好看。</p>
+<h3 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h3><p>IP即Internet Protocol，这里是指独立ip数，不同的ip地址的计算机访问网站时被计算的总次数。<br>独立ip数是网站流量的一个重要指标。<br>一般相同ip地址的客户端访问网站页面一天内只会被计算一次。<br>这里的ip指的是是固定的公网ip。</p>
+<h3 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h3><p>pv（Page View）即是页面浏览量，不管客户端是不是相同，也不管ip是否相同，用户只要访问网站页面就会被计算PV，一次计算一个PV。<br>pv的度量方法就是客户端从浏览器发出一个web请求（request），服务器接收请求返回一个页面给客户端，这样就产生一个pv。<br>页面刷新一下，就是一个PV。</p>
+<h3 id="UV"><a href="#UV" class="headerlink" title="UV"></a>UV</h3><p>UV即unique visitor，同一个客户端（pc或移动端）访问网站被计算为一个访客。<br>一天内相同的客户端访问同一个网站只计一次uv，uv是以cookie等技术为统计依据，实际统计存在误差。<br>一台计算机可能有多人使用，因此uv也不是最准确的。</p>
+<h3 id="并发数"><a href="#并发数" class="headerlink" title="并发数"></a>并发数</h3><p>并发数指系统同时能处理的请求数量，也反应了系统的负载能力。</p>
+<h3 id="响应时间"><a href="#响应时间" class="headerlink" title="响应时间"></a>响应时间</h3><p>响应时间是指执行一个请求从开始到最后收到响应数据所花费的总体时间。</p>
+<h3 id="QPS"><a href="#QPS" class="headerlink" title="QPS"></a>QPS</h3><p>Query Per Second：每秒查询数<br>服务器在一秒内处理了多少个请求，显然数字越大代表服务器的负载越高，处理能力越强。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Http相关术语pv、ip、uv 假设公司有一座大厦，大厦有100人，每个人有一台电脑和一部手机，上网都是通过nat转换出口，每个人点击网站2次（发2次请求）, 请问对应的pv,uv,ip分别是多少？</span><br><span class="line"></span><br><span class="line">PV：页面浏览量, 400 100人 2个设备 访问2次 =400数</span><br><span class="line">uv：独立的客户, 200 100人2个设备=200数</span><br><span class="line">ip：独立IP, 1个 同一个NAT出口，独立IP为1</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-03T13:50:12.000Z"><a href="/2019/04/03/HTTP学习02/">2019-04-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2019/04/03/HTTP学习02/">HTTP报文、URI</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>什么是http报文？它是HTTP应用程序之间发送的数据块。这些数据块以一些文本形式的元信息开头，这些信息描述了报文的内容及含义，后面跟着可选的数据部分。这些报文都是在客户端、服务器和代理之间流动。</p>
+<h3 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h3><p>由请求行，请求头部，空行，请求报文主体几个部分组成，即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">起始行： &lt;method&gt; &lt;request-URL&gt; &lt;version&gt;</span><br><span class="line"></span><br><span class="line">头部：   &lt;headers&gt;</span><br><span class="line"></span><br><span class="line">主体：   &lt;entity-body&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h3><p>HTTP 响应与 HTTP 请求相似，HTTP响应也由3个部分构成，分别是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">状态行</span><br><span class="line">响应头(Response Header)</span><br><span class="line">响应正文</span><br></pre></td></tr></table></figure></p>
+<h3 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h3><p>uri中文叫“统一资源标识符”，是一个用于标识某一互联网资源名称的字符串，在世界范围内标识定位某一个唯一信息资源。<br>还有一个概念叫做URL，那什么是URL？URL简称统一资源定位符。那URL的组成部分是由协议, 域名:端口, 路径和文件名。<br>url主要用在各种www客户端和服务器程序上，url可以用一种统一的格式来描述各种信息资源，包括文件，服务器地址和目录等。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-03T03:06:37.000Z"><a href="/2019/04/03/HTTP学习01/">2019-04-03</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2019/04/03/HTTP学习01/">HTTP简介、特点、版本、请求方法、状态码</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>## </p>
+<h3 id="一、Web服务基础"><a href="#一、Web服务基础" class="headerlink" title="一、Web服务基础"></a>一、Web服务基础</h3><p>用户访问网站的基本流程：</p>
+<p>1、双击浏览器，输入目标网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在目标域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用<br>2、如果本地dns缓存和hosts文件都没有域名解析记录，系统就会把访问的网址解析请求发送给客户端设置的DNS服务器去解析，也叫做Local DNS，如果LDNS服务器的本地缓存有对应的解析记录就会直接返回给客户端IP地址，如果没有LDNS就会继续请求其他的DNS服务器<br>3、LDNS继续从DNS系统的”.”(根)开始请求目标域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到目标域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。<br>4、此时授权的DNS服务器就会把目标对应的IP解析记录，例如（1.1.1.1）发送给LDNS<br>5、此时LDNS会把解析记录发给浏览器，并且缓存域名和IP的解析记录，便于下一次更快的返回请求<br>6、浏览器获得ip，请求对应的服务器，网站服务器接收到客户端的请求开始响应处理，将内容返回给浏览器。</p>
+<h3 id="二、HTTP协议"><a href="#二、HTTP协议" class="headerlink" title="二、HTTP协议"></a>二、HTTP协议</h3><pre><code>全称是HyperText Tansfer Protocol,中文叫超文本传输协议，是互联网最常见的协议。
+Http最重要的是www(World Wide Web)服务，也叫web服务器，中文叫“万维网”。
+web服务端口默认是80，另外一个加密的www服务应用https默认端口是443，主要用于支付，网银相关业务。
+</code></pre><h3 id="三、HTTP协议的特点"><a href="#三、HTTP协议的特点" class="headerlink" title="三、HTTP协议的特点"></a>三、HTTP协议的特点</h3><p>　　1.HTTP协议是无状态的<br>　　就是说每次HTTP请求都是独立的，任何两个请求之间没有什么必然的联系。但是在实际应用当中并不是完全这样的，引入了Cookie和Session机制来关联请求。</p>
 <p>　　2.多次HTTP请求<br>　　在客户端请求网页时多数情况下并不是一次请求就能成功的，服务端首先是响应HTML页面，然后浏览器收到响应之后发现HTML页面还引用了其他的资源，例如，CSS，JS文件，图片等等，还会自动发送HTTP请求这些需要的资源。现在的HTTP版本支持管道机制，可以同时请求和响应多个请求，大大提高了效率。</p>
 <p>　　3.基于TCP协议<br>　　HTTP协议目的是规定客户端和服务端数据传输的格式和数据交互行为，并不负责数据传输的细节。底层是基于TCP实现的。现在使用的版本当中是默认持久连接的，也就是多次HTTP请求使用一个TCP连接。</p>
 <h3 id="四、版本"><a href="#四、版本" class="headerlink" title="四、版本"></a>四、版本</h3><pre><code>http协议诞生以来有若干个版本，主要是http/1.0 http/1.1
@@ -89,8 +169,7 @@ TRACE    回显服务器收到的请求，主要用于测试或诊断。
 5**    服务器错误，服务器在处理请求的过程中发生了错误
 </code></pre><h3 id="七、HTTP状态码的命令查看"><a href="#七、HTTP状态码的命令查看" class="headerlink" title="七、HTTP状态码的命令查看"></a>七、HTTP状态码的命令查看</h3><pre><code>$ curl -I www.oldboyedu.com
 </code></pre><ul>
-<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/</a><pre><code>https://www.cnblogs.com/wxisme/p/6212797.html
-</code></pre></li>
+<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/和https://www.cnblogs.com/wxisme/p/6212797.html" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/和https://www.cnblogs.com/wxisme/p/6212797.html</a></li>
 </ul>
 
       
@@ -535,52 +614,11 @@ print(d)
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-10-14T03:32:35.000Z"><a href="/2018/10/14/HTML5CSS3_001/">2018-10-14</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/10/14/HTML5CSS3_001/">HTML5/CSS3新特性、移除的元素及兼容问题</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h3 id="HTML5现在已经不是SGML的子集，主要是关于图像、位置、存储、地理定位等功能的增加。新特性有："><a href="#HTML5现在已经不是SGML的子集，主要是关于图像、位置、存储、地理定位等功能的增加。新特性有：" class="headerlink" title="HTML5现在已经不是SGML的子集，主要是关于图像、位置、存储、地理定位等功能的增加。新特性有："></a>HTML5现在已经不是SGML的子集，主要是关于图像、位置、存储、地理定位等功能的增加。新特性有：</h3><ul>
-<li>绘画canvas元素</li>
-<li>用于媒介回放的 video 和 audio 元素</li>
-<li>本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；</li>
-<li>sessionStorage 的数据在浏览器关闭后自动删除</li>
-<li>语意化更好的内容元素，比如 article、footer、header、nav、section</li>
-<li>表单控件，calendar、date、time、email、url、search<h3 id="CSS3实现圆角、，阴影、对文字加特效，增加了更多的CSS选择器，多背景rgba，新的技术有webworker、websockt、Geolocation。"><a href="#CSS3实现圆角、，阴影、对文字加特效，增加了更多的CSS选择器，多背景rgba，新的技术有webworker、websockt、Geolocation。" class="headerlink" title="CSS3实现圆角、，阴影、对文字加特效，增加了更多的CSS选择器，多背景rgba，新的技术有webworker、websockt、Geolocation。"></a>CSS3实现圆角、，阴影、对文字加特效，增加了更多的CSS选择器，多背景rgba，新的技术有webworker、websockt、Geolocation。</h3><h3 id="移除的元素包括："><a href="#移除的元素包括：" class="headerlink" title="移除的元素包括："></a>移除的元素包括：</h3></li>
-<li>纯表现的元素  basefont、big、center、font、 s、strike、tt、u；</li>
-<li>对可用性产生负面影响的元素  frame、frameset、noframes。<h3 id="浏览器兼容问题解决方案："><a href="#浏览器兼容问题解决方案：" class="headerlink" title="浏览器兼容问题解决方案："></a>浏览器兼容问题解决方案：</h3>IE8/IE7/IE6支持通过document.createElement方法产生的标签，可以利用这一特性让这些浏览器支持HTML5新标签，浏览器支持新标签后，还需要添加标签默认的样式，当然最好的方式是直接使用成熟的框架：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--[if lt IE 9]&gt; </span><br><span class="line">&lt;script&gt; src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&lt;/script&gt; </span><br><span class="line">&lt;![endif]--&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
+  
+    <a href="/page/2/" class="alignright next">Next</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
@@ -601,7 +639,7 @@ print(d)
   
     <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
   
-    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>1</small></li>
+    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>3</small></li>
   
     <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
   

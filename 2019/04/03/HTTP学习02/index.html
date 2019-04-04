@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | Hexo</title>
+  <title>HTTP报文、URI | Hexo</title>
   <meta name="author" content="John Doe">
   
   <meta name="description" content="小白指路">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Hello World"/>
+  <meta property="og:title" content="HTTP报文、URI"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -51,25 +51,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2019-02-13T02:36:41.753Z"><a href="/2019/02/13/hello-world/">2019-02-13</a></time>
+        <time datetime="2019-04-03T13:50:12.000Z"><a href="/2019/04/03/HTTP学习02/">2019-04-03</a></time>
       
       
   
-    <h1 class="title">Hello World</h1>
+    <h1 class="title">HTTP报文、URI</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>什么是http报文？它是HTTP应用程序之间发送的数据块。这些数据块以一些文本形式的元信息开头，这些信息描述了报文的内容及含义，后面跟着可选的数据部分。这些报文都是在客户端、服务器和代理之间流动。</p>
+<h3 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h3><p>由请求行，请求头部，空行，请求报文主体几个部分组成，即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">起始行： &lt;method&gt; &lt;request-URL&gt; &lt;version&gt;</span><br><span class="line"></span><br><span class="line">头部：   &lt;headers&gt;</span><br><span class="line"></span><br><span class="line">主体：   &lt;entity-body&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h3><p>HTTP 响应与 HTTP 请求相似，HTTP响应也由3个部分构成，分别是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">状态行</span><br><span class="line">响应头(Response Header)</span><br><span class="line">响应正文</span><br></pre></td></tr></table></figure></p>
+<h3 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h3><p>uri中文叫“统一资源标识符”，是一个用于标识某一互联网资源名称的字符串，在世界范围内标识定位某一个唯一信息资源。<br>还有一个概念叫做URL，那什么是URL？URL简称统一资源定位符。那URL的组成部分是由协议, 域名:端口, 路径和文件名。<br>url主要用在各种www客户端和服务器程序上，url可以用一种统一的格式来描述各种信息资源，包括文件，服务器地址和目录等。</p>
 
       
     </div>
@@ -77,6 +72,11 @@
       
         
         
+  
+  <div class="tags">
+    <a href="/tags/HTTP学习/">HTTP学习</a>
+  </div>
+
         
   <div class="addthis addthis_toolbox addthis_default_style">
     
@@ -117,7 +117,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://sirxy.github.io/2019/02/13/hello-world/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/03/HTTP学习02/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

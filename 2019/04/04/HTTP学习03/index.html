@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | Hexo</title>
+  <title>网站流量术语 | Hexo</title>
   <meta name="author" content="John Doe">
   
   <meta name="description" content="小白指路">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Hello World"/>
+  <meta property="og:title" content="网站流量术语"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -51,25 +51,24 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2019-02-13T02:36:41.753Z"><a href="/2019/02/13/hello-world/">2019-02-13</a></time>
+        <time datetime="2019-04-04T01:46:13.000Z"><a href="/2019/04/04/HTTP学习03/">2019-04-04</a></time>
       
       
   
-    <h1 class="title">Hello World</h1>
+    <h1 class="title">网站流量术语</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>网站统计一般以数值较大的IP,PV统计，比较好看。</p>
+<h3 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h3><p>IP即Internet Protocol，这里是指独立ip数，不同的ip地址的计算机访问网站时被计算的总次数。<br>独立ip数是网站流量的一个重要指标。<br>一般相同ip地址的客户端访问网站页面一天内只会被计算一次。<br>这里的ip指的是是固定的公网ip。</p>
+<h3 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h3><p>pv（Page View）即是页面浏览量，不管客户端是不是相同，也不管ip是否相同，用户只要访问网站页面就会被计算PV，一次计算一个PV。<br>pv的度量方法就是客户端从浏览器发出一个web请求（request），服务器接收请求返回一个页面给客户端，这样就产生一个pv。<br>页面刷新一下，就是一个PV。</p>
+<h3 id="UV"><a href="#UV" class="headerlink" title="UV"></a>UV</h3><p>UV即unique visitor，同一个客户端（pc或移动端）访问网站被计算为一个访客。<br>一天内相同的客户端访问同一个网站只计一次uv，uv是以cookie等技术为统计依据，实际统计存在误差。<br>一台计算机可能有多人使用，因此uv也不是最准确的。</p>
+<h3 id="并发数"><a href="#并发数" class="headerlink" title="并发数"></a>并发数</h3><p>并发数指系统同时能处理的请求数量，也反应了系统的负载能力。</p>
+<h3 id="响应时间"><a href="#响应时间" class="headerlink" title="响应时间"></a>响应时间</h3><p>响应时间是指执行一个请求从开始到最后收到响应数据所花费的总体时间。</p>
+<h3 id="QPS"><a href="#QPS" class="headerlink" title="QPS"></a>QPS</h3><p>Query Per Second：每秒查询数<br>服务器在一秒内处理了多少个请求，显然数字越大代表服务器的负载越高，处理能力越强。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Http相关术语pv、ip、uv 假设公司有一座大厦，大厦有100人，每个人有一台电脑和一部手机，上网都是通过nat转换出口，每个人点击网站2次（发2次请求）, 请问对应的pv,uv,ip分别是多少？</span><br><span class="line"></span><br><span class="line">PV：页面浏览量, 400 100人 2个设备 访问2次 =400数</span><br><span class="line">uv：独立的客户, 200 100人2个设备=200数</span><br><span class="line">ip：独立IP, 1个 同一个NAT出口，独立IP为1</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -77,6 +76,11 @@
       
         
         
+  
+  <div class="tags">
+    <a href="/tags/HTTP学习/">HTTP学习</a>
+  </div>
+
         
   <div class="addthis addthis_toolbox addthis_default_style">
     
@@ -117,7 +121,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://sirxy.github.io/2019/02/13/hello-world/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/04/HTTP学习03/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>

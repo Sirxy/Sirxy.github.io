@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>HTTP协议简介 | Hexo</title>
+  <title>HTTP简介、特点、版本、请求方法、状态码 | Hexo</title>
   <meta name="author" content="John Doe">
   
   <meta name="description" content="小白指路">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="HTTP协议简介"/>
+  <meta property="og:title" content="HTTP简介、特点、版本、请求方法、状态码"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -55,15 +55,19 @@
       
       
   
-    <h1 class="title">HTTP协议简介</h1>
+    <h1 class="title">HTTP简介、特点、版本、请求方法、状态码</h1>
   
 
     </header>
     <div class="entry">
       
-        <h3 id="一、Web服务基础"><a href="#一、Web服务基础" class="headerlink" title="一、Web服务基础"></a>一、Web服务基础</h3><p>用户访问网站的基本流程：<br>1、双击浏览器，输入<a href="http://www.baidu.com网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在www.baidu.com域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用" target="_blank" rel="noopener">www.baidu.com网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在www.baidu.com域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用</a><br>2、如果本地dns缓存和hosts文件都没有域名解析记录，系统就会把访问的网址解析请求发送给客户端设置的DNS服务器去解析，也叫做Local DNS，如果LDNS服务器的本地缓存有对应的解析记录就会直接返回给客户端IP地址，如果没有LDNS就会继续请求其他的DNS服务器<br>3、LDNS继续从DNS系统的”.”(根)开始请求<a href="http://www.baidu.com域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到www.baidu.com域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。" target="_blank" rel="noopener">www.baidu.com域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到www.baidu.com域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。</a><br>4、此时授权的DNS服务器就会把<a href="http://www.baidu.com对应的IP解析记录，例如（1.1.1.1）发送给LDNS" target="_blank" rel="noopener">www.baidu.com对应的IP解析记录，例如（1.1.1.1）发送给LDNS</a><br>5、此时LDNS会把解析记录发给浏览器，并且缓存域名和IP的解析记录，便于下一次更快的返回请求<br>6、浏览器获得ip，请求对应的服务器，网站服务器接收到客户端的请求开始响应处理，将内容返回给浏览器。</p>
-<h3 id="二、HTTP协议"><a href="#二、HTTP协议" class="headerlink" title="二、HTTP协议"></a>二、HTTP协议</h3><p>全称是HyperText Tansfer Protocol,中文叫超文本传输协议，是互联网最常见的协议。<br>Http最重要的是www(World Wide Web)服务，也叫web服务器，中文叫“万维网”。<br>web服务端口默认是80，另外一个加密的www服务应用https默认端口是443，主要用于支付，网银相关业务。</p>
-<h3 id="三、HTTP协议的特点"><a href="#三、HTTP协议的特点" class="headerlink" title="三、HTTP协议的特点"></a>三、HTTP协议的特点</h3><p>　　1.HTTP协议是无状态的<br>　　就是说每次HTTP请求都是独立的，任何两个请求之间没有什么必然的联系。但是在实际应用当中并不是完全这样的，引入了Cookie和Session机制来关联请求。</p>
+        <p>## </p>
+<h3 id="一、Web服务基础"><a href="#一、Web服务基础" class="headerlink" title="一、Web服务基础"></a>一、Web服务基础</h3><p>用户访问网站的基本流程：</p>
+<p>1、双击浏览器，输入目标网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在目标域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用<br>2、如果本地dns缓存和hosts文件都没有域名解析记录，系统就会把访问的网址解析请求发送给客户端设置的DNS服务器去解析，也叫做Local DNS，如果LDNS服务器的本地缓存有对应的解析记录就会直接返回给客户端IP地址，如果没有LDNS就会继续请求其他的DNS服务器<br>3、LDNS继续从DNS系统的”.”(根)开始请求目标域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到目标域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。<br>4、此时授权的DNS服务器就会把目标对应的IP解析记录，例如（1.1.1.1）发送给LDNS<br>5、此时LDNS会把解析记录发给浏览器，并且缓存域名和IP的解析记录，便于下一次更快的返回请求<br>6、浏览器获得ip，请求对应的服务器，网站服务器接收到客户端的请求开始响应处理，将内容返回给浏览器。</p>
+<h3 id="二、HTTP协议"><a href="#二、HTTP协议" class="headerlink" title="二、HTTP协议"></a>二、HTTP协议</h3><pre><code>全称是HyperText Tansfer Protocol,中文叫超文本传输协议，是互联网最常见的协议。
+Http最重要的是www(World Wide Web)服务，也叫web服务器，中文叫“万维网”。
+web服务端口默认是80，另外一个加密的www服务应用https默认端口是443，主要用于支付，网银相关业务。
+</code></pre><h3 id="三、HTTP协议的特点"><a href="#三、HTTP协议的特点" class="headerlink" title="三、HTTP协议的特点"></a>三、HTTP协议的特点</h3><p>　　1.HTTP协议是无状态的<br>　　就是说每次HTTP请求都是独立的，任何两个请求之间没有什么必然的联系。但是在实际应用当中并不是完全这样的，引入了Cookie和Session机制来关联请求。</p>
 <p>　　2.多次HTTP请求<br>　　在客户端请求网页时多数情况下并不是一次请求就能成功的，服务端首先是响应HTML页面，然后浏览器收到响应之后发现HTML页面还引用了其他的资源，例如，CSS，JS文件，图片等等，还会自动发送HTTP请求这些需要的资源。现在的HTTP版本支持管道机制，可以同时请求和响应多个请求，大大提高了效率。</p>
 <p>　　3.基于TCP协议<br>　　HTTP协议目的是规定客户端和服务端数据传输的格式和数据交互行为，并不负责数据传输的细节。底层是基于TCP实现的。现在使用的版本当中是默认持久连接的，也就是多次HTTP请求使用一个TCP连接。</p>
 <h3 id="四、版本"><a href="#四、版本" class="headerlink" title="四、版本"></a>四、版本</h3><pre><code>http协议诞生以来有若干个版本，主要是http/1.0 http/1.1
@@ -88,8 +92,7 @@ TRACE    回显服务器收到的请求，主要用于测试或诊断。
 5**    服务器错误，服务器在处理请求的过程中发生了错误
 </code></pre><h3 id="七、HTTP状态码的命令查看"><a href="#七、HTTP状态码的命令查看" class="headerlink" title="七、HTTP状态码的命令查看"></a>七、HTTP状态码的命令查看</h3><pre><code>$ curl -I www.oldboyedu.com
 </code></pre><ul>
-<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/</a><pre><code>https://www.cnblogs.com/wxisme/p/6212797.html
-</code></pre></li>
+<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/和https://www.cnblogs.com/wxisme/p/6212797.html" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/和https://www.cnblogs.com/wxisme/p/6212797.html</a></li>
 </ul>
 
       
@@ -166,7 +169,7 @@ TRACE    回显服务器收到的请求，主要用于测试或诊断。
   
     <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
   
-    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>1</small></li>
+    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>3</small></li>
   
     <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
   
