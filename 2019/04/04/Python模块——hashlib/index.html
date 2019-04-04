@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Python模块——hashlib | Hexo</title>
-  <meta name="author" content="John Doe">
+  <title>Python模块——hashlib | 沐雨橙风</title>
+  <meta name="author" content="Sirxy">
   
-  <meta name="description" content="小白指路">
+  <meta name="description" content="Python, web后端，web前端，数据库，Linux等编程技术博客总结">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <meta property="og:title" content="Python模块——hashlib"/>
-  <meta property="og:site_name" content="Hexo"/>
+  <meta property="og:site_name" content="沐雨橙风"/>
 
   
     <meta property="og:image" content=""/>
   
 
   <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="沐雨橙风" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
@@ -29,8 +29,8 @@
 
 <body>
   <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Hexo</a></h1>
-  <h2><a href="/">Hexo-沐雨橙风</a></h2>
+  <h1><a href="/">沐雨橙风</a></h1>
+  <h2><a href="/">水滴石穿</a></h2>
 </div>
 <nav id="main-nav" class="alignright">
   <ul>
@@ -61,7 +61,7 @@
     </header>
     <div class="entry">
       
-        <p>Python的hashlib提供了常见的摘要算法，如MD5，SHA1，SHA224，SHA256，SHA384，SHA512等等,用于加密数据。<br>什么是摘要算法呢？摘要算法又称哈希算法、散列算法。它通过一个函数，把任意长度的数据转换为一个长度固定的数据串（通常用16进制的字符串表示）。<br>摘要算法就是通过摘要函数f()对任意长度的数据data计算出固定长度的摘要digest，目的是为了发现原始数据是否被人篡改过。<br>摘要算法之所以能指出数据是否被篡改过，就是因为摘要函数是一个单向函数，计算f(data)很容易，但通过digest反推data却非常困难。而且，对原始数据做一个bit的修改，都会导致计算出的摘要完全不同。<br>我们以常见的摘要算法MD5为例，计算出一个字符串的MD5值：</p>
+        <p>Python的hashlib提供了常见的摘要算法，如MD5，SHA1，SHA224，SHA256，SHA384，SHA512等等,用于加密数据。<br>什么是摘要算法呢？摘要算法又称哈希算法、散列算法。它通过一个函数，把任意长度的数据转换为一个长度固定的数据串（通常用16进制的字符串表示）。<br><a id="more"></a><br>摘要算法就是通过摘要函数f()对任意长度的数据data计算出固定长度的摘要digest，目的是为了发现原始数据是否被人篡改过。<br>摘要算法之所以能指出数据是否被篡改过，就是因为摘要函数是一个单向函数，计算f(data)很容易，但通过digest反推data却非常困难。而且，对原始数据做一个bit的修改，都会导致计算出的摘要完全不同。<br>我们以常见的摘要算法MD5为例，计算出一个字符串的MD5值：</p>
 <h3 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import hashlib</span><br><span class="line">md5 = hashlib.md5(b&apos;how to use md5 in python hashlib?&apos;)</span><br><span class="line">password_md5 = md5.hexdigest()</span><br><span class="line">print(password_md5) # d26a53750bc40b38b65a520292f69306</span><br></pre></td></tr></table></figure>
 <p>如果数据量很大，可以分块多次调用update()，最后计算的结果是一样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import hashlib</span><br><span class="line">md5 = hashlib.md5()</span><br><span class="line">md5.update(b&apos;how to use md5 in &apos;)</span><br><span class="line">md5.update(b&apos;python hashlib?&apos;)</span><br><span class="line">print(md5.hexdigest()) # d26a53750bc40b38b65a520292f69306</span><br></pre></td></tr></table></figure></p>
 <p>MD5是最常见的摘要算法，速度很快，生成结果是固定的128 bit字节，通常用一个32位的16进制字符串表示。另一种常见的摘要算法是SHA1，调用SHA1和调用MD5完全类似：</p>
@@ -77,6 +77,11 @@
     <footer>
       
         
+  
+  <div class="categories">
+    <a href="/categories/Python，数据加密/">Python，数据加密</a>
+  </div>
+
         
   
   <div class="tags">
@@ -138,6 +143,15 @@
 </div>
 
   
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Python，数据加密/">Python，数据加密</a><small>1</small></li>
+  
+  </ul>
+</div>
+
 
   
 <div class="widget tag">
@@ -164,7 +178,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2019 John Doe
+  &copy; 2019 Sirxy
   
 </div>
 <div class="clearfix"></div></footer>
