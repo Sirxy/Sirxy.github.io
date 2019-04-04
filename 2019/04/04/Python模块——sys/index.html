@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Python OS模块常用方法总结 | Hexo</title>
+  <title>Python模块——sys | Hexo</title>
   <meta name="author" content="John Doe">
   
   <meta name="description" content="小白指路">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Python OS模块常用方法总结"/>
+  <meta property="og:title" content="Python模块——sys"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -51,50 +51,17 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2018-10-14T10:42:29.000Z"><a href="/2018/10/14/Python OS模块常用方法总结/">2018-10-14</a></time>
+        <time datetime="2019-04-04T05:31:07.000Z"><a href="/2019/04/04/Python模块——sys/">2019-04-04</a></time>
       
       
   
-    <h1 class="title">Python OS模块常用方法总结</h1>
+    <h1 class="title">Python模块——sys</h1>
   
 
     </header>
     <div class="entry">
       
-        <ul>
-<li><p>操作               说明</p>
-</li>
-<li><p>os.getcwd()    得到当前工作目录，即当前Python脚本工作的目录路径</p>
-</li>
-<li>os.listdir()    返回指定目录下的所有文件和目录名</li>
-<li>os.remove()    函数用来删除一个文件</li>
-<li>os.removedirs(r”c\python”)    删除多个目录</li>
-<li>os.path.isfile()    检验给出的路径是否是一个文件</li>
-<li>os.path.isdir()    检验给出的路径是否是一个目录</li>
-<li>os.path.isabs()    判断是否是绝对路径</li>
-<li>os.path.exists()    检验给出的路径是否真地存</li>
-<li>os.path.split()    返回一个路径的目录名和文件名</li>
-<li>os.path.splitext()    分离扩展名</li>
-<li>os.path.dirname()    获取路径名</li>
-<li>os.path.basename()    获取文件名</li>
-<li>os.system()    运行shell命令</li>
-<li>os.getenv()与os.putenv()    读取和设置环境变量</li>
-<li>os.linesep     给出当前平台使用的行终止符，Windows使用’rn’，Linux使用’n’而Mac使用’r’</li>
-<li>os.name    指示你正在使用的平台，对于Windows，它是’nt’，而对于Linux/Unix用户，它是’posix’</li>
-<li>os.rename(old, new)    重命名：</li>
-<li>os.makedirs(r”c：\python\test”)    创建多级目录</li>
-<li>os.mkdir(“test”)    创建单个目录</li>
-<li>os.stat(file)    获取文件属性</li>
-<li>os.chmod(file)    修改文件权限与时间戳</li>
-<li>os.exit()    终止当前进程</li>
-<li>os.path.getsize(filename)    获取文件大小</li>
-<li>os.mkdir(“file”)    创建目录</li>
-<li>os.rename(“oldname”,”newname”)    重命名文件（目录）,文件或目录都是使用这条命令</li>
-<li>os.remove(“file”)    删除文件</li>
-<li>os.rmdir(“dir”)    删除目录, 只能删除空目录</li>
-<li>os.chdir(“path”)    转换目录, 换路径</li>
-<li>os.mknod(“test.txt”)    创建空文件</li>
-</ul>
+        <h3 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a>sys模块</h3><p>sys模块是与python解释器交互的一个接口。下面是常用的的一些接口解释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sys.argv           命令行参数List，第一个元素是程序本身路径</span><br><span class="line">sys.exit(n)        退出程序，正常退出时exit(0),错误退出sys.exit(1)</span><br><span class="line">sys.version        获取Python解释程序的版本信息</span><br><span class="line">sys.path           返回模块的搜索路径，初始化时使用PYTHONPATH环境变量的值</span><br><span class="line">sys.platform       返回操作系统平台名称</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -104,7 +71,7 @@
         
   
   <div class="tags">
-    <a href="/tags/Python基础/">Python基础</a>
+    <a href="/tags/Python模块/">Python模块</a>
   </div>
 
         
@@ -147,7 +114,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://sirxy.github.io/2018/10/14/Python OS模块常用方法总结/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/04/Python模块——sys/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
