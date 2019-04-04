@@ -63,7 +63,7 @@
       
         <p>## </p>
 <h3 id="一、Web服务基础"><a href="#一、Web服务基础" class="headerlink" title="一、Web服务基础"></a>一、Web服务基础</h3><p>用户访问网站的基本流程：</p>
-<p>1、双击浏览器，输入目标网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在目标域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用<br>2、如果本地dns缓存和hosts文件都没有域名解析记录，系统就会把访问的网址解析请求发送给客户端设置的DNS服务器去解析，也叫做Local DNS，如果LDNS服务器的本地缓存有对应的解析记录就会直接返回给客户端IP地址，如果没有LDNS就会继续请求其他的DNS服务器<br>3、LDNS继续从DNS系统的”.”(根)开始请求目标域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到目标域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。<br>4、此时授权的DNS服务器就会把目标对应的IP解析记录，例如（1.1.1.1）发送给LDNS<br>5、此时LDNS会把解析记录发给浏览器，并且缓存域名和IP的解析记录，便于下一次更快的返回请求<br>6、浏览器获得ip，请求对应的服务器，网站服务器接收到客户端的请求开始响应处理，将内容返回给浏览器。</p>
+<p>1、双击浏览器，输入目标网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在目标域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用<a id="more"></a><br>2、如果本地dns缓存和hosts文件都没有域名解析记录，系统就会把访问的网址解析请求发送给客户端设置的DNS服务器去解析，也叫做Local DNS，如果LDNS服务器的本地缓存有对应的解析记录就会直接返回给客户端IP地址，如果没有LDNS就会继续请求其他的DNS服务器<br>3、LDNS继续从DNS系统的”.”(根)开始请求目标域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到目标域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。<br>4、此时授权的DNS服务器就会把目标对应的IP解析记录，例如（1.1.1.1）发送给LDNS<br>5、此时LDNS会把解析记录发给浏览器，并且缓存域名和IP的解析记录，便于下一次更快的返回请求<br>6、浏览器获得ip，请求对应的服务器，网站服务器接收到客户端的请求开始响应处理，将内容返回给浏览器。</p>
 <h3 id="二、HTTP协议"><a href="#二、HTTP协议" class="headerlink" title="二、HTTP协议"></a>二、HTTP协议</h3><pre><code>全称是HyperText Tansfer Protocol,中文叫超文本传输协议，是互联网最常见的协议。
 Http最重要的是www(World Wide Web)服务，也叫web服务器，中文叫“万维网”。
 web服务端口默认是80，另外一个加密的www服务应用https默认端口是443，主要用于支付，网银相关业务。
@@ -100,6 +100,11 @@ TRACE    回显服务器收到的请求，主要用于测试或诊断。
     <footer>
       
         
+  
+  <div class="categories">
+    <a href="/categories/HTTP/">HTTP</a>
+  </div>
+
         
   
   <div class="tags">
@@ -165,7 +170,23 @@ TRACE    回显服务器收到的请求，主要用于测试或诊断。
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/Python，数据加密/">Python，数据加密</a><small>1</small></li>
+    <li><a href="/categories/HTTP/">HTTP</a><small>3</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+    <li><a href="/categories/Python基础/">Python基础</a><small>1</small></li>
+  
+    <li><a href="/categories/Python，数据加密/">Python，数据加密</a><small>0</small></li>
+  
+    <li><a href="/categories/html5/css3/">css3</a><small>1</small></li>
+  
+    <li><a href="/categories/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/categories/nginx/">nginx</a><small>3</small></li>
+  
+    <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
   
   </ul>
 </div>

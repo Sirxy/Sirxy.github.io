@@ -132,18 +132,15 @@
     <div class="entry">
       
         <p>网站统计一般以数值较大的IP,PV统计，比较好看。</p>
-<h3 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h3><p>IP即Internet Protocol，这里是指独立ip数，不同的ip地址的计算机访问网站时被计算的总次数。<br>独立ip数是网站流量的一个重要指标。<br>一般相同ip地址的客户端访问网站页面一天内只会被计算一次。<br>这里的ip指的是是固定的公网ip。</p>
-<h3 id="PV"><a href="#PV" class="headerlink" title="PV"></a>PV</h3><p>pv（Page View）即是页面浏览量，不管客户端是不是相同，也不管ip是否相同，用户只要访问网站页面就会被计算PV，一次计算一个PV。<br>pv的度量方法就是客户端从浏览器发出一个web请求（request），服务器接收请求返回一个页面给客户端，这样就产生一个pv。<br>页面刷新一下，就是一个PV。</p>
-<h3 id="UV"><a href="#UV" class="headerlink" title="UV"></a>UV</h3><p>UV即unique visitor，同一个客户端（pc或移动端）访问网站被计算为一个访客。<br>一天内相同的客户端访问同一个网站只计一次uv，uv是以cookie等技术为统计依据，实际统计存在误差。<br>一台计算机可能有多人使用，因此uv也不是最准确的。</p>
-<h3 id="并发数"><a href="#并发数" class="headerlink" title="并发数"></a>并发数</h3><p>并发数指系统同时能处理的请求数量，也反应了系统的负载能力。</p>
-<h3 id="响应时间"><a href="#响应时间" class="headerlink" title="响应时间"></a>响应时间</h3><p>响应时间是指执行一个请求从开始到最后收到响应数据所花费的总体时间。</p>
-<h3 id="QPS"><a href="#QPS" class="headerlink" title="QPS"></a>QPS</h3><p>Query Per Second：每秒查询数<br>服务器在一秒内处理了多少个请求，显然数字越大代表服务器的负载越高，处理能力越强。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Http相关术语pv、ip、uv 假设公司有一座大厦，大厦有100人，每个人有一台电脑和一部手机，上网都是通过nat转换出口，每个人点击网站2次（发2次请求）, 请问对应的pv,uv,ip分别是多少？</span><br><span class="line"></span><br><span class="line">PV：页面浏览量, 400 100人 2个设备 访问2次 =400数</span><br><span class="line">uv：独立的客户, 200 100人2个设备=200数</span><br><span class="line">ip：独立IP, 1个 同一个NAT出口，独立IP为1</span><br></pre></td></tr></table></figure>
-
+<h3 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h3><p>IP即Internet Protocol，这里是指独立ip数，不同的ip地址的计算机访问网站时被计算的总次数。<br>独立ip数是网站流量的一个重要指标。<br>一般相同ip地址的客户端访问网站页面一天内只会被计算一次。
       
     </div>
     <footer>
       
+        
+          <div class="alignleft">
+            <a href="/2019/04/04/HTTP学习03/#more" class="more-link">Read More</a>
+          </div>
         
         
       
@@ -171,296 +168,15 @@
     </header>
     <div class="entry">
       
-        <p>什么是http报文？它是HTTP应用程序之间发送的数据块。这些数据块以一些文本形式的元信息开头，这些信息描述了报文的内容及含义，后面跟着可选的数据部分。这些报文都是在客户端、服务器和代理之间流动。</p>
-<h3 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h3><p>由请求行，请求头部，空行，请求报文主体几个部分组成，即：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">起始行： &lt;method&gt; &lt;request-URL&gt; &lt;version&gt;</span><br><span class="line"></span><br><span class="line">头部：   &lt;headers&gt;</span><br><span class="line"></span><br><span class="line">主体：   &lt;entity-body&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h3><p>HTTP 响应与 HTTP 请求相似，HTTP响应也由3个部分构成，分别是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">状态行</span><br><span class="line">响应头(Response Header)</span><br><span class="line">响应正文</span><br></pre></td></tr></table></figure></p>
-<h3 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h3><p>uri中文叫“统一资源标识符”，是一个用于标识某一互联网资源名称的字符串，在世界范围内标识定位某一个唯一信息资源。<br>还有一个概念叫做URL，那什么是URL？URL简称统一资源定位符。那URL的组成部分是由协议, 域名:端口, 路径和文件名。<br>url主要用在各种www客户端和服务器程序上，url可以用一种统一的格式来描述各种信息资源，包括文件，服务器地址和目录等。</p>
-
+        <p>什么是http报文？它是HTTP应用程序之间发送的数据块。这些数据块以一些文本形式的元信息开头，这些信息描述了报文的内容及含义，后面跟着可选的数据部分。这些报文都是在客户端、服务器和代理之间流动。
       
     </div>
     <footer>
       
         
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-04-03T03:06:37.000Z"><a href="/2019/04/03/HTTP学习01/">2019-04-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/04/03/HTTP学习01/">HTTP简介、特点、版本、请求方法、状态码</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>## </p>
-<h3 id="一、Web服务基础"><a href="#一、Web服务基础" class="headerlink" title="一、Web服务基础"></a>一、Web服务基础</h3><p>用户访问网站的基本流程：</p>
-<p>1、双击浏览器，输入目标网址后，系统首先会查找本地的DNS缓存以及hosts文件信息，确定是否存在目标域名对应的ip解析记录，如果有就直接获取ip进行访问服务器，第一次请求时，dns缓存是没有解析记录的，hosts文件多数是开发临时测试用<br>2、如果本地dns缓存和hosts文件都没有域名解析记录，系统就会把访问的网址解析请求发送给客户端设置的DNS服务器去解析，也叫做Local DNS，如果LDNS服务器的本地缓存有对应的解析记录就会直接返回给客户端IP地址，如果没有LDNS就会继续请求其他的DNS服务器<br>3、LDNS继续从DNS系统的”.”(根)开始请求目标域名的解析，并且根据每个层级的DNS服务器系统进行系列的查找，最终在DNS网络上找到目标域名对应的授权DNS服务器。这个授权DNS服务器就是企业（个人）购买域名时用于管理域名解析的服务器，服务器上有对应的域名（IP）解析。<br>4、此时授权的DNS服务器就会把目标对应的IP解析记录，例如（1.1.1.1）发送给LDNS<br>5、此时LDNS会把解析记录发给浏览器，并且缓存域名和IP的解析记录，便于下一次更快的返回请求<br>6、浏览器获得ip，请求对应的服务器，网站服务器接收到客户端的请求开始响应处理，将内容返回给浏览器。</p>
-<h3 id="二、HTTP协议"><a href="#二、HTTP协议" class="headerlink" title="二、HTTP协议"></a>二、HTTP协议</h3><pre><code>全称是HyperText Tansfer Protocol,中文叫超文本传输协议，是互联网最常见的协议。
-Http最重要的是www(World Wide Web)服务，也叫web服务器，中文叫“万维网”。
-web服务端口默认是80，另外一个加密的www服务应用https默认端口是443，主要用于支付，网银相关业务。
-</code></pre><h3 id="三、HTTP协议的特点"><a href="#三、HTTP协议的特点" class="headerlink" title="三、HTTP协议的特点"></a>三、HTTP协议的特点</h3><p>　　1.HTTP协议是无状态的<br>　　就是说每次HTTP请求都是独立的，任何两个请求之间没有什么必然的联系。但是在实际应用当中并不是完全这样的，引入了Cookie和Session机制来关联请求。</p>
-<p>　　2.多次HTTP请求<br>　　在客户端请求网页时多数情况下并不是一次请求就能成功的，服务端首先是响应HTML页面，然后浏览器收到响应之后发现HTML页面还引用了其他的资源，例如，CSS，JS文件，图片等等，还会自动发送HTTP请求这些需要的资源。现在的HTTP版本支持管道机制，可以同时请求和响应多个请求，大大提高了效率。</p>
-<p>　　3.基于TCP协议<br>　　HTTP协议目的是规定客户端和服务端数据传输的格式和数据交互行为，并不负责数据传输的细节。底层是基于TCP实现的。现在使用的版本当中是默认持久连接的，也就是多次HTTP请求使用一个TCP连接。</p>
-<h3 id="四、版本"><a href="#四、版本" class="headerlink" title="四、版本"></a>四、版本</h3><pre><code>http协议诞生以来有若干个版本，主要是http/1.0 http/1.1
-http/1.0规定浏览器和服务器只能保持短暂的连接，浏览器的每次请求都需要和服务器建立一个TCP连接，服务器完成请求后即断开TCP连接，服务器不跟踪每个链接，也不记录请求
-http/1.1是对HTTP的缺陷进行重点修复，从可扩展性，缓存，带宽优化，持久连接，host头，错误通知等访问改进。
-http/1.1支持长连接，增加了更多的请求头和响应头信息，例如配置请求头的Connection的值为keep-alive，表示请求结果返回后保持连接
-</code></pre><h3 id="五、Http请求方法"><a href="#五、Http请求方法" class="headerlink" title="五、Http请求方法"></a>五、Http请求方法</h3><pre><code>在HTTP通信中，每个请求报文都包含一个方法，以告诉web服务器端需要执行哪些操作，这些动作被称为HTTP的请求方法。
-GET    请求指定的页面信息，并返回实体主体。
-HEAD    类似于get请求，只不过返回的响应中没有具体的内容，用于获取报头
-POST    向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有资源的修改。
-PUT    从客户端向服务器传送的数据取代指定的文档的内容。
-DELETE    请求服务器删除指定的页面。
-CONNECT    HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。
-OPTIONS    允许客户端查看服务器的性能。
-TRACE    回显服务器收到的请求，主要用于测试或诊断。
-</code></pre><h3 id="六、HTTP状态码"><a href="#六、HTTP状态码" class="headerlink" title="六、HTTP状态码"></a>六、HTTP状态码</h3><pre><code>HTTP状态码表示web服务器响应http请求状态的数字代码。
-常见状态码以及作用：
-1**    信息，服务器收到请求，需要请求者继续执行操作
-2**    成功，操作被成功接收并处理
-3**    重定向，需要进一步的操作以完成请求
-4**    客户端错误，请求包含语法错误或无法完成请求
-5**    服务器错误，服务器在处理请求的过程中发生了错误
-</code></pre><h3 id="七、HTTP状态码的命令查看"><a href="#七、HTTP状态码的命令查看" class="headerlink" title="七、HTTP状态码的命令查看"></a>七、HTTP状态码的命令查看</h3><pre><code>$ curl -I www.oldboyedu.com
-</code></pre><ul>
-<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/和https://www.cnblogs.com/wxisme/p/6212797.html" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/和https://www.cnblogs.com/wxisme/p/6212797.html</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-04-03T01:31:41.000Z"><a href="/2019/04/03/nginx学习总结03/">2019-04-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/04/03/nginx学习总结03/">nginx多个虚拟主机</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>## </p>
-<h3 id="Nginx多个虚拟主机"><a href="#Nginx多个虚拟主机" class="headerlink" title="Nginx多个虚拟主机"></a>Nginx多个虚拟主机</h3><p>想象一下，如果网站部署者在部署网站时，每台linux服务器只运行了一个小网站，那么人气低，流量小的草根站长需要承担高额的服务器租赁费，也造成了硬件资源浪费。于是就有了解决这种局面的办法：虚拟主机。虚拟主机就是将一台服务器分割成了多个“虚拟服务器”，每个站点可以使用各自的硬盘空间，由于节省资源、省钱，许多网站使用虚拟主机来部署网站。虚拟主机的概念就是在web服务里的一个独立的网站站点，这个站点对应独立的域名（IP），具有独立的程序和资源目录，可以独立的对外提供服务。这个独立的站点配置是在nginx.conf中使用server{}代码块标签来表示一个虚拟主机。Nginx支持多个server{}标签，即支持多个虚拟主机站点。</p>
-<h4 id="虚拟主机类型"><a href="#虚拟主机类型" class="headerlink" title="虚拟主机类型"></a>虚拟主机类型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- 基于域名的虚拟主机</span><br><span class="line">通过不同的域名区分不同的虚拟主机，是企业应用最广的虚拟主机。</span><br><span class="line"></span><br><span class="line">- 基于端口的虚拟主机</span><br><span class="line">通过不同的端口来区分不同的虚拟主机，一般用作企业内部网站，不对外直接提供服务的后台，例如www.pythonav.cn:9000</span><br><span class="line"></span><br><span class="line">- 基于IP的虚拟主机</span><br><span class="line">通过不同的IP区分不同的虚拟主机，此类比较少见，一般业务需要多IP的常见都会在负载均衡中绑定VIP</span><br></pre></td></tr></table></figure>
-<p>nginx可以自动识别用户请求的域名，根据不同的域名请求服务器传输不同的内容，只需要保证服务器上有一个可用的ip地址，配置好dns解析服务。<br>/etc/hosts是linux系统中本地dns解析的配置文件，同样可以达到域名访问效果。</p>
-<p>修改nginx.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">egrep -v &apos;#|^$&apos; /opt/nginx1-12/conf/nginx.conf</span><br><span class="line">#配置文件内容如下</span><br><span class="line">worker_processes  1;</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</span><br><span class="line">    access_log  logs/access.log  main;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    #虚拟主机1</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  www.pyyuc.cn;</span><br><span class="line">        location /&#123;</span><br><span class="line">            root   html/pyyuc;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">    #虚拟主机2</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  www.pythonav.cn;</span><br><span class="line">        location /&#123;</span><br><span class="line">            root   html/pythonav;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@oldboy_python /opt/nginx1-12 14:52:12]#curl www.pythonav.cn</span><br><span class="line">&lt;meta charset=utf8&gt;我是pythonav，未成年禁止入内</span><br><span class="line">[root@oldboy_python /opt/nginx1-12 14:52:40]#curl www.pyyuc.cn</span><br><span class="line">&lt;meta charset=utf8&gt;我是pyyuc站点</span><br></pre></td></tr></table></figure>
-<ul>
-<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-04-03T00:52:04.000Z"><a href="/2019/04/03/nginx学习总结02/">2019-04-03</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/04/03/nginx学习总结02/">nginx目录、部署站点</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h3 id="一、nginx软件目录"><a href="#一、nginx软件目录" class="headerlink" title="一、nginx软件目录"></a>一、nginx软件目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yc-virtual-machine /opt/nginx1-12 11:44:02]#ls</span><br><span class="line">client_body_temp  conf  fastcgi_temp  html  logs  proxy_temp  sbin  scgi_temp  static  uwsgi_temp</span><br></pre></td></tr></table></figure>
-<ul>
-<li>conf 存放nginx所有配置文件的目录,主要nginx.conf</li>
-<li>html 存放nginx默认站点的目录，如index.html、error.html等</li>
-<li>logs 存放nginx默认日志的目录，如error.log access.log</li>
-<li>sbin 存放nginx主命令的目录,sbin/nginx</li>
-</ul>
-<p>Nginx主配置文件/etc/nginx/nginx.conf是一个纯文本类型的文件，整个配置文件是以区块的形式组织的。一般，每个区块以一对大括号{}来表示开始与结束。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CoreModule核心模块</span><br><span class="line"></span><br><span class="line">user www;                       #Nginx进程所使用的用户</span><br><span class="line">worker_processes 1;             #Nginx运行的work进程数量(建议与CPU数量一致或auto)</span><br><span class="line">error_log /log/nginx/error.log  #Nginx错误日志存放路径</span><br><span class="line">pid /var/run/nginx.pid          #Nginx服务运行后产生的pid进程号</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">events事件模块</span><br><span class="line"></span><br><span class="line">events &#123;            </span><br><span class="line">    worker_connections  //每个worker进程支持的最大连接数</span><br><span class="line">    use epool;          //事件驱动模型, epoll默认</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">http内核模块</span><br><span class="line"></span><br><span class="line">// 公共的配置定义在http&#123;&#125;</span><br><span class="line">http &#123;  //http层开始</span><br><span class="line">...    </span><br><span class="line">    // 使用Server配置网站, 每个Server&#123;&#125;代表一个网站(简称虚拟主机)</span><br><span class="line">    &apos;server&apos; &#123;</span><br><span class="line">        listen       80;        // 监听端口, 默认80</span><br><span class="line">        server_name  localhost; // 提供服务的域名或主机名</span><br><span class="line">        access_log host.access.log  // 访问日志</span><br><span class="line">        // 控制网站访问路径</span><br><span class="line">        &apos;location&apos; / &#123;</span><br><span class="line">            root   /usr/share/nginx/html;   // 存放网站代码路径</span><br><span class="line">            index  index.html index.htm;    // 服务器返回的默认页面文件</span><br><span class="line">        &#125;</span><br><span class="line">        // 指定错误代码, 统一定义错误页面, 错误代码重定向到新的Locaiton</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    //第二个虚拟主机配置</span><br><span class="line">    &apos;server&apos; &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#125;</span><br><span class="line">    include /etc/nginx/conf.d/*.conf;  // 包含/etc/nginx/conf.d/目录下所有以.conf结尾的文件</span><br><span class="line">&#125;   // http层结束</span><br></pre></td></tr></table></figure>
-<h3 id="二、部署nginx站点"><a href="#二、部署nginx站点" class="headerlink" title="二、部署nginx站点"></a>二、部署nginx站点</h3><p>nginx默认站点是Nginx目录下的html文件夹，这里可以从nginx.conf中查到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /&#123;</span><br><span class="line">        root   html;  #这里是默认的站点html文件夹，也就是              /opt/nginx1-12/html/文件夹下的内容</span><br><span class="line">        index  index.html index.htm; #站点首页文件名是index.html</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果要部署网站业务数据，只需要把开发好的程序全放到html目录下即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yc-virtual-machine /tmp 11:34:52]#ls /opt/nginx1-12/html/</span><br><span class="line">index.html  jssts.jpeg  lhy.mp4  man.jpg  wget-log</span><br></pre></td></tr></table></figure></p>
-<p>至此，只需要通过域名/资源，即可访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.pyyuc.cn/index.html</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-04-02T10:01:56.000Z"><a href="/2019/04/02/nginx学习总结01/">2019-04-02</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/04/02/nginx学习总结01/">nginx简介、安装</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h3 id="一、nginx出世"><a href="#一、nginx出世" class="headerlink" title="一、nginx出世"></a>一、nginx出世</h3><p>2004年10月4日，为俄罗斯知名门户站点而开发的Web服务程序 Nginx 横空出世。Nginx程序作为一款轻量级的网站服务软件，因其稳定性和丰富的功能而快速占领服务器市场，但Nginx最被认可的还当是系统资源消耗低且并发能力强，因此得到了国内诸如新浪、网易、腾讯等门户站的青睐。</p>
-<h3 id="二、nginx介绍"><a href="#二、nginx介绍" class="headerlink" title="二、nginx介绍"></a>二、nginx介绍</h3><ul>
-<li>nginx是一个开源的，支持高性能，高并发的www服务和代理服务软件。它是一个俄罗斯人lgor sysoev开发的，作者将源代码开源出来供全球使用。</li>
-<li>nginx比它大哥apache性能改进许多，nginx占用的系统资源更少，支持更高的并发连接，有更高的访问效率。</li>
-<li>nginx不但是一个优秀的web服务软件，还可以作为反向代理，负载均衡，以及缓存服务使用。</li>
-<li>安装更为简单，方便，灵活。</li>
-<li>支持高并发，能支持几万并发连接</li>
-<li>资源消耗少，在3万并发连接下开启10个nginx线程消耗的内存不到200M</li>
-<li>可以做http反向代理和负载均衡</li>
-<li>支持异步网络i/o事件模型epoll<br>下面介绍nginx的安装与配置</li>
-</ul>
-<h3 id="三、安装配置nginx"><a href="#三、安装配置nginx" class="headerlink" title="三、安装配置nginx"></a>三、安装配置nginx</h3><h4 id="安装nginx前的依赖环境解决"><a href="#安装nginx前的依赖环境解决" class="headerlink" title="安装nginx前的依赖环境解决"></a>安装nginx前的依赖环境解决</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#执行第一条语句即可</span><br><span class="line">yum install gcc patch libffi-devel python-devel  zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel openssl openssl-devel -y</span><br><span class="line">#依赖简单介绍</span><br><span class="line">一. gcc 安装</span><br><span class="line">安装 nginx 需要先将官网下载的源码进行编译，编译依赖 gcc 环境，如果没有 gcc 环境，则需要安装：</span><br><span class="line">yum install gcc-c++</span><br><span class="line">二. PCRE pcre-devel 安装</span><br><span class="line">PCRE(Perl Compatible Regular Expressions) 是一个Perl库，包括 perl 兼容的正则表达式库。nginx 的 http 模块使用 pcre 来解析正则表达式，所以需要在 linux 上安装 pcre 库，pcre-devel 是使用 pcre 开发的一个二次开发库。nginx也需要此库。命令：</span><br><span class="line">yum install -y pcre pcre-devel</span><br><span class="line">三. zlib 安装</span><br><span class="line">zlib 库提供了很多种压缩和解压缩的方式， nginx 使用 zlib 对 http 包的内容进行 gzip ，所以需要在 Centos 上安装 zlib 库。</span><br><span class="line">yum install -y zlib zlib-devel</span><br><span class="line">四. OpenSSL 安装</span><br><span class="line">OpenSSL 是一个强大的安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及 SSL 协议，并提供丰富的应用程序供测试或其它目的使用。</span><br><span class="line">nginx 不仅支持 http 协议，还支持 https（即在ssl协议上传输http），所以需要在 Centos 安装 OpenSSL 库。</span><br></pre></td></tr></table></figure>
-<h4 id="编译安装nginx"><a href="#编译安装nginx" class="headerlink" title="编译安装nginx"></a>编译安装nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.下载源码包</span><br><span class="line">wget -c https://nginx.org/download/nginx-1.12.0.tar.gz</span><br><span class="line">2.解压缩源码</span><br><span class="line">tar -zxvf nginx-1.12.0.tar.gz</span><br><span class="line">3.配置，编译安装  开启nginx状态监测功能</span><br><span class="line">./configure --prefix=/opt/nginx112/ </span><br><span class="line">make &amp;&amp; make install </span><br><span class="line">4.启动nginx，进入sbin目录,找到nginx启动命令</span><br><span class="line">cd sbin</span><br><span class="line">./nginx #启动</span><br><span class="line">./nginx -s stop #关闭</span><br><span class="line">./nginx -s reload #重新加载</span><br><span class="line">5.修改PATH</span><br><span class="line">PATH=$PATH:/opt/nginx112/</span><br></pre></td></tr></table></figure>
-<ul>
-<li>参考自：<a href="https://pythonav.com/wiki/detail/3/34/" target="_blank" rel="noopener">https://pythonav.com/wiki/detail/3/34/</a></li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-02-13T02:36:41.753Z"><a href="/2019/02/13/hello-world/">2019-02-13</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/02/13/hello-world/">Hello World</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-11-19T12:43:32.000Z"><a href="/2018/11/19/Linux基础/">2018-11-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/11/19/Linux基础/">Linux基础</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>一、Linux与Windows的区别<br>体现在目录的结构和安全性上，Linux所有的命令是以文件形式存储的，在Linux系统当中一切皆为文件（常用的比如：普通文件、目录文件、链接文件、设备文件等）。</p>
-<p>二、目录含义<br>/bin 存放普通用户的命令文件<br>/boot 存放系统启动文件<br>/cdrom 存放读取光盘<br>/dev 存放设备相关文件<br>/etc 存放配置文件<br>/home 家目录<br>/lib 库文件相关<br>/lib64 64位库文件<br>/lost+found 系统异常产生错误时，丢失文件放在这里<br>/media 媒体文件<br>/mnt 挂载目录<br>/opt 安装软件时的默认目录<br>/proc 内存中相关数据文件<br>/root root用户登录的家目录<br>/run 系统运行的时候用到的文件<br>/sbin 超级管理员运行的文件<br>/srv 服务启动之后需要访问的数据目录<br>/sys 系统文件<br>/tmp 临时文件<br>/usr 应用程序存放目录<br>/var 放置系统执行过程中经常变化的文件，如随时更改的日志文件</p>
-<p>三、相关命令<br>查看命令（目录结构、路径）：<br>.     当前路径<br>..  上一级路径<br>cd ..  回到上一级<br>cd  切换到家目录<br>cd ~  切换到家目录<br>cd - 回到上一个你操作的那一个目录<br>pwd 查看当前所在的目录是哪里<br>ls  查看当前文件夹里面有什么<br>    .bash_history 但凡是点开头的文件，都是隐藏文件<br>    -a  所有文件（包括隐藏文件）<br>    -l  以列表的形式呈现<br>    -h  可以让文件大小带上单位<br>ll 相当于ls -al<br>man 是帮助命令，比如：man ls或man cp<br>nano 内置自带的文本编辑器（编辑文件用的）<br>cat 查看文件内容<br>more 对于内容较多的情况下用more支持分页，空格下一页<br>head 加上-2是查看前几条<br>tail 加上-2是查看后几条<br>dmesg 查看系统接入设备信息<br>top 查看运行状态<br>sudo service network-manager restart 网络有线未托管<br>sudo apt-get install vim<br>操作命令（新建、复制粘贴剪切、删除）：<br>mkdir 要创建的文件夹名字<br>touch 要创建的文件名<br>ln -s 创建软链接，ln -s 指定你想要创建的连接  放到哪个目录下面，ln -s 需要使用绝对路径的方式来创建。<br>mv /路径/文件夹或文件 新名称  功能：既可以剪切也可以改名<br>cp 路径 路径（从哪里~到哪里去）<br>cp 默认只能够复制文件<br>cp -r 可以复制文件夹<br>cp -a 可以复制权限和所有属性<br>rm -rf 指定文件夹或者文件名称 功能：用于删除文件或者目录<br>查找命令（找文件、文件内容）：<br>find 搜索文件的命令<br>find 查找位置 -name 文件名<br>find    /     -iname index.php<br>grep 搜索文件里面符合条件的内容<br>grep “字符串” 文件名<br>grep  -i   “root”<br>grep  -v   “root”<br>挂载操作命令：<br>sudo fdisk -l         查看当前系统有哪些挂载设备<br>sudo mount 找到的设备路径 /mnt/cdrom           挂载<br>sudo umount /mnt/cdrom(umount + 挂载的目录)    取消挂载</p>
-<p>四、权限结构<br>在Linux中，无论文件夹还是文件都是有权限的，通过在终端键入ls -l命令行可以看到每一行开始都有类似drwxrwxr-x的一串字符码，当中就包含有权限的标识。其中：第一位表示类型，即说明是文件夹(d)、文件(-)以及链接(l)中的哪一类型；后面的9位，每三位划分为一组作为权限位，从前往后这三个权限位分别标识所属主、所属组、其他用户的权限。<br>指定类型(dl-) 权限位1(rwx) 权限位2(rwx) 权限位3(rwx)，其中r=&gt;read w=&gt;write x=&gt;可执行，r =&gt; 4, w =&gt; 2, x =&gt; 1。<br>d rwx rwx r-x<br>文件类型-所属主 所属组 其他<br>   d     rwx     rwx    rwx<br>位数1,2,3 代表当前文件或者文件夹的所有者的权限设定:(所有者的权限  u,user)<br>    1: r 或者 -  r表示可以读取  - 表示不可以读取<br>    2: w 或者 -  w表示可以写入  - 表示不可以写入<br>    3: x 或者 -  x表示可以执行  - 表示不可以执行<br>位数4,5,6 代表当前文件或者文件夹的所属组的权限设定:(所属组的权限 g ,group)<br>    1: r 或者 -  r表示可以读取  - 表示不可以读取<br>    2: w 或者 -  w表示可以写入  - 表示不可以写入<br>    3: x 或者 -  x表示可以执行  - 表示不可以执行<br>位数7,8,9 代表其他用户对当前文件或者文件夹的的权限设定:(其他人的权限 o,other)<br>    1: r 或者 -  r表示可以读取  - 表示不可以读取<br>    2: w 或者 -  w表示可以写入  - 表示不可以写入<br>    3: x 或者 -  x表示可以执行  - 表示不可以执行<br>更改权限<br>rwx的任意组合共 8 种 情况：<br>rwx    =&gt; 7<br>rw-    =&gt; 6<br>r-x    =&gt; 5<br>r–    =&gt; 4<br>-wx    =&gt; 3<br>-w-    =&gt; 2<br>–x    =&gt; 1<br>—    =&gt; 0<br>其中r =&gt; 4, w =&gt; 2, x =&gt; 1。例如：根目录下默认的文件夹权限为755（rwx  r-x  r-x） ，根目录下默认的文件权限为644（rw-  r–  r–），所有权限为777（rwx  rwx  rwx）<br>关于权限更改的各种写法<br>chmod 755 1.txt<br>chmod -R 777 ceshi100(chmod -R 777 文件夹) # 递归更改这个文件夹里面的所有文件权限<br>chmod u+r,g-w,o+x 1.txt<br>chmod u=rwx 1.txt<br>其中：<br>u代表所有者   加一个r权限 (user)<br>g代表所属组   减一个w权限 (group)<br>o代表其他     加一个执行权限 (other)<br>=&gt;对于目录来讲<br>r   是否呈现里面的文件<br>w   是否可以在里面创建文件或文件夹<br>x   cd 切不进来  不能访问这个目录<br>=&gt;对于文件来讲<br>r  可以看到文件内容<br>w  可以更改删除文件及内容<br>x  是否可以执行这个文件 ./abc.sh</p>
-<p>(*扩展)<br>sudo useradd a01    添加新用户账号<br>sudo passwd a01     为新用户设置密码<br>sudo su a01            切换用户账号<br>exit                  退出当前用户  </p>
-<p><a href="http://www.xuetangx.com/courses/course-v1:MITx+6_00_1x+sp/courseware/Week_1/videosequence:Lecture_1/" target="_blank" rel="noopener">http://www.xuetangx.com/courses/course-v1:MITx+6_00_1x+sp/courseware/Week_1/videosequence:Lecture_1/</a></p>
-
-      
-    </div>
-    <footer>
-      
+          <div class="alignleft">
+            <a href="/2019/04/03/HTTP学习02/#more" class="more-link">Read More</a>
+          </div>
         
         
       
@@ -493,7 +209,23 @@ TRACE    回显服务器收到的请求，主要用于测试或诊断。
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/Python，数据加密/">Python，数据加密</a><small>1</small></li>
+    <li><a href="/categories/HTTP/">HTTP</a><small>3</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+    <li><a href="/categories/Python基础/">Python基础</a><small>1</small></li>
+  
+    <li><a href="/categories/Python，数据加密/">Python，数据加密</a><small>0</small></li>
+  
+    <li><a href="/categories/html5/css3/">css3</a><small>1</small></li>
+  
+    <li><a href="/categories/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/categories/nginx/">nginx</a><small>3</small></li>
+  
+    <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
   
   </ul>
 </div>
