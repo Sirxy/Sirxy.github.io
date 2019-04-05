@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python面向对象——super() | 沐雨橙风</title>
+  <meta name="author" content="Sirxy">
+  
+  <meta name="description" content="Python, web后端，web前端，数据库，Linux等编程技术博客总结">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Python面向对象——super()"/>
+  <meta property="og:site_name" content="沐雨橙风"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="沐雨橙风" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">沐雨橙风</a></h1>
+  <h2><a href="/">水滴石穿</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-05T02:25:02.000Z"><a href="/2019/04/05/Python面向对象——super/">2019-04-05</a></time>
+      
+      
+  
+    <h1 class="title">Python面向对象——super()</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="Python-OOP中关于super-的描述"><a href="#Python-OOP中关于super-的描述" class="headerlink" title="Python OOP中关于super()的描述"></a>Python OOP中关于super()的描述</h3><p>在Python OOP实际应用中，有一个函数super()，通过这个函数可以允许继承父类的子类访问该父类中的方法。super()会在该子类当中单独返回一个父类的临时对象，然后允许你在该子类中调用该父类所拥有的方法。<a id="more"></a>通常使用super()这个函数调用父类当中所构建的方法，这可以使你无需在子类中重写这些方法，并允许你使用最少的代码更改来替换父类。在对Python super()有了一个大致的认识后，下面说一说Python中关于各种继承（单继承、多继承）对super()的简单应用等。</p>
+<h3 id="Python单继承之super"><a href="#Python单继承之super" class="headerlink" title="Python单继承之super()"></a>Python单继承之super()</h3><p>首先来定义两个类：Rectangle、Square，通过这两个类来说明继承关系。定义类如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Rectangle():</span><br><span class="line">	&apos;&apos;&apos;矩形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, width, height):</span><br><span class="line">		self.width = width</span><br><span class="line">		self.length = length</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		&apos;&apos;&apos;计算面积&apos;&apos;&apos;</span><br><span class="line">		return self.length * self.width</span><br><span class="line"></span><br><span class="line">	def perimeter(self):</span><br><span class="line">		&apos;&apos;&apos;计算周长&apos;&apos;&apos;</span><br><span class="line">		return (self.width + self.length) &lt;&lt; 1</span><br><span class="line"></span><br><span class="line">class Square():</span><br><span class="line">	&apos;&apos;&apos;正方形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, length):</span><br><span class="line">		self.length = length</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		&apos;&apos;&apos;计算面积&apos;&apos;&apos;</span><br><span class="line">		return self.length * self.length</span><br><span class="line"></span><br><span class="line">	def perimeter(self):</span><br><span class="line">		&apos;&apos;&apos;计算周长&apos;&apos;&apos;</span><br><span class="line">		return self.length &lt;&lt; 2</span><br><span class="line"></span><br><span class="line">square = Square(4) # 实例化正方形类</span><br><span class="line">print(square.area())</span><br><span class="line">rectangle = Rectangle(2, 4) # 实例化矩形类</span><br><span class="line">print(rectangle.area())</span><br></pre></td></tr></table></figure></p>
+<p>通过此示例发现，这两个类是两个相互有关联的形状类：正方形是一种特殊的矩形， 但以上的代码似乎并没有展示出这种关系，因此这两个类具有重复的代码。找出了相关性，我们就可以通过这种相关性类实现继承的关系，通过继承减少代码的量的编写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Rectangle():</span><br><span class="line">	&apos;&apos;&apos;矩形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, width, length):</span><br><span class="line">		self.width = width</span><br><span class="line">		self.length = length</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		&apos;&apos;&apos;计算面积&apos;&apos;&apos;</span><br><span class="line">		return self.length * self.width</span><br><span class="line"></span><br><span class="line">	def perimeter(self):</span><br><span class="line">		&apos;&apos;&apos;计算周长&apos;&apos;&apos;</span><br><span class="line">		return (self.width + self.length) &lt;&lt; 1</span><br><span class="line"></span><br><span class="line">class Square(Rectangle):</span><br><span class="line">	&apos;&apos;&apos;正方形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, length):</span><br><span class="line">		super().__init__(length, length)</span><br><span class="line"></span><br><span class="line">square = Square(4) # 实例化正方形类</span><br><span class="line">print(square.area())</span><br><span class="line">rectangle = Rectangle(2, 4) # 实例化矩形类</span><br><span class="line">print(rectangle.area())</span><br></pre></td></tr></table></figure></p>
+<p>在这里，我们使用了super()来调用Rectangle类的<strong>init </strong>()，允许我们在Square类中使用它而不重复代码。 如下所示，核心功能在进行更改后仍然存在。<br>因为Square和Rectangle .<strong> init </strong>()方法非常相似，所以你可以使用super()从Square的方法中调用超类的.<strong> init </strong>()方法（Rectangle .<strong> init </strong>()）。 这里设置了.length和.width属性，即使您只需要为Square构造函数提供单个长度参数。<br>当你运行它时，即使你的Square类没有显式地实现它，对.area()的调用将使用超类中的.area()方法并打印16. Square类从Rectangle继承.area() 方法。</p>
+<h3 id="super-在单继承中能为你做什么呢？"><a href="#super-在单继承中能为你做什么呢？" class="headerlink" title="super()在单继承中能为你做什么呢？"></a>super()在单继承中能为你做什么呢？</h3><p>与其他面向对象语言一样，它允许您在子类中调用父类的方法。这种情况的主要用例是扩展继承方法的功能。<br>在下面的示例中，您将创建一个继承自Square的类Cube，并扩展.area()的功能（通过Square继承自Rectangle类）以计算Cube实例的表面积和体积：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">class Rectangle():</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;矩形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, width, length):</span><br><span class="line">		self.width = width</span><br><span class="line">		self.length = length</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		&apos;&apos;&apos;计算面积&apos;&apos;&apos;</span><br><span class="line">		return self.length * self.width</span><br><span class="line"></span><br><span class="line">	def perimeter(self):</span><br><span class="line">		&apos;&apos;&apos;计算周长&apos;&apos;&apos;</span><br><span class="line">		return (self.width + self.length) &lt;&lt; 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Square(Rectangle):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;正方形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, length):</span><br><span class="line">		super().__init__(length, length)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Cube(Square):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;立方体类&apos;&apos;&apos;</span><br><span class="line">	def surface_area(self):</span><br><span class="line">		&apos;&apos;&apos;计算表面积&apos;&apos;&apos;</span><br><span class="line">		face_area = super().area()</span><br><span class="line">		return face_area * 6</span><br><span class="line"></span><br><span class="line">	def volume(self):</span><br><span class="line">		face_area = super().area()</span><br><span class="line">		return face_area * self.length</span><br></pre></td></tr></table></figure></p>
+<p>这时，让我们看一下边长为3的立方体的表面积和体积：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cube = Cube(3)</span><br><span class="line">print(cube.surface_area()) # 54</span><br><span class="line">print(cube.volume()) # 27</span><br></pre></td></tr></table></figure></p>
+<p>从上面可以看出，我们为Cube立方体类实现了两个方法：.surface_area()和.volume()。这两个计算都依赖于计算单个面的面积，因此您不必重新实现面积计算，而是使用super()来扩展面积计算。<br>另外请注意，Cube类定义没有.<strong> init </strong>()。因为Cube继承自Square，而.<strong> init </strong>()并没有为Cube做任何不同的事情，所以你可以跳过定义它，并且将自动调用超类（Square）的.<strong> init </strong>()。<br>super()将委托对象返回给父类，因此您可以直接调用它所需的方法：super().area()。这不仅使我们不必重写面积计算方法，而且还允许我们在一个位置更改内部.area()逻辑。当你有一些继承自一个父类的子类时，这尤其有用。<br>介绍了上面这些示例，下面我们探索一下super()它的机制。</p>
+<h3 id="super-机制"><a href="#super-机制" class="headerlink" title="super()机制"></a>super()机制</h3><p>我们发现，上面一系列的示例是在没有任何参数的情况下调用super()的，然而super()也可以使用两个参数：第一个是子类，第二个参数是作为该子类实例的对象。<br>首先，让我们看两个示例，通过使用已有的类来展示操作第一个变量可以做什么：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Rectangle():</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;矩形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, width, length):</span><br><span class="line">		self.width = width</span><br><span class="line">		self.length = length</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		&apos;&apos;&apos;计算面积&apos;&apos;&apos;</span><br><span class="line">		return self.length * self.width</span><br><span class="line"></span><br><span class="line">	def perimeter(self):</span><br><span class="line">		&apos;&apos;&apos;计算周长&apos;&apos;&apos;</span><br><span class="line">		return (self.width + self.length) &lt;&lt; 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Square(Rectangle):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;正方形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, length):</span><br><span class="line">		super(Square, self).__init__(length, length)</span><br></pre></td></tr></table></figure></p>
+<p>在Python 3当中，super(Square，self)调用等同于无参数的super()调用。 第一个参数指的是子类Square，而第二个参数指的是Square对象，在这种情况下，它是self。 我们也可以使用其他类调用super()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Cube(Square):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;立方体类&apos;&apos;&apos;</span><br><span class="line">	def surface_area(self):</span><br><span class="line">		&apos;&apos;&apos;计算表面积&apos;&apos;&apos;</span><br><span class="line">		face_area = super(Square, self).area()</span><br><span class="line">		return face_area * 6</span><br><span class="line"></span><br><span class="line">	def volume(self):</span><br><span class="line">		face_area = super(Square, self).area()</span><br><span class="line">		return face_area * self.length</span><br></pre></td></tr></table></figure></p>
+<p>在此示例中，您将Square设置为super()的子类参数，而不是Cube。 这导致super()开始在实例层次结构中的Square上方的一个级别搜索匹配方法（在本例中为.area()方法），在本例中为Rectangle类。在此特定示例中，行为不会更改。 但想象一下Square还实现了一个你想要确保Cube不使用的.area()方法。 以这种方式调用super()可以让你这样做。<br>第二个参数怎么样？请记住，这是一个对象，它是用作第一个参数的类的实例。例如，isinstance(Cube，Square)必须返回True。<br>通过包含实例化对象，super()返回一个绑定方法：绑定到对象的方法，用来为方法提供对象的上下文，例如任何实例属性。如果未包含此参数，则返回的方法只是一个函数，与对象的上下文无关。（注意：super()不返回方法。它返回一个代理对象。它将调用正确的类方法，而不需要另外创建一个对象。）</p>
+<h3 id="Python多继承之super"><a href="#Python多继承之super" class="headerlink" title="Python多继承之super()"></a>Python多继承之super()</h3><p>了解了单继承的super()和它的一些示例，下面，我们将开始了解多继承的一些概述和一些示例，这些示例将演示多继承如何工作以及super()如何启用该功能。</p>
+<ul>
+<li>多继承概述<br>Python支持多继承，其中子类可以从多个不必继承的超类（也称为兄弟类）继承。<br>为了更好地说明多继承的实际应用，下面将展示如何通过三角形和正方形构建一个右金字塔（带有方形底座的金字塔）：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">class Rectangle():</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;矩形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, width, length):</span><br><span class="line">		self.width = width</span><br><span class="line">		self.length = length</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		&apos;&apos;&apos;计算面积&apos;&apos;&apos;</span><br><span class="line">		return self.length * self.width</span><br><span class="line"></span><br><span class="line">	def perimeter(self):</span><br><span class="line">		&apos;&apos;&apos;计算周长&apos;&apos;&apos;</span><br><span class="line">		return (self.width + self.length) &lt;&lt; 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Square(Rectangle):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;正方形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, length):</span><br><span class="line">		super().__init__(length, length)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Triangle():</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;三角形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, base, height):</span><br><span class="line">		self.base = base</span><br><span class="line">		self.height = height</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		return self.base * self.height * 0.5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class RightPyramid(Triangle, Square):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;右金字塔类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, base, slant_height):</span><br><span class="line">		self.base = base</span><br><span class="line">		# 倾斜高度：从物体底部中心（如金字塔）到其面部到该物体顶部的高度</span><br><span class="line">		self.slant_height = slant_height </span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		base_area = super().area()</span><br><span class="line">		perimeter = super().perimeter()</span><br><span class="line">		return perimeter * self.slant_height * 0.5 + base_area</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此示例原来的基础上又声明了一个Triangle类和一个继承Square和Triangle的RightPyramid类。<br>您将看到另一个使用super()的.area()方法，就像在单继承中一样，目的是用到在Rectangle类中一直定义的.perimeter()和.area()方法。<br>但问题是两个超类（Triangle和Square）都定义了一个.area()。花一点时间思考在RightPyramid上调用.area()时会发生什么，然后尝试调用它，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pyramid = RightPyramid(2, 4)</span><br><span class="line">print(pyramid.area())</span><br><span class="line"># Traceback (most recent call last):</span><br><span class="line">#   File &quot;C:\Users\lenovo\Desktop\dianping.py&quot;, line 103, in &lt;module&gt;</span><br><span class="line">#     print(pyramid.area())</span><br><span class="line">#   File &quot;C:\Users\lenovo\Desktop\dianping.py&quot;, line 99, in area</span><br><span class="line">#     base_area = super().area()</span><br><span class="line">#   File &quot;C:\Users\lenovo\Desktop\dianping.py&quot;, line 88, in area</span><br><span class="line">#     return self.base * self.height * 0.5</span><br><span class="line"># AttributeError: &apos;RightPyramid&apos; object has no attribute &apos;height&apos;</span><br></pre></td></tr></table></figure></p>
+<p>您是否猜测Python会尝试调用Triangle.area()？ 这是因为所谓的方法解析顺序在起作用。<br>注意：我们怎么注意到Triangle.area()被调用了，而不是像我们希望的那样，Square.area()？ 如果查看回溯的最后一行（在AttributeError之前），您将看到对特定代码行的引用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return self.base * self.height * 0.5</span><br></pre></td></tr></table></figure></p>
+<p>您可以将几何类中的这个方法认为是三角形面积公式。 或者，你可能已经找到Triangle和Rectangle类定义，并在Triangle.area()中看到了相同的代码。</p>
+<ul>
+<li>方法解析顺序mro<br>方法解析顺序告诉Python如何搜索继承来的方法，当你使用super()时，这回排上很大的用场，因为mro会告诉Python将使用super()以及以什么样的顺序来进行调用的方法。<br>每个类都会有一个.<strong>mro</strong>的魔术属性，它允许我们检查顺序：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(RightPyramid.__mro__) </span><br><span class="line"># 打印结果：</span><br><span class="line">(&lt;class &apos;__main__.RightPyramid&apos;&gt;, &lt;class &apos;__main__.Triangle&apos;&gt;, &lt;class &apos;__main__.Square&apos;&gt;, &lt;class &apos;__main__.Rectangle&apos;&gt;, &lt;class &apos;object&apos;&gt;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这告诉我们首先在Rightpyramid中搜索方法，然后在Triangle中搜索，然后在Square中搜索，然后在Rectangle中搜索，然后，如果没有找到，则在对象中搜索。</p>
+<p>这里的问题是解释器在Square和Rectangle之前在Triangle中搜索.area()，并且在Triangle中找到.area()时，Python会调用它而不是你想要的那个。 因为Triangle.area()期望有.height和.base属性，所以Python会抛出AttributeError。</p>
+<p>幸运的是，您可以控制MRO的构建方式。 只需更改RightPyramid类的签名，即可按所需顺序进行搜索，方法将正确解析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class RightPyramid(Square, Triangle):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;右金字塔类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, base, slant_height):</span><br><span class="line">		self.base = base</span><br><span class="line">		self.slant_height = slant_height</span><br><span class="line">		super().__init__(self.base)</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		base_area = super().area()</span><br><span class="line">		perimeter = super().perimeter()</span><br><span class="line">		return perimeter * self.slant_height * 0.5 + base_area</span><br></pre></td></tr></table></figure></p>
+<p>请注意，RightPyramid使用Square类中的.<strong> init </strong>()进行部分初始化。 这允许.area()在对象上使用.length，如设计的那样。</p>
+<p>现在，您可以构建金字塔类，检查MRO并计算表面积：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pyramid = RightPyramid(2, 4)</span><br><span class="line">print(pyramid.area()) # 20.0</span><br><span class="line">print(RightPyramid.__mro__) # (&lt;class &apos;__main__.RightPyramid&apos;&gt;, &lt;class &apos;__main__.Square&apos;&gt;, &lt;class &apos;__main__.Rectangle&apos;&gt;, &lt;class &apos;__main__.Triangle&apos;&gt;, &lt;class &apos;object&apos;&gt;)</span><br></pre></td></tr></table></figure></p>
+<p>您可以看到MRO现在是您所期望的，并且您也可以检查金字塔的表面积，这要归功于.area()和.perimeter()。</p>
+<p>不过，这里仍然存在问题。为了简单起见，我在这个例子中故意设置了一些错误：第一个，可以说最重要的是，我有两个具有相同方法名称和签名的独立类。</p>
+<p>这会导致方法解析问题，因为将调用MRO列表中遇到的.area()的第一个实例。</p>
+<p>当您使用具有多重继承的super()时，必须设计您的类以进行协作。其中一点是确保您的方法是唯一的，以便通过签名确保方法是唯一的 - 无论是使用方法名称还是方法参数，在MRO中正确解析它们。</p>
+<p>在这种情况下，为了避免对代码进行彻底检查，可以将Triangle类的.area()方法重命名为.tri_area()。这样，area方法可以继续使用类属性而不是使用外部参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Triangle():</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;三角形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, base, height):</span><br><span class="line">		self.base = base</span><br><span class="line">		self.height = height</span><br><span class="line">		super().__init__()</span><br><span class="line"></span><br><span class="line">	def tri_area(self):</span><br><span class="line">		return self.base * self.height * 0.5</span><br></pre></td></tr></table></figure></p>
+<p>让我们继续在RightPyramid类中使用它：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class RightPyramid(Square, Triangle):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;右金字塔类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, base, slant_height):</span><br><span class="line">		self.base = base</span><br><span class="line">		self.slant_height = slant_height</span><br><span class="line">		super().__init__(self.base)</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		base_area = super().area()</span><br><span class="line">		perimeter = super().perimeter()</span><br><span class="line">		return perimeter * self.slant_height * 0.5 + base_area</span><br><span class="line">	def area_2(self):</span><br><span class="line">		base_area = super().area()</span><br><span class="line">		triangle_area = super().tri_area()</span><br><span class="line">		return triangle_area * 4 + base_area</span><br></pre></td></tr></table></figure></p>
+<p>这里的下一个问题是代码没有像Square对象那样的委托的Triangle对象，所以调用.area_2()会给我们一个AttributeError，因为.base和.height没有任何值。</p>
+<p>你需要做两件事来解决这个问题：</p>
+<p>1.使用super()调用的所有方法都需要调用其超类的该方法版本。 这意味着您需要将super().<strong> init </strong>()添加到Triangle和Rectangle的.<strong> init </strong>()方法中。</p>
+<p>2.重新设计所有.<strong> init </strong>()调用以获取关键字字典。 请参阅下面的完整代码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">class Rectangle():</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;矩形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, width, length, **kwargs):</span><br><span class="line">		self.width = width</span><br><span class="line">		self.length = length</span><br><span class="line">		super().__init__(**kwargs)</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		&apos;&apos;&apos;计算面积&apos;&apos;&apos;</span><br><span class="line">		return self.length * self.width</span><br><span class="line"></span><br><span class="line">	def perimeter(self):</span><br><span class="line">		&apos;&apos;&apos;计算周长&apos;&apos;&apos;</span><br><span class="line">		return (self.width + self.length) &lt;&lt; 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Square(Rectangle):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;正方形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, length, **kwargs):</span><br><span class="line">		super().__init__(length=length, width=length, **kwargs)</span><br><span class="line"></span><br><span class="line">class Cube(Square):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;立方体类&apos;&apos;&apos;</span><br><span class="line">	def surface_area(self):</span><br><span class="line">		face_area = super().area()</span><br><span class="line">		return face_area * 6</span><br><span class="line"></span><br><span class="line">	def volume(self):</span><br><span class="line">		face_area = super().area()</span><br><span class="line">		return face_area * self.length</span><br><span class="line"></span><br><span class="line">class Triangle():</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;三角形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, base, height, **kwargs):</span><br><span class="line">		self.base = base</span><br><span class="line">		self.height = height</span><br><span class="line">		super().__init__(**kwargs)</span><br><span class="line"></span><br><span class="line">	def tri_area(self):</span><br><span class="line">		return self.base * self.height * 0.5</span><br><span class="line"></span><br><span class="line">class RightPyramid(Square, Triangle):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;右金字塔类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, base, slant_height, **kwargs):</span><br><span class="line">		self.base = base</span><br><span class="line">		self.slant_height = slant_height</span><br><span class="line">		kwargs[&quot;height&quot;] = slant_height</span><br><span class="line">		kwargs[&quot;length&quot;] = base</span><br><span class="line">		super().__init__(base=base, **kwargs)</span><br><span class="line"></span><br><span class="line">	def area(self):</span><br><span class="line">		base_area = super().area()</span><br><span class="line">		perimeter = super().perimeter()</span><br><span class="line">		return perimeter * self.slant_height * 0.5 + base_area</span><br><span class="line"></span><br><span class="line">	def area_2(self):</span><br><span class="line">		base_area = super().area()</span><br><span class="line">		triangle_area = super().tri_area()</span><br><span class="line">		return triangle_area * 4 + base_area</span><br></pre></td></tr></table></figure></p>
+<p>此代码中存在许多重要差异：</p>
+<p>1.kwargs在某些地方被修改（例如RightPyramid .<strong> init </strong>()): 这将允许这些对象的用户仅使用对该特定对象有意义的参数来实例化它们。</p>
+<p>2.在<strong>kwargs之前设置命名参数：你可以在RightPyramid .<strong> init </strong>()中看到这个。 这具有从</strong>kwargs字典中去除特定键的简洁效果，因此当它在MRO中最终进行到object时，**kwargs为空。<br>现在，当您使用这些更新的类时，您有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pyramid = RightPyramid(base=2, slant_height=4)</span><br><span class="line">print(pyramid.area()) # 20</span><br><span class="line">print(pyramid.area_2()) # 20.0</span><br></pre></td></tr></table></figure></p>
+<p>起作用了！ 您已经使用super()成功追溯复杂的类层次结构，同时使用继承和组合来创建具有最少重新实现的新类。</p>
+<h3 id="多重继承替代方案"><a href="#多重继承替代方案" class="headerlink" title="多重继承替代方案"></a>多重继承替代方案</h3><p>如您所见，多重继承可能很有用，但也会导致非常复杂的情况和难以阅读的代码。 拥有整齐地从多个其他对象继承所有东西的对象也很少见。</p>
+<p>如果您发现自己开始使用多重继承和复杂的类层次结构，那么值得问问自己是否可以通过使用组合而不是继承来实现更清晰，更易于理解的代码。</p>
+<p>通过组合，您可以从一个称为mixin的专用简单类中为您的类添加非常特定的功能。</p>
+<p>由于本文主要关注继承，因此我不会详细介绍组合以及如何在Python中使用它，但这里有一个使用VolumeMixin为我们的3D对象提供特定功能的简短示例 - 在这种情况下，是一个体积计算：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Rectangle():</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;矩形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, width, length):</span><br><span class="line">		self.width = width</span><br><span class="line">		self.length = length</span><br><span class="line">		</span><br><span class="line">	def area(self):</span><br><span class="line">		&apos;&apos;&apos;计算面积&apos;&apos;&apos;</span><br><span class="line">		return self.length * self.width</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Square(Rectangle):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;正方形类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, length):</span><br><span class="line">		super().__init__(length, length)</span><br><span class="line"></span><br><span class="line">class VolumeMixin():</span><br><span class="line">	def volume(self):</span><br><span class="line">		return self.area() * self.height</span><br><span class="line"></span><br><span class="line">class Cube(VolumeMixin, Square):</span><br><span class="line"></span><br><span class="line">	&apos;&apos;&apos;立方体类&apos;&apos;&apos;</span><br><span class="line">	def __init__(self, length):</span><br><span class="line">		super().__init__(length)</span><br><span class="line">		self.height = length</span><br><span class="line"></span><br><span class="line">	def surface_area(self):</span><br><span class="line">		face_area = super().area()</span><br><span class="line">		return face_area * 6</span><br><span class="line"></span><br><span class="line">	def face_area(self):</span><br><span class="line">		return super().area()</span><br></pre></td></tr></table></figure></p>
+<p>在这个例子中，代码被重新设计为包含一个名为VolumeMixin的mixin。 然后，Cube使用mixin并使Cube能够计算其体积，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cube = Cube(2)</span><br><span class="line">print(cube.surface_area()) # 24</span><br><span class="line">print(cube.volume()) # 8</span><br></pre></td></tr></table></figure></p>
+<p>这个mixin可以在任何需要计算体积的类中以相同的方式使用，并且公式area*height返回正确的结果。</p>
+<p>有关Python中面向对象编程和使用super()的更多信息，请查看以下资源：</p>
+<ul>
+<li>官方的super()文档</li>
+<li>由Raymond Hettinger写的Python的super()真的超赞</li>
+<li>Python中面向对象的编程3</li>
+</ul>
+<p>参考自：<a href="https://realpython.com/python-super/" target="_blank" rel="noopener">https://realpython.com/python-super/</a> </p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Python面向对象/">Python面向对象</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Python面向对象/">Python面向对象</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/05/Python面向对象——super/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:sirxy.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/HTTP/">HTTP</a><small>3</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+    <li><a href="/categories/Python基础/">Python基础</a><small>1</small></li>
+  
+    <li><a href="/categories/Python面向对象/">Python面向对象</a><small>1</small></li>
+  
+    <li><a href="/categories/html5/css3/">css3</a><small>1</small></li>
+  
+    <li><a href="/categories/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/categories/nginx/">nginx</a><small>3</small></li>
+  
+    <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
+  
+    <li><a href="/tags/Python模块/">Python模块</a><small>2</small></li>
+  
+    <li><a href="/tags/Python面向对象/">Python面向对象</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 Sirxy
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
