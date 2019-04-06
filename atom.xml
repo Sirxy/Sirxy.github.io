@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sirxy.github.io/"/>
-  <updated>2019-04-06T04:51:43.594Z</updated>
+  <updated>2019-04-06T12:24:12.570Z</updated>
   <id>http://sirxy.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://sirxy.github.io/2019/04/06/git01/"/>
     <id>http://sirxy.github.io/2019/04/06/git01/</id>
     <published>2019-04-06T04:35:25.000Z</published>
-    <updated>2019-04-06T04:51:43.594Z</updated>
+    <updated>2019-04-06T12:24:12.570Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="一张git版本控制常用命令图送给你"><a href="#一张git版本控制常用命令图送给你" class="headerlink" title="一张git版本控制常用命令图送给你"></a>一张git版本控制常用命令图送给你</h3><p>Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。<br>Git 是 Linus Torvalds 为了<a id="more"></a>帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。<br>Git 与常用的版本控制工具 CVS, Subversion 等不同，它采用了分布式版本库的方式，不必服务器端软件支持。<br>下面是一张关于git版本控制的常用命令表：<br><img src="/2019/04/06/git01/b00-git-cheat-sheet-zh-cn.jpg" alt="git常用命令"></p><blockquote><p>参考自：<a href="http://www.runoob.com/git/git-tutorial.html" target="_blank" rel="noopener">Git教程|菜鸟教程</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h3 id="一张git版本控制常用命令图送给你"><a href="#一张git版本控制常用命令图送给你" class="headerlink" title="一张git版本控制常用命令图送给你"></a>一张git版本控制常用命令图送给你</h3><p>Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。<br>Git 是 Linus Torvalds 为了<a id="more"></a>帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。<br>Git 与常用的版本控制工具 CVS, Subversion 等不同，它采用了分布式版本库的方式，不必服务器端软件支持。<br>下面是一张关于git版本控制的常用命令表：<br><img src="/2019/04/06/git01/b00-git-cheat-sheet-zh-cn.jpg" alt="版本控制git常用命令"></p><blockquote><p>参考自：<a href="http://www.runoob.com/git/git-tutorial.html" target="_blank" rel="noopener">Git教程|菜鸟教程</a></p></blockquote>]]></content>
     
     <summary type="html">
     
