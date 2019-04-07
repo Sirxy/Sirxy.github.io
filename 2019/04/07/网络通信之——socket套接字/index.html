@@ -61,7 +61,7 @@
     </header>
     <div class="entry">
       
-        <h3 id="什么是Socket"><a href="#什么是Socket" class="headerlink" title="什么是Socket"></a>什么是Socket</h3><p>socket(简称 套接字)是一个网络通信的端点，它能实现不同主机间的进程通信，我们网络上各种各样大多数都是基于Socket来完成的通讯。</p>
+        <h3 id="什么是Socket"><a href="#什么是Socket" class="headerlink" title="什么是Socket"></a>什么是Socket</h3><p>socket(简称 套接字)是一个网络通信的端点，它能实现不同主机间的进程通信，我们网络上各种各样大多数都是基于Socket来完成的通讯。<br><a id="more"></a></p>
 <h3 id="网络中进程之间如何通讯呢？"><a href="#网络中进程之间如何通讯呢？" class="headerlink" title="网络中进程之间如何通讯呢？"></a>网络中进程之间如何通讯呢？</h3><p>首要解决的问题是如何确定你要和对方电脑上哪个进程进行通讯，这主要是<br>利用协议，IP地址，端口标识网络的进程，然后通过这些标识进行通讯。</p>
 <h4 id="socket——UDP网络通讯"><a href="#socket——UDP网络通讯" class="headerlink" title="socket——UDP网络通讯"></a>socket——UDP网络通讯</h4><p>使用socket创建UDP通讯的过程很简单，如下图：<br><img src="/2019/04/07/网络通信之——socket套接字/socket-udp.png" alt="socket——UDP网络通讯示意图"><br>根据上图我们可以总结创建服务端和客户端的步骤，使用代码分别实现服务端和客户端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">服务端：</span><br><span class="line">1.创建套接字对象</span><br><span class="line">2.绑定ip地址和端口号</span><br><span class="line">3.接受消息</span><br><span class="line">4.返回消息</span><br><span class="line">5.关闭套接字</span><br><span class="line"></span><br><span class="line">import socket</span><br><span class="line"># 创建套接字</span><br><span class="line">udp_s = socket.socked(socket.AF_INET,socket.SOCK_DGRAM)</span><br><span class="line"># 绑定ip地址</span><br><span class="line">udp_s.bind((&apos;&apos;,8080))</span><br><span class="line"># 接受消息</span><br><span class="line">data,addr = udp_s.recvfrom(1024)</span><br><span class="line">print(data)</span><br><span class="line"></span><br><span class="line"># 关闭套接字</span><br><span class="line">udp_s.close()</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">客户端：</span><br><span class="line">1.创建套接字对象</span><br><span class="line">2.发送消息</span><br><span class="line">3.关闭套接字对象</span><br><span class="line"></span><br><span class="line">import socekd</span><br><span class="line"># 创建套接字对象</span><br><span class="line">udp_c = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)</span><br><span class="line"># 发送消息</span><br><span class="line">udp_c.sendto(&apos;hello&apos;.encode(&apos;utf-8&apos;),(&apos;192.168.1.15&apos;,8080))</span><br><span class="line"># 关闭套接字</span><br><span class="line">udp_c.close()</span><br></pre></td></tr></table></figure>
@@ -160,6 +160,8 @@
   
     <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
   
+    <li><a href="/categories/爬虫/">爬虫</a><small>1</small></li>
+  
     <li><a href="/categories/版本控制/">版本控制</a><small>1</small></li>
   
     <li><a href="/categories/网络协议/">网络协议</a><small>1</small></li>
@@ -186,6 +188,8 @@
     <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
   
     <li><a href="/tags/Python模块/">Python模块</a><small>2</small></li>
+  
+    <li><a href="/tags/Python爬虫/">Python爬虫</a><small>1</small></li>
   
     <li><a href="/tags/Python面向对象/">Python面向对象</a><small>1</small></li>
   
