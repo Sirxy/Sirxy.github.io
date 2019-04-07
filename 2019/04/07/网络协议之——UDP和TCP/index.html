@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>网络协议之——UDP和TCP | 沐雨橙风</title>
+  <meta name="author" content="Sirxy">
+  
+  <meta name="description" content="Python, web后端，web前端，数据库，Linux等编程技术博客总结">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="网络协议之——UDP和TCP"/>
+  <meta property="og:site_name" content="沐雨橙风"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="沐雨橙风" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">沐雨橙风</a></h1>
+  <h2><a href="/">水滴石穿</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-07T03:49:03.000Z"><a href="/2019/04/07/网络协议之——UDP和TCP/">2019-04-07</a></time>
+      
+      
+  
+    <h1 class="title">网络协议之——UDP和TCP</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="UDP协议和TCP协议"><a href="#UDP协议和TCP协议" class="headerlink" title="UDP协议和TCP协议"></a>UDP协议和TCP协议</h3><h4 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h4><p>UDP：用户数据报协议，不可靠性，只是把应用程序传给IP层数据报送出去，但是不能保证他们是否能到达目的地<a id="more"></a>，传输数据报前不用再客户端和服务器之间建立连接，并且没有超时重发机制，所以传输速度快。<br>特点：安全性差，传输速度快，无序，大小有限制64kb。</p>
+<h3 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h3><p>我们知道，在通讯之前，一定要先建立相关链接，才能发送数据。</p>
+<p>下面是tcp建立连接 三次握手的概述：<br><img src="/2019/04/07/网络协议之——UDP和TCP/threehand.png" alt="tcp三次握手，建立连接"><br>其中：ACK：确认标志，SYN：同步标志<br>第一次握手：主机A发送位码为syn＝1,随机产生seq number=1234567的数据包到服务器，主机B由SYN=1知道，A要求建立联机；<br>第二次握手：主机B收到请求后要确认联机信息，向A发送ack number=(主机A的seq+1),syn=1,ack=1,随机产生seq=7654321的包<br>第三次握手：主机A收到后检查ack number是否正确，即第一次发送的seq number+1,以及位码ack是否为1，若正确，主机A会再发送ack number=(主机B的seq+1),ack=1，主机B收到后确认seq值与ack=1则连接建立成功。<br>完成三次握手，主机A与主机B开始传送数据。<br>特点：安全性高，稳定性好，有序；速度相对较慢。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/网络协议/">网络协议</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/网络协议学习/">网络协议学习</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/07/网络协议之——UDP和TCP/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:sirxy.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/HTTP/">HTTP</a><small>3</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+    <li><a href="/categories/Python基础/">Python基础</a><small>1</small></li>
+  
+    <li><a href="/categories/Python面向对象/">Python面向对象</a><small>1</small></li>
+  
+    <li><a href="/categories/html5/css3/">css3</a><small>1</small></li>
+  
+    <li><a href="/categories/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/categories/nginx/">nginx</a><small>3</small></li>
+  
+    <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
+  
+    <li><a href="/categories/版本控制/">版本控制</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议/">网络协议</a><small>1</small></li>
+  
+    <li><a href="/categories/网络通信/">网络通信</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
+  
+    <li><a href="/tags/Python模块/">Python模块</a><small>2</small></li>
+  
+    <li><a href="/tags/Python面向对象/">Python面向对象</a><small>1</small></li>
+  
+    <li><a href="/tags/git版本控制/">git版本控制</a><small>1</small></li>
+  
+    <li><a href="/tags/网络协议学习/">网络协议学习</a><small>1</small></li>
+  
+    <li><a href="/tags/网络通信学习/">网络通信学习</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 Sirxy
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

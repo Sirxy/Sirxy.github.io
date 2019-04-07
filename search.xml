@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[网络通信之——socket套接字]]></title>
+    <url>%2F2019%2F04%2F07%2F%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E4%B9%8B%E2%80%94%E2%80%94socket%E5%A5%97%E6%8E%A5%E5%AD%97%2F</url>
+    <content type="text"><![CDATA[什么是Socketsocket(简称 套接字)是一个网络通信的端点，它能实现不同主机间的进程通信，我们网络上各种各样大多数都是基于Socket来完成的通讯。 网络中进程之间如何通讯呢？首要解决的问题是如何确定你要和对方电脑上哪个进程进行通讯，这主要是利用协议，IP地址，端口标识网络的进程，然后通过这些标识进行通讯。 socket——UDP网络通讯使用socket创建UDP通讯的过程很简单，如下图：根据上图我们可以总结创建服务端和客户端的步骤，使用代码分别实现服务端和客户端：123456789101112131415161718服务端：1.创建套接字对象2.绑定ip地址和端口号3.接受消息4.返回消息5.关闭套接字import socket# 创建套接字udp_s = socket.socked(socket.AF_INET,socket.SOCK_DGRAM)# 绑定ip地址udp_s.bind((&apos;&apos;,8080))# 接受消息data,addr = udp_s.recvfrom(1024)print(data)# 关闭套接字udp_s.close() 123456789101112客户端：1.创建套接字对象2.发送消息3.关闭套接字对象import socekd# 创建套接字对象udp_c = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)# 发送消息udp_c.sendto(&apos;hello&apos;.encode(&apos;utf-8&apos;),(&apos;192.168.1.15&apos;,8080))# 关闭套接字udp_c.close() Socket–TCP网络通讯TCP通讯过程如下图：从图上可以看出，创建服务端通信需要经过：1234567891011121314151617181920212223242526272829301.创建套接字对象2.绑定ip地址和端口号3.监听4.接受消息5.返回消息6.关闭套接字import sockettcp_s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)tcp_s.bind((&apos;&apos;,8080))tcp_s.listen()s,addr = tcp_s.accept()data = s.recv(1024)print(data.decode(&apos;utf-8&apos;))s.send(&apos;hello&apos;.encode(&apos;utf-8))s.close()tcp_s.close()``` 创建客户端通信需要经过：``` 1.创建套接字对象2.创建连接3.发送消息4.关闭套接字对象import sockettcp_c = socket.socket(socket.AF_INET,socket.SOCK_STRAM)tcp_c.connect((&apos;192.168.1.15&apos;,8080))tcp_c.send(&apos;hello&apos;.encode(&apos;utf-8&apos;))tcp_c.close()]]></content>
+      <categories>
+        <category>网络通信</category>
+      </categories>
+      <tags>
+        <tag>网络通信学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[网络协议之——UDP和TCP]]></title>
+    <url>%2F2019%2F04%2F07%2F%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E4%B9%8B%E2%80%94%E2%80%94UDP%E5%92%8CTCP%2F</url>
+    <content type="text"><![CDATA[UDP协议和TCP协议UDP协议UDP：用户数据报协议，不可靠性，只是把应用程序传给IP层数据报送出去，但是不能保证他们是否能到达目的地，传输数据报前不用再客户端和服务器之间建立连接，并且没有超时重发机制，所以传输速度快。特点：安全性差，传输速度快，无序，大小有限制64kb。 TCP协议我们知道，在通讯之前，一定要先建立相关链接，才能发送数据。 下面是tcp建立连接 三次握手的概述：其中：ACK：确认标志，SYN：同步标志第一次握手：主机A发送位码为syn＝1,随机产生seq number=1234567的数据包到服务器，主机B由SYN=1知道，A要求建立联机；第二次握手：主机B收到请求后要确认联机信息，向A发送ack number=(主机A的seq+1),syn=1,ack=1,随机产生seq=7654321的包第三次握手：主机A收到后检查ack number是否正确，即第一次发送的seq number+1,以及位码ack是否为1，若正确，主机A会再发送ack number=(主机B的seq+1),ack=1，主机B收到后确认seq值与ack=1则连接建立成功。完成三次握手，主机A与主机B开始传送数据。特点：安全性高，稳定性好，有序；速度相对较慢。]]></content>
+      <categories>
+        <category>网络协议</category>
+      </categories>
+      <tags>
+        <tag>网络协议学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[git常用命令]]></title>
     <url>%2F2019%2F04%2F06%2Fgit01%2F</url>
     <content type="text"><![CDATA[一张git版本控制常用命令图送给你Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。Git 与常用的版本控制工具 CVS, Subversion 等不同，它采用了分布式版本库的方式，不必服务器端软件支持。下面是一张关于git版本控制的常用命令表： 参考自：Git教程|菜鸟教程]]></content>
