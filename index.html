@@ -52,6 +52,42 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2019-04-10T10:08:11.000Z"><a href="/2019/04/10/Thread-comparison/">2019-04-10</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2019/04/10/Thread-comparison/">单线程和多线程执行对比</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>为了将单线程和多线程执行进行对比，下面的脚本比较了递归求斐波那契、阶乘以及累加函数的操作。该脚本按照单线程的方式运行这三个函数，接着使用多线程的方式执行同样的三个函数，以此来说明多线程环境的优点。</p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2019/04/10/Thread-comparison/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2019-04-09T08:17:07.000Z"><a href="/2019/04/09/threading模块/">2019-04-09</a></time>
       
       
@@ -63,29 +99,14 @@
     <div class="entry">
       
         <h3 id="threading模块的Thread类"><a href="#threading模块的Thread类" class="headerlink" title="threading模块的Thread类"></a>threading模块的Thread类</h3><p>threading模块的Thread类是主要的执行对象。它有thread模块中没有的许多函数。使用Thread类可以有很多方法来创建线程。这里介绍其中比较相似的三种方法。</p>
-<ul>
-<li>方法一：创建Thread的实例，传给它一个函数。如下啊：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">from time import sleep, ctime</span><br><span class="line"></span><br><span class="line">loops = [4, 2]</span><br><span class="line"></span><br><span class="line">def loop(nloop, nsec):</span><br><span class="line">	print(&apos;start loop&apos;, nloop, &apos;at:&apos;, ctime())</span><br><span class="line">	sleep(nsec)</span><br><span class="line">	print(&apos;loop&apos;, nloop, &apos;done at:&apos;, ctime())</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">	print(&apos;starting at:&apos;, ctime())</span><br><span class="line">	threads = []</span><br><span class="line">	nloops = range(len(loops))</span><br><span class="line"></span><br><span class="line">	for i in nloops:</span><br><span class="line">		t = threading.Thread(target=loop, args=(i, loops[i]))</span><br><span class="line">		threads.append(t)</span><br><span class="line"></span><br><span class="line">	for i in nloops: # start threads</span><br><span class="line">		threads[i].start()</span><br><span class="line"></span><br><span class="line">	for i in nloops: # wait for all threads to finish</span><br><span class="line">		threads[i].join()</span><br><span class="line"></span><br><span class="line">	print(&apos;all done at:&apos;, ctime())</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">	main()</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>当运行完后，打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">starting at: Wed Apr 10 16:28:53 2019</span><br><span class="line">start loop 0 at: Wed Apr 10 16:28:53 2019</span><br><span class="line">start loop 1 at: Wed Apr 10 16:28:53 2019</span><br><span class="line">loop 1 done at: Wed Apr 10 16:28:55 2019</span><br><span class="line">loop 0 done at: Wed Apr 10 16:28:57 2019</span><br><span class="line">all done at: Wed Apr 10 16:28:57 2019</span><br><span class="line">[Finished in 4.2s]</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>方法二：创建Thread的实例，传给它一个可调用的类实例<br>在创建线程时，与传入函数相似的一个方法是传入一个可调用的类的实例，用于线程执行——这种方法更加接近面向对象的多线程编程。这种可调用的类包含一个执行环境，比起一个函数或者从一组函数中选择而言，有更好的灵活性。现在你有了一个类对象，而不仅仅是单个函数或者一个函数列表/元组。<br>在方法一的代码中添加一个新类ThreadFunc，并进行一些其他的轻微改动，得到下面的代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">from time import sleep, ctime</span><br><span class="line"></span><br><span class="line">loops = [4, 2]</span><br><span class="line"></span><br><span class="line">class ThreadFunc(object):</span><br><span class="line"></span><br><span class="line">	def __init__(self, func, args, name=&apos;&apos;):</span><br><span class="line">		self.name = name</span><br><span class="line">		self.func = func</span><br><span class="line">		self.args = args</span><br><span class="line"></span><br><span class="line">	def __call__(self):</span><br><span class="line">		self.func(*self.args)</span><br><span class="line"></span><br><span class="line">def loop(nloop, nsec):</span><br><span class="line">	print(&apos;start loop&apos;, nloop, &apos;at:&apos;, ctime())</span><br><span class="line">	sleep(nsec)</span><br><span class="line">	print(&apos;loop&apos;, nloop, &apos;done at:&apos;, ctime())</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">	print(&apos;starting at:&apos;, ctime())</span><br><span class="line">	threads = []</span><br><span class="line">	nloops = range(len(loops))</span><br><span class="line"></span><br><span class="line">	for i in nloops: # create all threads</span><br><span class="line">		t = threading.Thread(target=ThreadFunc(loop, (i, loops[i]), loop.__name__))</span><br><span class="line">		threads.append(t)</span><br><span class="line"></span><br><span class="line">	for i in nloops: # start threads</span><br><span class="line">		threads[i].start()</span><br><span class="line"></span><br><span class="line">	for i in nloops: # wait for all threads to finish</span><br><span class="line">		threads[i].join()</span><br><span class="line"></span><br><span class="line">	print(&apos;all done at:&apos;, ctime())</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">	main()</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>当运行完后，得到了如下的输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">starting at: Wed Apr 10 16:51:55 2019</span><br><span class="line">start loop 0 at: Wed Apr 10 16:51:55 2019</span><br><span class="line">start loop 1 at: Wed Apr 10 16:51:55 2019</span><br><span class="line">loop 1 done at: Wed Apr 10 16:51:57 2019</span><br><span class="line">loop 0 done at: Wed Apr 10 16:51:59 2019</span><br><span class="line">all done at: Wed Apr 10 16:51:59 2019</span><br><span class="line">[Finished in 4.2s]</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>方法三：派生Thread的子类，并创建子类的实例<br>这种方法要介绍的这个例子要调用Thread()的子类（实际上就是继承Thread类鞭编写我们自己需要的线程类），和上一个创建可调用类的例子有些类似。当创建线程时使用子类要相对更容易阅读。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">from time import sleep, ctime</span><br><span class="line"></span><br><span class="line">loops = [4, 2]</span><br><span class="line"></span><br><span class="line">class MyThread(threading.Thread): # 继承</span><br><span class="line"></span><br><span class="line">	def __init__(self, func, args, name=&apos;&apos;):</span><br><span class="line">		threading.Thread.__init__(self) # 必须调用基类的构造函数</span><br><span class="line">		self.name = name</span><br><span class="line">		self.func = func</span><br><span class="line">		self.args = args</span><br><span class="line"></span><br><span class="line">	def run(self):</span><br><span class="line">		self.func(*self.args)</span><br><span class="line"></span><br><span class="line">def loop(nloop, nsec):</span><br><span class="line">	print(&apos;start loop&apos;, nloop, &apos;at:&apos;, ctime())</span><br><span class="line">	sleep(nsec)</span><br><span class="line">	print(&apos;loop&apos;, nloop, &apos;done at:&apos;, ctime())</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">	print(&apos;starting at:&apos;, ctime())</span><br><span class="line">	threads = []</span><br><span class="line">	nloops = range(len(loops))</span><br><span class="line"></span><br><span class="line">	for i in nloops: # create all threads</span><br><span class="line">		t = MyThread(loop, (i, loops[i]), loop.__name__)</span><br><span class="line">		threads.append(t)</span><br><span class="line"></span><br><span class="line">	for i in nloops: # start threads</span><br><span class="line">		threads[i].start()</span><br><span class="line"></span><br><span class="line">	for i in nloops: # wait for all threads to finish</span><br><span class="line">		threads[i].join()</span><br><span class="line"></span><br><span class="line">	print(&apos;all Done at:&apos;, ctime())</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">	main()</span><br></pre></td></tr></table></figure>
-<p>当运行完后，得到了如下的输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">starting at: Wed Apr 10 17:07:01 2019</span><br><span class="line">start loop 0 at: Wed Apr 10 17:07:01 2019</span><br><span class="line">start loop 1 at: Wed Apr 10 17:07:01 2019</span><br><span class="line">loop 1 done at: Wed Apr 10 17:07:03 2019</span><br><span class="line">loop 0 done at: Wed Apr 10 17:07:05 2019</span><br><span class="line">all Done at: Wed Apr 10 17:07:05 2019</span><br><span class="line">[Finished in 4.2s]</span><br></pre></td></tr></table></figure></p>
-<p>本例中将对Thread子类化，而不是直接对齐实例化。这将使我们在定制线程对象时拥有更多的灵活性，也能够简化线程创建的调用过程。</p>
-<p>现在对MyThread类进行修改，增加一些调试信息的输出，并将其存储为一个名为myThread的独立模块，以便于后面自己用到这个类。myThread.py：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">from time import sleep, ctime</span><br><span class="line"></span><br><span class="line">class MyThread(threading.Thread):</span><br><span class="line"></span><br><span class="line">	def __init__(self, func, args, name=&apos;&apos;):</span><br><span class="line">		threading.Thread.__init__(self) # 必须调用基类的构造函数</span><br><span class="line">		self.name = name</span><br><span class="line">		self.func = func</span><br><span class="line">		self.args = args</span><br><span class="line"></span><br><span class="line">	def getResult(self):</span><br><span class="line">		return self.res</span><br><span class="line"></span><br><span class="line">	def run(self):</span><br><span class="line">		print(&apos;starting&apos;, self.name, &apos;at:&apos;, ctime())</span><br><span class="line">		self.res = self.func(*self.args)</span><br><span class="line">		print(self.name, &apos;finished at:&apos;, ctime())</span><br></pre></td></tr></table></figure></p>
-<h3 id="threading模块的其他函数"><a href="#threading模块的其他函数" class="headerlink" title="threading模块的其他函数"></a>threading模块的其他函数</h3><p>除了各种同步和线程对象外，threading模块还提供了一些函数：<br>active_count() 当前活动的Thread对象个数<br>current_thread 返回当前的Thread对象<br>enumerate() 返回当前活动的Thread对象列表<br>settrace(func) 为所有线程设置一个trace函数<br>setprofile(func) 为所有线程设置一个profile函数<br>stack_size(size=0) 返回新创建线程的栈大小；或为后续创建的线程设定栈的大小为size<br>|函数|描述|<br>|—|—|<br>|active_count()|当前活动的Thread对象个数|<br>|current_thread |返回当前的Thread对象|<br>|enumerate()|返回当前活动的Thread对象列表|<br>|settrace(func)|为所有线程设置一个trace函数|<br>|setprofile(func)|为所有线程设置一个profile函数|<br>|stack_size(size=0)|返回新创建线程的栈大小；或为后续创建的线程设定栈的大小为size|</p>
-
       
     </div>
     <footer>
       
+        
+          <div class="alignleft">
+            <a href="/2019/04/09/threading模块/#more" class="more-link">Read More</a>
+          </div>
         
         
       
@@ -169,42 +190,6 @@
 
 
 
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2019-04-07T04:00:22.000Z"><a href="/2019/04/07/网络通信之——socket套接字/">2019-04-07</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2019/04/07/网络通信之——socket套接字/">网络通信之——socket套接字</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h3 id="什么是Socket"><a href="#什么是Socket" class="headerlink" title="什么是Socket"></a>什么是Socket</h3><p>socket(简称 套接字)是一个网络通信的端点，它能实现不同主机间的进程通信，我们网络上各种各样大多数都是基于Socket来完成的通讯。<br></p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2019/04/07/网络通信之——socket套接字/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
@@ -242,7 +227,7 @@
   
     <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
   
-    <li><a href="/categories/多线程编程/">多线程编程</a><small>1</small></li>
+    <li><a href="/categories/多线程编程/">多线程编程</a><small>2</small></li>
   
     <li><a href="/categories/爬虫/">爬虫</a><small>1</small></li>
   
@@ -275,7 +260,7 @@
   
     <li><a href="/tags/Python爬虫/">Python爬虫</a><small>1</small></li>
   
-    <li><a href="/tags/Python线程与进程/">Python线程与进程</a><small>1</small></li>
+    <li><a href="/tags/Python线程与进程/">Python线程与进程</a><small>2</small></li>
   
     <li><a href="/tags/Python面向对象/">Python面向对象</a><small>2</small></li>
   
