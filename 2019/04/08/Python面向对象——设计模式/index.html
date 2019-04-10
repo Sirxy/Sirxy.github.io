@@ -61,7 +61,7 @@
     </header>
     <div class="entry">
       
-        <h3 id="Python设计模式"><a href="#Python设计模式" class="headerlink" title="Python设计模式"></a>Python设计模式</h3><p>概念:为了解决面向对象系统中重要和重复的设计封装在一起的一种代码实现框架,可以使得代码更加易于扩展和调用<br><a id="more"></a><br>四个基本要素:模式名称,问题,解决方案,效果.<br>六大原则:<br>1.开闭原则:一个软件实体,如类,模块和函数应该对扩展开发,对修改关闭.既软件实体应尽量在不修改原有代码的情况下进行扩展.<br>2.里氏替换原则:所有引用父类的方法必须能透明的使用其子类的对象<br>3.依赖倒置原则:高层模块不应该依赖底层模块,二者都应该依赖其抽象,抽象不应该依赖于细节,细节应该依赖抽象,换而言之,要针对接口编程而不是针对实现编程<br>4.接口隔离原则:使用多个专门的接口,而不是使用单一的总接口,即客户端不应该依赖那些并不需要的接口<br>5.迪米特法则:一个软件实体应该尽可能的少与其他实体相互作用<br>6.单一直责原则:不要存在多个导致类变更的原因.即一个类只负责一项职责<br>比较流行的是：GOF23种设计模式。</p>
+        <h3 id="Python设计模式"><a href="#Python设计模式" class="headerlink" title="Python设计模式"></a>Python设计模式</h3><p>一个定义：为了解决面向对象系统中重要和重复的设计封装在一起的一种代码实现框架，可以使得代码更加易于扩展和调用。<a id="more"></a><br>四个基本要素：模式名称、问题、解决方案、效果。<br>六大原则：<br>1、开闭原则：一个软件实体,如类,模块和函数应该对扩展开发,对修改关闭.既软件实体应尽量在不修改原有代码的情况下进行扩展。<br>2、里氏替换原则：所有引用父类的方法必须能透明的使用其子类的对象。<br>3、依赖倒置原则：高层模块不应该依赖底层模块，二者都应该依赖其抽象，抽象不应该依赖于细节，细节应该依赖抽象，换而言之，要针对接口编程而不是针对实现编程。<br>4、接口隔离原则：使用多个专门的接口,而不是使用单一的总接口，即客户端不应该依赖那些并不需要的接口。<br>5、迪米特法则：一个软件实体应该尽可能的少与其他实体相互作用。<br>6、单一直责原则：不要存在多个导致类变更的原因，即一个类只负责一项职责。<br>比较流行的是：GOF23种设计模式。</p>
 <h3 id="设计模式——工厂模式"><a href="#设计模式——工厂模式" class="headerlink" title="设计模式——工厂模式"></a>设计模式——工厂模式</h3><p>工厂模式实现了创建者和调用者的分离，使用专门的工厂类将选择实现类、创建对象进行统一的管理和控制。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class CarFactory:</span><br><span class="line"></span><br><span class="line">	def create_car(self, brand):</span><br><span class="line">		if brand == &apos;奔驰&apos;:</span><br><span class="line">			return Benz()</span><br><span class="line">		elif brand == &apos;宝马&apos;:</span><br><span class="line">			return BMW()</span><br><span class="line">		elif brand == &apos;比亚迪&apos;:</span><br><span class="line">			return BYD()</span><br><span class="line">		else:</span><br><span class="line">			return &apos;未知品牌，无法创建&apos;</span><br><span class="line"></span><br><span class="line">class Benz():</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">class BMW():</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">class BYD():</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line">factory = CarFactory()</span><br><span class="line">c1 = factory.create_car(&apos;奔驰&apos;)	</span><br><span class="line">c2 = factory.create_car(&apos;宝马&apos;)</span><br><span class="line">c3 = factory.create_car(&apos;比亚迪&apos;)</span><br><span class="line">print(c1)</span><br><span class="line">print(c2)</span><br><span class="line">print(c3)</span><br></pre></td></tr></table></figure></p>
 <p>打印结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;__main__.Benz object at 0x0261EBD0&gt;</span><br><span class="line">&lt;__main__.BMW object at 0x0261E9F0&gt;</span><br><span class="line">&lt;__main__.BYD object at 0x0261ECB0&gt;</span><br></pre></td></tr></table></figure></p>
 <h3 id="设计模式——单例模式"><a href="#设计模式——单例模式" class="headerlink" title="设计模式——单例模式"></a>设计模式——单例模式</h3><p>单例模式（Singleton Pattern）的核心作用是确保一个类只有一个实例，并且提供一个访问该实例的全局访问点。<br>单例模式只生成一个实例对象，减少了对系统资源的开销。当一个对象的产生需要比较多的资源，<br>如读取配置文件、产生其他依赖对象时，可以产生一个“单例对象”，然后永久驻留在内存中，从而极大的降低开销。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class MySingleton:</span><br><span class="line">	__obj = None # 类属性</span><br><span class="line">	__init_flag = True</span><br><span class="line">	</span><br><span class="line">	def __new__(cls, *args, **kwargs):</span><br><span class="line">		if cls.__obj == None:</span><br><span class="line">			cls.__obj = object.__new__(cls)</span><br><span class="line">		return cls.__obj</span><br><span class="line"></span><br><span class="line">	def __init__(self, name):</span><br><span class="line">		if MySingleton.__init_flag:</span><br><span class="line">			</span><br><span class="line">			print(&quot;init.......&quot;)</span><br><span class="line">			self.name = name</span><br><span class="line">			MySingleton.__init_flag = False</span><br><span class="line">			</span><br><span class="line">a = MySingleton(&apos;aa&apos;)</span><br><span class="line">b = MySingleton(&apos;bb&apos;)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure></p>
@@ -83,6 +83,11 @@
   </div>
 
         
+  
+  <div class="tags">
+    <a href="/tags/Python面向对象/">Python面向对象</a>
+  </div>
+
         
   <div class="addthis addthis_toolbox addthis_default_style">
     
@@ -158,6 +163,8 @@
   
     <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
   
+    <li><a href="/categories/多线程编程/">多线程编程</a><small>1</small></li>
+  
     <li><a href="/categories/爬虫/">爬虫</a><small>1</small></li>
   
     <li><a href="/categories/版本控制/">版本控制</a><small>1</small></li>
@@ -189,7 +196,9 @@
   
     <li><a href="/tags/Python爬虫/">Python爬虫</a><small>1</small></li>
   
-    <li><a href="/tags/Python面向对象/">Python面向对象</a><small>1</small></li>
+    <li><a href="/tags/Python线程与进程/">Python线程与进程</a><small>1</small></li>
+  
+    <li><a href="/tags/Python面向对象/">Python面向对象</a><small>2</small></li>
   
     <li><a href="/tags/git版本控制/">git版本控制</a><small>1</small></li>
   
