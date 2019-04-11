@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redis数据库之数据类型 | 沐雨橙风</title>
+  <meta name="author" content="Sirxy">
+  
+  <meta name="description" content="Python, web后端，web前端，数据库，Linux等编程技术博客总结">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Redis数据库之数据类型"/>
+  <meta property="og:site_name" content="沐雨橙风"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="沐雨橙风" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">沐雨橙风</a></h1>
+  <h2><a href="/">水滴石穿</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-11T04:39:12.000Z"><a href="/2019/04/11/Redis数据库之数据类型/">2019-04-11</a></time>
+      
+      
+  
+    <h1 class="title">Redis数据库之数据类型</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="Redis的数据类型"><a href="#Redis的数据类型" class="headerlink" title="Redis的数据类型"></a>Redis的数据类型</h3><p>Redis通常被称为数据结构服务器，因为值（value）可以是 字符串(String), 哈希(Hash), 列表(list), 集合(sets) 和 有序集合(sorted sets)等类型。<a id="more"></a><br>下面介绍redis数据类型：</p>
+<ul>
+<li><p>String（子串类型）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">set 命令：设置一个键和值，键存在则只覆盖，返回ok</span><br><span class="line">&gt; set 键  值    例如： &gt;set name zhangsan</span><br><span class="line"></span><br><span class="line">get 命令：获取一个键的值，返回值</span><br><span class="line">&gt; get 键        例如：&gt;get name</span><br><span class="line"></span><br><span class="line">setnx命令：设置一个不存在的键和值（防止覆盖），</span><br><span class="line">&gt; setnx 键 值      若键已存在则返回0表示失败</span><br><span class="line"></span><br><span class="line">setex命令：设置一个指定有效期的键和值（单位秒）</span><br><span class="line">&gt; setex 键 [有效时间] 值  例如: &gt;setex color 10 red</span><br><span class="line"> 不写有效时间则表示永久有效，等价于set</span><br><span class="line"></span><br><span class="line">setrange命令：替换子字符串 (替换长度由子子串长度决定)</span><br><span class="line">&gt; setrange 键 位置 子字串</span><br><span class="line">&gt; setrange name 4 aa  将name键对应值的第4个位置开始替换</span><br><span class="line"></span><br><span class="line">mset命令：批量设置键和值,成功则返回ok</span><br><span class="line">&gt; mset 键1 值1 键2 值2 键3 值3 ....</span><br><span class="line"></span><br><span class="line">msetnx命令：批量设置不存在的键和值,成功则返回ok</span><br><span class="line">&gt; msetnx 键1 值1 键2 值2 键3 值3 ....</span><br><span class="line"></span><br><span class="line">getset命令：获取原值，并设置新值</span><br><span class="line"></span><br><span class="line">getrange命令：获取指定范围的值</span><br><span class="line">&gt;getrange 键 0 4     //获取指定0到4位置上的值</span><br><span class="line"></span><br><span class="line">mget命令： 批量获取值</span><br><span class="line">&gt;mget 键1 键2 键3....</span><br><span class="line"></span><br><span class="line">incr命令： 指定键的值做加加操作，返回加后的结果。</span><br><span class="line">&gt;  键        例如： &gt;incr kid</span><br><span class="line">incrby命令： 设置某个键加上指定值</span><br><span class="line">&gt; incrby 键 m    //其中m可以是正整数或负整数</span><br><span class="line"></span><br><span class="line">decr命令： 指定键的值做减减操作，返回减后的结果。</span><br><span class="line">&gt; decr 键        例如： &gt;decr kid</span><br><span class="line">decrby命令： 设置某个键减上指定值</span><br><span class="line">&gt; decrby 键 m    //其中m可以是正整数或负整数</span><br><span class="line"></span><br><span class="line">append命令：给指定key的字符串追加value，返回新字符串值的长度</span><br><span class="line">&gt;append 键 追加字串</span><br><span class="line"></span><br><span class="line">strlen求长度 &gt;strlen 键名   //返回对应的值。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Hash类型<br>Redis hash 是一个string类型的field和value的映射表，hash特别适合用于存储对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">hset命令：设置一个哈希表的键和值</span><br><span class="line">&gt;hset hash名 键  值</span><br><span class="line">如：&gt;hset user:001 name zhangsan</span><br><span class="line">hget命令： 获取执行哈希名中的键对应值</span><br><span class="line"></span><br><span class="line">hsetnx命令：设置一个哈希表中不存在的键和值</span><br><span class="line">&gt;hsetnx hash名 键  值  //成功返回1，失败返回0</span><br><span class="line">如：&gt;hsetnx user:001 name zhangsan</span><br><span class="line"></span><br><span class="line">hmset命令:hmset user:001 username zhangsan age 20 sex 1 批量设置</span><br><span class="line">hmget user:001 username age sex:批量获取值</span><br><span class="line"></span><br><span class="line">&gt;hexists user:001 name //是否存在， 若存在返回1</span><br><span class="line"></span><br><span class="line">&gt;hlen user:001  //获取某哈希user001名中键的数量</span><br><span class="line"></span><br><span class="line">&gt;hdel user:001 name //删除哈希user:001 中name键</span><br><span class="line"></span><br><span class="line">&gt;hkeys user:002   //返回哈希名为user:002中的所有键。</span><br><span class="line">&gt;hvals user:002   //返回哈希名为user:002中的所有值。</span><br><span class="line">&gt;hgetall user:002 //返回哈希名为user:002中的所有键和值。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>List列表（双向链表结构）<br>Redis列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">list即可以作为“栈”也可以作为&quot;队列&quot;。</span><br><span class="line">操作：</span><br><span class="line">&gt;lpush list1 &quot;world&quot;  //在list1头部压入一个字串</span><br><span class="line">&gt;lpush list1 &quot;hello&quot;  // 在list1头部压入一个字串</span><br><span class="line">&gt;lrange list1 0 -1  //获取list1中内容</span><br><span class="line">    0:表示开头  -1表示结尾。</span><br><span class="line"></span><br><span class="line">&gt;rpush list2 &quot;world&quot;  //在list2尾部压入一个字串</span><br><span class="line">&gt;rpush list2 &quot;hello&quot;  // 在list2尾部压入一个字串</span><br><span class="line">&gt;lrange list2 0 -1  //获取list2中内容</span><br><span class="line">    0:表示开头  -1表示结尾。</span><br><span class="line"></span><br><span class="line">&gt;linsert list2 before hello there</span><br><span class="line">在key对应list的特定位置前或后添加字符串</span><br><span class="line"></span><br><span class="line">&gt;lset list2 1 &quot;four&quot;</span><br><span class="line">修改指定索引位置上的值</span><br><span class="line"></span><br><span class="line">&gt;lrem list2 2 &quot;hello&quot;  //删除前两个hello值</span><br><span class="line">&gt;lrem list2 -2 &quot;hello&quot; //删除后两个hello值</span><br><span class="line">&gt;lrem list2 0 &quot;hello&quot;  //删除所有hello值</span><br><span class="line"></span><br><span class="line">&gt;ltrim mylist8 1 3    //删除此范围外的值</span><br><span class="line"></span><br><span class="line">&gt;lpop list2   //从list2的头部删除元素，并返回删除元素</span><br><span class="line">&gt;rpop list2   //从list2的尾部删除元素，并返回删除元素</span><br><span class="line">&gt;rpoplpush list1 list2    //将list1的尾部一个元素移出到list2头部。并返回</span><br><span class="line"></span><br><span class="line">&gt;lindex list2 1 //返回list2中索引位置上的元素</span><br><span class="line">&gt;llen list2 //返回list2上长度</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Redis 集合(Set)<br>Redis的Set是string类型的无序集合。集合成员是唯一的，这就意味着集合中不能出现重复的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;sadd myset &quot;hello&quot; //向myset中添加一个元素</span><br><span class="line"> 成功返回1，失败(重复)返回0</span><br><span class="line"></span><br><span class="line">&gt;smembers myset //获取myset中的所有元素(结果是无序的)</span><br><span class="line"></span><br><span class="line">&gt;srem myset &quot;one&quot; //从myset中删除一个one</span><br><span class="line"> 成功返回1，失败(不存在)返回0</span><br><span class="line"></span><br><span class="line">&gt;spop myset //随机返回并删除myset中的一个元素</span><br><span class="line">&gt;srandmember myset //随机获取myset中的一个元素，但是不删除</span><br><span class="line"></span><br><span class="line">&gt; smove myset1 myset2 zhangsan:将myset1中zhangsan移动到myset2中</span><br><span class="line">&gt; scard myset1 返回myset1的个数</span><br><span class="line">&gt; sismember myset zhangsan:判断张三是否在myset中</span><br><span class="line"></span><br><span class="line">&gt;sdiff myset1 myset2 //返回两个集合的差集</span><br><span class="line">以myset1为标准，获取myset2中不存在的。</span><br><span class="line">&gt;sdiffstore dstset myset1 myset2 ...// 返回所有集合的差集，并保存到dstset中</span><br><span class="line"></span><br><span class="line">&gt;sinter myset1 myset2 myset3... // 返回N个集合中的交集</span><br><span class="line">&gt;sinterstore dstset myset1 myset2 ... // 返回N个集合的交集并存储到dstset中</span><br><span class="line"></span><br><span class="line">&gt; sunion myset1 myset2 ...//返回所有集合的并集</span><br><span class="line">&gt; sunionstore dstset myset1 myset2// 返回所有集合的并集，并存储到dstset中</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Redis 有序集合Sset (sorted set)<br>Redis 有序集合和集合一样也是string类型元素的集合,且不允许重复的成员。<br>不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。<br>有序集合的成员是唯一的,但分数(score)却可以重复。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt; zadd zset 1 one 向zset中添加one，排序为1排序</span><br><span class="line">&gt; zrem zset one:删除zset中one</span><br><span class="line"></span><br><span class="line">&gt; zincrby zset 2 one:如果one存在，则顺序增加2，如果one不存在，那么就是2</span><br><span class="line"></span><br><span class="line">&gt; zrank zset one:返回one在zset中排名(从小到大的排序)</span><br><span class="line">&gt; zrevrank zset one:返回one在zset中排名(从大到小的排序)</span><br><span class="line"></span><br><span class="line">&gt; zrange zset 0 -1 withscores:根据score排序（根据score从小到大排序）</span><br><span class="line">&gt; zrevrange zset 0 -1 withscores:根据score排序（根据score从大到小排序）</span><br><span class="line"></span><br><span class="line">&gt; zrangebyscore zset 2 3 withscores:返回集合中score在给定区间的元素（包含2和5）</span><br><span class="line">&gt; zcount zset 2 3:返回集合中给定区间的数量</span><br><span class="line">&gt; zcard zset:返回集合中元素的个数</span><br><span class="line">&gt; zscore zset one:返回one元素的score</span><br><span class="line">&gt; zremrangebyrank zset 3 3:删除集合中排名在给定区间的元素</span><br><span class="line">&gt; zremrangebyscore zset 1 2:将zset中从小到大排序结果的score在1-2之间的删除</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>持续中。。。。。。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库/">数据库</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/数据库/">数据库</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/11/Redis数据库之数据类型/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:sirxy.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/HTTP/">HTTP</a><small>3</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+    <li><a href="/categories/Python基础/">Python基础</a><small>1</small></li>
+  
+    <li><a href="/categories/Python面向对象/">Python面向对象</a><small>2</small></li>
+  
+    <li><a href="/categories/nginx/">nginx</a><small>3</small></li>
+  
+    <li><a href="/categories/web前端/">web前端</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
+  
+    <li><a href="/categories/多线程编程/">多线程编程</a><small>2</small></li>
+  
+    <li><a href="/categories/数据库/">数据库</a><small>4</small></li>
+  
+    <li><a href="/categories/爬虫/">爬虫</a><small>1</small></li>
+  
+    <li><a href="/categories/版本控制/">版本控制</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议/">网络协议</a><small>1</small></li>
+  
+    <li><a href="/categories/网络通信/">网络通信</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
+  
+    <li><a href="/tags/Python模块/">Python模块</a><small>2</small></li>
+  
+    <li><a href="/tags/Python爬虫/">Python爬虫</a><small>1</small></li>
+  
+    <li><a href="/tags/Python线程与进程/">Python线程与进程</a><small>2</small></li>
+  
+    <li><a href="/tags/Python面向对象/">Python面向对象</a><small>2</small></li>
+  
+    <li><a href="/tags/git版本控制/">git版本控制</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库/">数据库</a><small>4</small></li>
+  
+    <li><a href="/tags/网络协议学习/">网络协议学习</a><small>1</small></li>
+  
+    <li><a href="/tags/网络通信学习/">网络通信学习</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 Sirxy
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

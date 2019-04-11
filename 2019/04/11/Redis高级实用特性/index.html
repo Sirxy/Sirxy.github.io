@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redis高级实用特性 | 沐雨橙风</title>
+  <meta name="author" content="Sirxy">
+  
+  <meta name="description" content="Python, web后端，web前端，数据库，Linux等编程技术博客总结">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Redis高级实用特性"/>
+  <meta property="og:site_name" content="沐雨橙风"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="沐雨橙风" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">沐雨橙风</a></h1>
+  <h2><a href="/">水滴石穿</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-11T04:50:13.000Z"><a href="/2019/04/11/Redis高级实用特性/">2019-04-11</a></time>
+      
+      
+  
+    <h1 class="title">Redis高级实用特性</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="Redis-安全"><a href="#Redis-安全" class="headerlink" title="Redis 安全"></a>Redis 安全</h3><p>我们可以通过 redis 的配置文件设置密码参数，这样客户端连接到 redis 服务就需要密码验证，这样可以让你的 redis 服务更安全。<br><a id="more"></a><br>查看是否设置了密码验证：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; CONFIG get requirepass</span><br><span class="line">1) &quot;requirepass&quot;</span><br><span class="line">2) &quot;&quot;</span><br></pre></td></tr></table></figure></p>
+<p>默认情况下 requirepass 参数是空的，这就意味着你无需通过密码验证就可以连接到 redis 服务。</p>
+<p>临时修改密码(redis服务重启后不再生效)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; CONFIG set requirepass &quot;runoob&quot;</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; CONFIG get requirepass</span><br><span class="line">1) &quot;requirepass&quot;</span><br><span class="line">2) &quot;runoob&quot;</span><br></pre></td></tr></table></figure></p>
+<p>配置文件为Redis添加密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">修改配置文件</span><br><span class="line">sudo vim /etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line">设置：requirepass redis的密码</span><br><span class="line"></span><br><span class="line"># requirepass foobared</span><br><span class="line"></span><br><span class="line">requirepass abc123</span><br><span class="line"></span><br><span class="line">重启服务</span><br><span class="line">sudo service redis restart</span><br><span class="line"></span><br><span class="line">登录（两种）</span><br><span class="line">1.# ./redis-cli -a  密码 //连接时指定密码来进行授权</span><br><span class="line">2.redis-cli 进入后发现操作不了时</span><br><span class="line">  auth 密码</span><br><span class="line">  OK</span><br><span class="line">---------------------</span><br><span class="line">windows 下设置密码生效</span><br><span class="line">修改配置文件</span><br><span class="line">启动服务 加载配置文件redis-server redis.conf  \(加载一次即可\)</span><br><span class="line">启动客户端</span><br></pre></td></tr></table></figure></p>
+<h3 id="Redis主从复制"><a href="#Redis主从复制" class="headerlink" title="Redis主从复制"></a>Redis主从复制</h3><p>操作步骤：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1.先将linux虚拟机关闭，之后克隆一个。</span><br><span class="line"></span><br><span class="line">2.启动两个虚拟机：master（主）和slave（从）</span><br><span class="line"></span><br><span class="line">3. 在slave（从）中配置一下ip地址</span><br><span class="line"></span><br><span class="line">   \# ifconfig eth0 192.168.128.229</span><br><span class="line"></span><br><span class="line">   \# ping 一下看看通不通。</span><br><span class="line"></span><br><span class="line">4. 配置从机</span><br><span class="line"></span><br><span class="line">   进入：配置文件</span><br><span class="line"></span><br><span class="line">   slaveof  192.168.128.228 6379   //配置连接主机的Redis的ip和端口</span><br><span class="line"></span><br><span class="line">   masterauth 密码  //配置连接密码</span><br><span class="line"></span><br><span class="line">   最后启动slave（从）机的Redis服务。</span><br><span class="line"></span><br><span class="line">其他：可以通过info命令中的role属性查看自己角色是master、slave</span><br></pre></td></tr></table></figure></p>
+<h3 id="Redis事务"><a href="#Redis事务" class="headerlink" title="Redis事务"></a>Redis事务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;multi   //开启一个事务</span><br><span class="line">&gt;set age 10 //暂存指令队列</span><br><span class="line">&gt;set age 20</span><br><span class="line">&gt;exec    //开始执行（提交事务）</span><br><span class="line">或&gt;discard //清空指令队列（事务回滚）</span><br></pre></td></tr></table></figure>
+<h3 id="Redis乐观锁"><a href="#Redis乐观锁" class="headerlink" title="Redis乐观锁"></a>Redis乐观锁</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Redis Watch 命令用于监视一个(或多个) key ，如果在事务执行之前这个(或这些) key 被其他命令所改动，那么事务将被打断</span><br><span class="line">在事务前对被操作的属性做一个：</span><br><span class="line">&gt; watch age</span><br><span class="line">&gt;multi   //开启一个事务(在此期间有其他修改，则此处会失败)</span><br><span class="line">&gt;set age 10 //暂存指令队列</span><br><span class="line">&gt;set age 20</span><br><span class="line">&gt;exec    //开始执行（提交事务）</span><br><span class="line">或&gt;discard //清空指令队列（事务回滚）</span><br></pre></td></tr></table></figure>
+<h3 id="Redis持久化机制-通过修改配置文件做设置"><a href="#Redis持久化机制-通过修改配置文件做设置" class="headerlink" title="Redis持久化机制(通过修改配置文件做设置)"></a>Redis持久化机制(通过修改配置文件做设置)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.snapshotting(快照)默认方式</span><br><span class="line">   配置    save</span><br><span class="line">   save 900 1 #900秒内如果超过1个key被修改，则发起快照保存</span><br><span class="line">   save 300 10 #300秒内容如超过10个key被修改，则发起快照保存</span><br><span class="line">   save 60 10000</span><br><span class="line">2.Append-only file（aof方式）</span><br><span class="line">   配置 appendonly on 改为yes</span><br><span class="line">   会在bin目录下产生一个.aof的文件</span><br><span class="line">   关于aof的配置</span><br><span class="line">   appendonly yes //启用aof 持久化方式</span><br><span class="line"></span><br><span class="line">   # appendfsync always //收到写命令就立即写入磁盘，最慢，但是保证完全的持久化</span><br><span class="line">     appendfsync everysec //每秒钟写入磁盘一次，在性能和持久化方面做了很好的折中</span><br><span class="line">   # appendfsync no //完全依赖os，性能最好,持久化没保证</span><br></pre></td></tr></table></figure>
+<h3 id="Redis发布订阅"><a href="#Redis发布订阅" class="headerlink" title="Redis发布订阅"></a>Redis发布订阅</h3><p>Redis 发布订阅(pub/sub)是一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息。<br>Redis 客户端可以订阅任意数量的频道。<br>下图展示了频道 channel1 ， 以及订阅这个频道的三个客户端 —— client2 、 client5 和 client1 之间的关系：<br><img src="/2019/04/11/Redis高级实用特性/pubsub1.png" alt=""><br>当有新消息通过 PUBLISH 命令发送给频道 channel1 时， 这个消息就会被发送给订阅它的三个客户端：<br><img src="/2019/04/11/Redis高级实用特性/pubsub2.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">我们创建了订阅频道名为 redisChat:</span><br><span class="line">redis 127.0.0.1:6379&gt; SUBSCRIBE redisChat</span><br><span class="line"></span><br><span class="line">Reading messages... (press Ctrl-C to quit)</span><br><span class="line">1) &quot;subscribe&quot;</span><br><span class="line">2) &quot;redisChat&quot;</span><br><span class="line">3) (integer) 1</span><br><span class="line"></span><br><span class="line">现在，我们先重新开启个 redis 客户端，然后在同一个频道 redisChat 发布两次消息，订阅者就能接收到消息。</span><br><span class="line">redis 127.0.0.1:6379&gt; PUBLISH redisChat &quot;Redis is a great caching technique&quot;</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line">redis 127.0.0.1:6379&gt; PUBLISH redisChat &quot;Learn redis by runoob.com&quot;</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line"># 订阅者的客户端会显示如下消息</span><br><span class="line">1) &quot;message&quot;</span><br><span class="line">2) &quot;redisChat&quot;</span><br><span class="line">3) &quot;Redis is a great caching technique&quot;</span><br><span class="line">1) &quot;message&quot;</span><br><span class="line">2) &quot;redisChat&quot;</span><br><span class="line">3) &quot;Learn redis by runoob.com&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">----------------------------</span><br><span class="line"></span><br><span class="line">序号    命令及描述</span><br><span class="line">1    PSUBSCRIBE pattern [pattern ...] 订阅一个或多个符合给定模式的频道。</span><br><span class="line">2    PUBSUB subcommand [argument [argument ...]] 查看订阅与发布系统状态。</span><br><span class="line">3    PUBLISH channel message 将信息发送到指定的频道。</span><br><span class="line">4    PUNSUBSCRIBE [pattern [pattern ...]] 退订所有给定模式的频道。</span><br><span class="line">5    SUBSCRIBE channel [channel ...] 订阅给定的一个或多个频道的信息。</span><br><span class="line">6    UNSUBSCRIBE [channel [channel ...]] 指退订给定的频道。</span><br></pre></td></tr></table></figure></p>
+<h3 id="Redis配置虚拟内存"><a href="#Redis配置虚拟内存" class="headerlink" title="Redis配置虚拟内存"></a>Redis配置虚拟内存</h3><p>和大多NoSQL数据库一样，Redis同样遵循了Key/Value数据存储模型。在有些情况下，Redis会将Keys/Values保存在内存中以提高数据查询和数据修改的效率，然而这样的做法并非总是很好的选择。鉴于此，我们可以将之进一步优化，即尽量在内存中只保留Keys的数据，这样可以保证数据检索的效率，而Values数据在很少使用的时候则可以被换出到磁盘。</p>
+<p>在实际的应用中，大约只有10%的Keys属于相对比较常用的键，这样Redis就可以通过虚存将其余不常用的Keys和Values换出到磁盘上，而一旦这些被换出的Keys或Values需要被读取时，Redis则将其再次读回到主内存中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在redis配置文件中设置</span><br><span class="line">vm-enabled yes            #开启vm功能</span><br><span class="line">vm-swap-file  /tmp/redis.swap    #交换出来的value保存的文件路径</span><br><span class="line">vm-max-memory 1000000    #redis使用的最大内存上限</span><br><span class="line">vm-page-size 32            #每个页面的大小32字节</span><br><span class="line">vm-pages 134217728        #最多使用多少页面</span><br><span class="line">vm-max-threads 4        #用于执行value对象换入患处的工作线程数量</span><br></pre></td></tr></table></figure></p>
+<p>持续中。。。。。。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库/">数据库</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/数据库/">数据库</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/11/Redis高级实用特性/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:sirxy.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/HTTP/">HTTP</a><small>3</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+    <li><a href="/categories/Python基础/">Python基础</a><small>1</small></li>
+  
+    <li><a href="/categories/Python面向对象/">Python面向对象</a><small>2</small></li>
+  
+    <li><a href="/categories/nginx/">nginx</a><small>3</small></li>
+  
+    <li><a href="/categories/web前端/">web前端</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
+  
+    <li><a href="/categories/多线程编程/">多线程编程</a><small>2</small></li>
+  
+    <li><a href="/categories/数据库/">数据库</a><small>4</small></li>
+  
+    <li><a href="/categories/爬虫/">爬虫</a><small>1</small></li>
+  
+    <li><a href="/categories/版本控制/">版本控制</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议/">网络协议</a><small>1</small></li>
+  
+    <li><a href="/categories/网络通信/">网络通信</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
+  
+    <li><a href="/tags/Python模块/">Python模块</a><small>2</small></li>
+  
+    <li><a href="/tags/Python爬虫/">Python爬虫</a><small>1</small></li>
+  
+    <li><a href="/tags/Python线程与进程/">Python线程与进程</a><small>2</small></li>
+  
+    <li><a href="/tags/Python面向对象/">Python面向对象</a><small>2</small></li>
+  
+    <li><a href="/tags/git版本控制/">git版本控制</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库/">数据库</a><small>4</small></li>
+  
+    <li><a href="/tags/网络协议学习/">网络协议学习</a><small>1</small></li>
+  
+    <li><a href="/tags/网络通信学习/">网络通信学习</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 Sirxy
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
