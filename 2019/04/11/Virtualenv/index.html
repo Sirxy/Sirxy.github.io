@@ -51,7 +51,7 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2019-04-11T09:02:24.000Z"><a href="/2019/04/11/Virtualenv虚拟环境/">2019-04-11</a></time>
+        <time datetime="2019-04-11T09:02:24.000Z"><a href="/2019/04/11/Virtualenv/">2019-04-11</a></time>
       
       
   
@@ -75,19 +75,18 @@
 </ul>
 <p>(venv) $<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 停止虚拟环境</span><br><span class="line">当你在虚拟环境中完成工作并想回到全局Python解释器，在命令提示符中输入deactivate就可以了。</span><br></pre></td></tr></table></figure></p>
 <p>$ deactivate<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 使用pip安装python包</span><br><span class="line">大多数的Python包是通过pip程序安装的，在创建虚拟环境的时候virtualenv会自动添加进去。当一个虚拟环境被激活后，pip程序的位置会被添加到PATH中。</span><br><span class="line"></span><br><span class="line">注：如果你使用pyvenv创建虚拟环境在Python 3.3中，则必须手动安装pip。安装指令在pip网站上可以找到。在Python 3.4下，pyvenv会自动安装pip。</span><br><span class="line"></span><br><span class="line">比如，安装Flask到虚拟环境中，使用下面的命令：</span><br></pre></td></tr></table></figure></p>
-<p>(venv)$ pip install flask<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过这个命令，Flask和它的依赖集都会安装到虚拟环境中。你可以验证Flask是否正确安装通过启动Python解释器并试着导入它：</span><br></pre></td></tr></table></figure></p>
+<p>(venv)$ pip install flask<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">通过这个命令，Flask和它的依赖集都会安装到虚拟环境中。你可以验证Flask是否正确安装通过启动Python解释器并试着导入它：</span><br></pre></td></tr></table></figure></p>
 <p>(venv)$ python</p>
 <blockquote>
 <blockquote>
 <blockquote>
-<p>import flask</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果需要安装的包比较多的时候，这样做会比较繁琐，我们还有一键安装的方法。首先新建一个文本文件，如：requirements.txt，然后将你需要安装的包名保存到该文件中(根据自己的需要)，如下：</span><br></pre></td></tr></table></figure>
+<p>import flask<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">如果需要安装的包比较多的时候，这样做会比较繁琐，我们还有一键安装的方法。首先新建一个文本文件，如：requirements.txt，然后将你需要安装的包名保存到该文件中(根据自己的需要)，如下：</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 </blockquote>
-<p>Babel==1.3<br>Flask==0.10.1<br>Flask-Login==0.2.7<br>Flask-SQLAlchemy==1.0<br>Flask-WTF==0.9.3<br>Jinja2==2.7.1<br>SQLAlchemy==0.8.2<br>WTForms==1.0.5<br>Werkzeug==0.9.4<br>psycopg2==2.5.1<br>…<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最后你只需要输入以下命令，所有需要的包就可以全部安装好了：</span><br></pre></td></tr></table></figure></p>
-<p>(venv)$ pip install -r requirements.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果没有出现错误，祝贺你：安装成功了。</span><br><span class="line"></span><br><span class="line">若要查看当前环境安装了哪些包，可以使用下面的命令：</span><br></pre></td></tr></table></figure></p>
-<p>(venv)$ pip freeze<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">还可以直接导出到文件中</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>Babel==1.3<br>Flask==0.10.1<br>Flask-Login==0.2.7<br>Flask-SQLAlchemy==1.0<br>Flask-WTF==0.9.3<br>Jinja2==2.7.1<br>SQLAlchemy==0.8.2<br>WTForms==1.0.5<br>Werkzeug==0.9.4<br>psycopg2==2.5.1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最后你只需要输入以下命令，所有需要的包就可以全部安装好了：</span><br></pre></td></tr></table></figure></p>
+<p>(venv)$ pip install -r requirements.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">如果没有出现错误，祝贺你：安装成功了。</span><br><span class="line"></span><br><span class="line">若要查看当前环境安装了哪些包，可以使用下面的命令：</span><br></pre></td></tr></table></figure></p>
+<p>(venv)$ pip freeze<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">还可以直接导出到文件中</span><br></pre></td></tr></table></figure></p>
 <p>(venv)$ pip freeze &gt; requirements.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 移除环境</span><br><span class="line">删除虚拟环境只需通过停用虚拟环境并删除环境文件夹及其所有内容即可完成：</span><br></pre></td></tr></table></figure></p>
 <p>(ENV)$ deactivate<br>$ rm -r /path/to/ENV<br><code>`</code></p>
 <p><img src="https://virtualenv.pypa.io/en/latest/" alt="Virtualenv —— virtualenv 16.4.4.dev0 documentation"></p>
@@ -149,7 +148,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/11/Virtualenv虚拟环境/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/11/Virtualenv/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
