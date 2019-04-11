@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Virtualenv虚拟环境 | 沐雨橙风</title>
+  <meta name="author" content="Sirxy">
+  
+  <meta name="description" content="Python, web后端，web前端，数据库，Linux等编程技术博客总结">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Virtualenv虚拟环境"/>
+  <meta property="og:site_name" content="沐雨橙风"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="沐雨橙风" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">沐雨橙风</a></h1>
+  <h2><a href="/">水滴石穿</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-11T09:02:24.000Z"><a href="/2019/04/11/Virtualenv虚拟环境/">2019-04-11</a></time>
+      
+      
+  
+    <h1 class="title">Virtualenv虚拟环境</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="Virtualenv"><a href="#Virtualenv" class="headerlink" title="Virtualenv"></a>Virtualenv</h3><p>VirtualEnv用于在一台机器上创建多个独立的Python虚拟运行环境，多个Python环境相互独立，互不影响，它能够：在没有权限的情况下安装新套件；不同应用可以使用不同的套件版本；套件升级不影响其他应用。<a id="more"></a></p>
+<ul>
+<li><p>ubuntu16.04安装:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ [sudo] pip3 install virtualenv</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建虚拟环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  virtualenv venv</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>激活虚拟环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ubuntu:</span><br><span class="line"></span><br><span class="line">    $ source venv/bin/activate</span><br><span class="line"></span><br><span class="line">windows:</span><br><span class="line">    cd ./f1/Scripts/</span><br><span class="line">    activate.bat</span><br><span class="line">    (f1) F:\tulingxueyuan\f1\Scripts&gt;</span><br><span class="line">```    </span><br><span class="line">当虚拟环境被激活了，Python解释器的位置会被添加到PATH中，但是这个改动并不是永久的；它只影响当前命令会话。提醒一下，你激活了虚拟环境，该激活命令会将环境的名称包含在命令提示符里面：</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>(venv) $<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 停止虚拟环境</span><br><span class="line">当你在虚拟环境中完成工作并想回到全局Python解释器，在命令提示符中输入deactivate就可以了。</span><br></pre></td></tr></table></figure></p>
+<p>$ deactivate<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 使用pip安装python包</span><br><span class="line">大多数的Python包是通过pip程序安装的，在创建虚拟环境的时候virtualenv会自动添加进去。当一个虚拟环境被激活后，pip程序的位置会被添加到PATH中。</span><br><span class="line"></span><br><span class="line">注：如果你使用pyvenv创建虚拟环境在Python 3.3中，则必须手动安装pip。安装指令在pip网站上可以找到。在Python 3.4下，pyvenv会自动安装pip。</span><br><span class="line"></span><br><span class="line">比如，安装Flask到虚拟环境中，使用下面的命令：</span><br></pre></td></tr></table></figure></p>
+<p>(venv)$ pip install flask<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过这个命令，Flask和它的依赖集都会安装到虚拟环境中。你可以验证Flask是否正确安装通过启动Python解释器并试着导入它：</span><br></pre></td></tr></table></figure></p>
+<p>(venv)$ python</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import flask</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果需要安装的包比较多的时候，这样做会比较繁琐，我们还有一键安装的方法。首先新建一个文本文件，如：requirements.txt，然后将你需要安装的包名保存到该文件中(根据自己的需要)，如下：</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<p>Babel==1.3<br>Flask==0.10.1<br>Flask-Login==0.2.7<br>Flask-SQLAlchemy==1.0<br>Flask-WTF==0.9.3<br>Jinja2==2.7.1<br>SQLAlchemy==0.8.2<br>WTForms==1.0.5<br>Werkzeug==0.9.4<br>psycopg2==2.5.1<br>…<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最后你只需要输入以下命令，所有需要的包就可以全部安装好了：</span><br></pre></td></tr></table></figure></p>
+<p>(venv)$ pip install -r requirements.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果没有出现错误，祝贺你：安装成功了。</span><br><span class="line"></span><br><span class="line">若要查看当前环境安装了哪些包，可以使用下面的命令：</span><br></pre></td></tr></table></figure></p>
+<p>(venv)$ pip freeze<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">还可以直接导出到文件中</span><br></pre></td></tr></table></figure></p>
+<p>(venv)$ pip freeze &gt; requirements.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 移除环境</span><br><span class="line">删除虚拟环境只需通过停用虚拟环境并删除环境文件夹及其所有内容即可完成：</span><br></pre></td></tr></table></figure></p>
+<p>(ENV)$ deactivate<br>$ rm -r /path/to/ENV<br><code>`</code></p>
+<p><img src="https://virtualenv.pypa.io/en/latest/" alt="Virtualenv —— virtualenv 16.4.4.dev0 documentation"></p>
+<p>持续中。。。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Python/">Python</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Python基础/">Python基础</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/11/Virtualenv虚拟环境/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:sirxy.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/HTTP/">HTTP</a><small>3</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>4</small></li>
+  
+    <li><a href="/categories/Python基础/">Python基础</a><small>1</small></li>
+  
+    <li><a href="/categories/Python面向对象/">Python面向对象</a><small>2</small></li>
+  
+    <li><a href="/categories/nginx/">nginx</a><small>3</small></li>
+  
+    <li><a href="/categories/web前端/">web前端</a><small>2</small></li>
+  
+    <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
+  
+    <li><a href="/categories/多线程编程/">多线程编程</a><small>2</small></li>
+  
+    <li><a href="/categories/数据库/">数据库</a><small>5</small></li>
+  
+    <li><a href="/categories/爬虫/">爬虫</a><small>1</small></li>
+  
+    <li><a href="/categories/版本控制/">版本控制</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议/">网络协议</a><small>1</small></li>
+  
+    <li><a href="/categories/网络通信/">网络通信</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Python基础/">Python基础</a><small>3</small></li>
+  
+    <li><a href="/tags/Python模块/">Python模块</a><small>2</small></li>
+  
+    <li><a href="/tags/Python爬虫/">Python爬虫</a><small>1</small></li>
+  
+    <li><a href="/tags/Python线程与进程/">Python线程与进程</a><small>2</small></li>
+  
+    <li><a href="/tags/Python面向对象/">Python面向对象</a><small>2</small></li>
+  
+    <li><a href="/tags/git版本控制/">git版本控制</a><small>1</small></li>
+  
+    <li><a href="/tags/web前端/">web前端</a><small>2</small></li>
+  
+    <li><a href="/tags/数据库/">数据库</a><small>5</small></li>
+  
+    <li><a href="/tags/网络协议学习/">网络协议学习</a><small>1</small></li>
+  
+    <li><a href="/tags/网络通信学习/">网络通信学习</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 Sirxy
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

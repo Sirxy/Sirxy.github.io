@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Virtualenv虚拟环境]]></title>
+    <url>%2F2019%2F04%2F11%2FVirtualenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[VirtualenvVirtualEnv用于在一台机器上创建多个独立的Python虚拟运行环境，多个Python环境相互独立，互不影响，它能够：在没有权限的情况下安装新套件；不同应用可以使用不同的套件版本；套件升级不影响其他应用。 ubuntu16.04安装: 1$ [sudo] pip3 install virtualenv 创建虚拟环境 1$ virtualenv venv 激活虚拟环境 12345678910ubuntu: $ source venv/bin/activatewindows: cd ./f1/Scripts/ activate.bat (f1) F:\tulingxueyuan\f1\Scripts&gt;``` 当虚拟环境被激活了，Python解释器的位置会被添加到PATH中，但是这个改动并不是永久的；它只影响当前命令会话。提醒一下，你激活了虚拟环境，该激活命令会将环境的名称包含在命令提示符里面： (venv) $12- 停止虚拟环境当你在虚拟环境中完成工作并想回到全局Python解释器，在命令提示符中输入deactivate就可以了。 $ deactivate1234567### 使用pip安装python包大多数的Python包是通过pip程序安装的，在创建虚拟环境的时候virtualenv会自动添加进去。当一个虚拟环境被激活后，pip程序的位置会被添加到PATH中。注：如果你使用pyvenv创建虚拟环境在Python 3.3中，则必须手动安装pip。安装指令在pip网站上可以找到。在Python 3.4下，pyvenv会自动安装pip。比如，安装Flask到虚拟环境中，使用下面的命令： (venv)$ pip install flask1通过这个命令，Flask和它的依赖集都会安装到虚拟环境中。你可以验证Flask是否正确安装通过启动Python解释器并试着导入它： (venv)$ python import flask 1如果需要安装的包比较多的时候，这样做会比较繁琐，我们还有一键安装的方法。首先新建一个文本文件，如：requirements.txt，然后将你需要安装的包名保存到该文件中(根据自己的需要)，如下： Babel==1.3Flask==0.10.1Flask-Login==0.2.7Flask-SQLAlchemy==1.0Flask-WTF==0.9.3Jinja2==2.7.1SQLAlchemy==0.8.2WTForms==1.0.5Werkzeug==0.9.4psycopg2==2.5.1…1最后你只需要输入以下命令，所有需要的包就可以全部安装好了： (venv)$ pip install -r requirements.txt123如果没有出现错误，祝贺你：安装成功了。若要查看当前环境安装了哪些包，可以使用下面的命令： (venv)$ pip freeze1还可以直接导出到文件中 (venv)$ pip freeze &gt; requirements.txt123### 移除环境删除虚拟环境只需通过停用虚拟环境并删除环境文件夹及其所有内容即可完成： (ENV)$ deactivate$ rm -r /path/to/ENV` 持续中。。。]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[教你三分钟学会Ajax]]></title>
     <url>%2F2019%2F04%2F11%2Fajax%2F</url>
-    <content type="text"><![CDATA[ajax是什么?AJAX 指异步 JavaScript 及 XML（Asynchronous JavaScript And XML）。AJAX 是与服务器交换数据并更新部分网页的艺术，在不重新加载整个页面的情况下。AJAX 是一种在 2005 年由 Google 推广开来的编程模式。AJAX 不是一种新的编程语言，而是一种使用现有标准的新方法。通过 AJAX，你可以创建更好、更快以及更友好的 WEB 应用程序。AJAX 基于 JavaScript 和 HTTP 请求（HTTP requests）。通过 HTTP 请求加载远程数据。 jQuery 底层对 AJAX 实现进行了封装.使得我们在进行ajax操作时,不必像原生js中那么复杂$.get, $.post, $.ajax() 返回其创建的 XMLHttpRequest 对象。多数情况下我们不需要去操作返回的对象 如何使用ajax技术?首先你得有web服务器,能够通过浏览器去执行你的html和你的python，注意一点:我们平常写的html,直接在浏览器打开时 使用的是file协议，而ajax是基于HTTP请求的,所以要求你的html能够使用http的协议打开如果你能做到用http协议去打开你的html并且能够正常显示的话,就代表你的web服务器搭建成功。 $.get() 方法: 12//发送ajax请求 1.url 2.可选 发送get请求时携带的参数 ,3,可选 回调函数,请求完之后做什么事 4,可选,返回的数据类型 json$.get(url,&#123;请求的参数&#125;,function(data)&#123;&#125;,&apos;json&apos;) $.post() 1$.post(url,&#123;请求的参数&#125;,function(data)&#123;&#125;,&apos;json&apos;) $.ajax() 12345678910111213141516$.ajax(&#123; url:&apos;/cgi-bin/5.py&apos;,//当前请求的url地址 type:&apos;get&apos;,//当前请求的方式 get post data:&#123;id:100,username:&apos;zhangsan&apos;&#125;,//请求时发送的参数 dataType:&apos;json&apos;,//返回的数据类型 success:function(data)&#123; //ajax请求成功后执行的代码 console.log(data); &#125;, error:function()&#123; //ajax执行失败后执行的代码 alert(&apos;ajax执行错误&apos;); &#125;, timeout:2000,//设置当前请求的超时时间 毫秒,必须时异步请求才会生效 async:true// 是否异步 true为异步 false 同步&#125;) ajax异步 同步 1234//设置ajax的全局配置 async:false 设置当前请求为同步$.ajaxSetup(&#123; async:false&#125;) 关于ajax中 异步 和 同步：ajax默认就是异步请求,async (默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。同步请求,就发ajax请求发出去后必须等待ajax的结果返回后才能继续往下执行。一般情况下都使用异步操作就可以,除非有特殊情况,必须等ajax的结果回来后才能做处理的,就用同步。 扩展：了解json格式数据json是 JavaScript Object Notation 的首字母缩写，单词的意思是javascript对象表示法，这里说的json指的是类似于javascript对象的一种数据格式，目前这种数据格式比较流行，逐渐替换掉了传统的xml数据格式。 javascript对象字面量：1234var tom = &#123; name:&apos;tom&apos;, age:18&#125; json格式的数据：1234&#123; &quot;name&quot;:&apos;tom&apos;, &quot;age&quot;:18&#125; 与json对象不同的是，json数据格式的属性名称需要用双引号引起来，用单引号或者不用引号会导致读取数据错误。 json的另外一个数据格式是数组，和javascript中的数组字面量相同。1[&apos;tom&apos;,18,&apos;programmer&apos;]]]></content>
+    <content type="text"><![CDATA[ajax是什么?AJAX 指异步 JavaScript 及 XML（Asynchronous JavaScript And XML）。AJAX 是与服务器交换数据并更新部分网页的艺术，在不重新加载整个页面的情况下。AJAX 是一种在 2005 年由 Google 推广开来的编程模式。AJAX 不是一种新的编程语言，而是一种使用现有标准的新方法。通过 AJAX，你可以创建更好、更快以及更友好的 WEB 应用程序。AJAX 基于 JavaScript 和 HTTP 请求（HTTP requests）。通过 HTTP 请求加载远程数据。 jQuery 底层对 AJAX 实现进行了封装.使得我们在进行ajax操作时,不必像原生js中那么复杂$.get, $.post, $.ajax() 返回其创建的 XMLHttpRequest 对象。多数情况下我们不需要去操作返回的对象 如何使用ajax技术?首先你得有web服务器,能够通过浏览器去执行你的html和你的python，注意一点:我们平常写的html,直接在浏览器打开时 使用的是file协议，而ajax是基于HTTP请求的,所以要求你的html能够使用http的协议打开如果你能做到用http协议去打开你的html并且能够正常显示的话,就代表你的web服务器搭建成功。 $.get() 方法: 12//发送ajax请求 1.url 2.可选 发送get请求时携带的参数 ,3,可选 回调函数,请求完之后做什么事 4,可选,返回的数据类型 json$.get(url,&#123;请求的参数&#125;,function(data)&#123;&#125;,&apos;json&apos;) $.post() 1$.post(url,&#123;请求的参数&#125;,function(data)&#123;&#125;,&apos;json&apos;) $.ajax() 12345678910111213141516$.ajax(&#123; url:&apos;/cgi-bin/5.py&apos;,//当前请求的url地址 type:&apos;get&apos;,//当前请求的方式 get post data:&#123;id:100,username:&apos;zhangsan&apos;&#125;,//请求时发送的参数 dataType:&apos;json&apos;,//返回的数据类型 success:function(data)&#123; //ajax请求成功后执行的代码 console.log(data); &#125;, error:function()&#123; //ajax执行失败后执行的代码 alert(&apos;ajax执行错误&apos;); &#125;, timeout:2000,//设置当前请求的超时时间 毫秒,必须时异步请求才会生效 async:true// 是否异步 true为异步 false 同步&#125;) ajax异步 同步 1234//设置ajax的全局配置 async:false 设置当前请求为同步$.ajaxSetup(&#123; async:false&#125;) 关于ajax中 异步 和 同步：ajax默认就是异步请求,async (默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。同步请求,就发ajax请求发出去后必须等待ajax的结果返回后才能继续往下执行。一般情况下都使用异步操作就可以,除非有特殊情况,必须等ajax的结果回来后才能做处理的,就用同步。 扩展：了解json格式数据json是 JavaScript Object Notation 的首字母缩写，单词的意思是javascript对象表示法，这里说的json指的是类似于javascript对象的一种数据格式，目前这种数据格式比较流行，逐渐替换掉了传统的xml数据格式。 javascript对象字面量：1234var tom = &#123; name:&apos;tom&apos;, age:18&#125; json格式的数据：1234&#123; &quot;name&quot;:&apos;tom&apos;, &quot;age&quot;:18&#125; 与json对象不同的是，json数据格式的属性名称需要用双引号引起来，用单引号或者不用引号会导致读取数据错误。 json的另外一个数据格式是数组，和javascript中的数组字面量相同。1[&apos;tom&apos;,18,&apos;programmer&apos;] 持续中。。。。。。]]></content>
       <categories>
         <category>web前端</category>
       </categories>
@@ -291,7 +302,7 @@
         <category>web前端</category>
       </categories>
       <tags>
-        <tag>HTML5/CSS3</tag>
+        <tag>web前端</tag>
       </tags>
   </entry>
 </search>
