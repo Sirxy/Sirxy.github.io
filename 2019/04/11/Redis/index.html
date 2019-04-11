@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redis 数据库 | 沐雨橙风</title>
+  <meta name="author" content="Sirxy">
+  
+  <meta name="description" content="Python, web后端，web前端，数据库，Linux等编程技术博客总结">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Redis 数据库"/>
+  <meta property="og:site_name" content="沐雨橙风"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="沐雨橙风" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">沐雨橙风</a></h1>
+  <h2><a href="/">水滴石穿</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-11T04:16:05.000Z"><a href="/2019/04/11/Redis/">2019-04-11</a></time>
+      
+      
+  
+    <h1 class="title">Redis 数据库</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="Redis简介与安装"><a href="#Redis简介与安装" class="headerlink" title="Redis简介与安装"></a>Redis简介与安装</h3><p>1、Redis简介：<br>Redis 一个内存数据库，通过 Key-Value 键值对的的方式存储数据。由于 Redis 的数据都存储在内存中，所以访问速度非常快，因此 Redis <a id="more"></a>大量用于缓存系统，存储热点数据，可以极大的提高网站的响应速度。</p>
+<p>2、优点：<br>支持数据的持久化，通过配置可以将内存中的数据保存在磁盘中，Redis 重启以后再将数据加载到内存中；<br>支持列表，哈希，有序集合等数据结构，极大的扩展了 Redis 用途；<br>原子操作，Redis 的所有操作都是原子性的，这使得基于 Redis 实现分布式锁非常简单；<br>支持发布/订阅功能，数据过期功能；<br>环境准备：<a href="http://www.runoob.com/redis/redis-install.html" target="_blank" rel="noopener">http://www.runoob.com/redis/redis-install.html</a><br>3、Ubuntu下安装<br>在 Ubuntu 系统安装 Redi 可以使用以下命令:</p>
+<blockquote>
+<p>$sudo apt-get update<br>$sudo apt-get install redis-server<br>启动 Redis<br>$ redis-server<br>查看 redis 是否启动？<br>$ redis-cli<br>以上命令将打开以下终端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt;</span><br><span class="line">127.0.0.1 是本机 IP ，6379 是 redis 服务端口。现在我们输入 PING 命令。</span><br><span class="line"></span><br><span class="line">redis 127.0.0.1:6379&gt; ping</span><br><span class="line">PONG</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>以上说明我们已经成功安装了redis。</p>
+<h3 id="Redis基本操作与配置"><a href="#Redis基本操作与配置" class="headerlink" title="Redis基本操作与配置"></a>Redis基本操作与配置</h3><p>1、基本操作<br>Redis 是 Key-Value 内存数据库，操作是通过各种指令进行的，比如 <code>SET</code> 指令可以设置键值对，而 <code>GET</code> 指令则获取某一个键的值。不同的数据结构，Redis 有不同的指令，这样指令一共有几十个，下面主要介绍一些常用的指令。<br>Redis 对 Key 也就是键有各种各样的指令，主要有下面的指令（下面的指令中小写字符串都是参数，可以自定义）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;keys *  //返回键（key）</span><br><span class="line">&gt;keys list*   //返回名以list开头的所有键（key）</span><br><span class="line">&gt;exists list1  //判断键名为list1的是否存在   存在返回1， 不存在返回0</span><br><span class="line">&gt;del list1 //删除一个键（名为list1）</span><br><span class="line">&gt;expire list1 10 //设置键名为list1的过期时间为10秒后</span><br><span class="line">&gt;ttl list1 //查看键名为list1的过期时间，若为-1表示以过期 或 永不过期</span><br><span class="line">&gt;move age 1 //将键名age的转移到1数据库中。</span><br><span class="line">&gt;select 1 //表示进入到1数据库中，默认在0数据库</span><br><span class="line">&gt;persist age //移除age的过期时间</span><br><span class="line">&gt;flushdb:删除所有的数据 清除当前所在库的所有数据</span><br><span class="line">&gt;flushall 清空所有数据</span><br></pre></td></tr></table></figure></p>
+<p>2、Redis 配置<br>Redis 的配置文件位于 Redis 安装目录下，文件名为 redis.conf。<br>你可以通过CONFIG命令查看或设置配置项。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; CONFIG GET CONFIG_SETTING_NAME</span><br><span class="line"></span><br><span class="line">redis 127.0.0.1:6379&gt; CONFIG GET loglevel</span><br><span class="line"></span><br><span class="line">1) &quot;loglevel&quot;</span><br><span class="line">2) &quot;notice&quot;</span><br></pre></td></tr></table></figure></p>
+<p>3、Redis 配置参数说明<br>redis.conf 配置项说明如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">1. Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程</span><br><span class="line">    daemonize no</span><br><span class="line">2. 当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定</span><br><span class="line">    pidfile /var/run/redis.pid</span><br><span class="line">3. 指定Redis监听端口，默认端口为6379，作者在自己的一篇博文中解释了为什么选用6379作为默认端口，</span><br><span class="line">    因为6379在手机按键上MERZ对应的号码，而MERZ取自意大利歌女Alessia Merz的名字</span><br><span class="line">    port 6379</span><br><span class="line">4. 绑定的主机地址</span><br><span class="line">    bind 127.0.0.1</span><br><span class="line">5.当 客户端闲置多长时间后关闭连接，如果指定为0，表示关闭该功能</span><br><span class="line">    timeout 300</span><br><span class="line">6. 指定日志记录级别，Redis总共支持四个级别：debug、verbose、notice、warning，默认为verbose</span><br><span class="line">    loglevel verbose</span><br><span class="line">7. 日志记录方式，默认为标准输出，如果配置Redis为守护进程方式运行，而这里又配置为日志记录方式为标准输出，则日志将会发送给/dev/null</span><br><span class="line">    logfile stdout</span><br><span class="line">8. 设置数据库的数量，默认数据库为0，可以使用SELECT &lt;dbid&gt;命令在连接上指定数据库id</span><br><span class="line">    databases 16</span><br><span class="line">9. 指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合</span><br><span class="line">    save &lt;seconds&gt; &lt;changes&gt;</span><br><span class="line">    Redis默认配置文件中提供了三个条件：</span><br><span class="line">    save 900 1</span><br><span class="line">    save 300 10</span><br><span class="line">    save 60 10000</span><br><span class="line">    分别表示900秒（15分钟）内有1个更改，300秒（5分钟）内有10个更改以及60秒内有10000个更改。</span><br><span class="line"></span><br><span class="line">10. 指定存储至本地数据库时是否压缩数据，默认为yes，Redis采用LZF压缩，如果为了节省CPU时间，可以关闭该选项，</span><br><span class="line">    但会导致数据库文件变的巨大</span><br><span class="line">    rdbcompression yes</span><br><span class="line">11. 指定本地数据库文件名，默认值为dump.rdb</span><br><span class="line">    dbfilename dump.rdb</span><br><span class="line">12. 指定本地数据库存放目录</span><br><span class="line">    dir ./</span><br><span class="line">13. 设置当本机为slav服务时，设置master服务的IP地址及端口，在Redis启动时，它会自动从master进行数据同步</span><br><span class="line">    slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br><span class="line">14. 当master服务设置了密码保护时，slav服务连接master的密码</span><br><span class="line">    masterauth &lt;master-password&gt;</span><br><span class="line">15. 设置Redis连接密码，如果配置了连接密码，客户端在连接Redis时需要通过AUTH &lt;password&gt;命令提供密码，默认关闭</span><br><span class="line">    requirepass foobared</span><br><span class="line">16. 设置同一时间最大客户端连接数，默认无限制，Redis可以同时打开的客户端连接数为Redis进程可以打开的最大文件描述符数，</span><br><span class="line">    如果设置 maxclients 0，表示不作限制。当客户端连接数到达限制时，</span><br><span class="line">    Redis会关闭新的连接并向客户端返回max number of clients reached错误信息</span><br><span class="line">    maxclients 128</span><br><span class="line">17. 指定Redis最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先尝试清除已到期或即将到期的Key，</span><br><span class="line">    当此方法处理 后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作。</span><br><span class="line">    Redis新的vm机制，会把Key存放内存，Value会存放在swap区</span><br><span class="line">    maxmemory &lt;bytes&gt;</span><br><span class="line">18. 指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，如果不开启，</span><br><span class="line">    可能会在断电时导致一段时间内的数据丢失。因为 redis本身同步数据文件是按上面save条件来同步的，</span><br><span class="line">    所以有的数据会在一段时间内只存在于内存中。默认为no</span><br><span class="line">    appendonly no</span><br><span class="line">19. 指定更新日志文件名，默认为appendonly.aof</span><br><span class="line">     appendfilename appendonly.aof</span><br><span class="line">20. 指定更新日志条件，共有3个可选值： </span><br><span class="line">    no：表示等操作系统进行数据缓存同步到磁盘（快） </span><br><span class="line">    always：表示每次更新操作后手动调用fsync()将数据写到磁盘（慢，安全） </span><br><span class="line">    everysec：表示每秒同步一次（折衷，默认值）</span><br><span class="line">    appendfsync everysec</span><br><span class="line"></span><br><span class="line">21. 指定是否启用虚拟内存机制，默认值为no，简单的介绍一下，VM机制将数据分页存放，由Redis将访问量较少的页即冷数据swap到磁盘上，</span><br><span class="line">    访问多的页面由磁盘自动换出到内存中（在后面的文章我会仔细分析Redis的VM机制）</span><br><span class="line">     vm-enabled no</span><br><span class="line">22. 虚拟内存文件路径，默认值为/tmp/redis.swap，不可多个Redis实例共享</span><br><span class="line">     vm-swap-file /tmp/redis.swap</span><br><span class="line">23. 将所有大于vm-max-memory的数据存入虚拟内存,无论vm-max-memory设置多小,所有索引数据都是内存存储的(Redis的索引数据 就是keys),</span><br><span class="line">    也就是说,当vm-max-memory设置为0的时候,其实是所有value都存在于磁盘。默认值为0</span><br><span class="line">     vm-max-memory 0</span><br><span class="line">24. Redis swap文件分成了很多的page，一个对象可以保存在多个page上面，但一个page上不能被多个对象共享，</span><br><span class="line">    vm-page-size是要根据存储的 数据大小来设定的，作者建议如果存储很多小对象，page大小最好设置为32或者64bytes；</span><br><span class="line">    如果存储很大大对象，则可以使用更大的page，如果不 确定，就使用默认值</span><br><span class="line">     vm-page-size 32</span><br><span class="line">25. 设置swap文件中的page数量，由于页表（一种表示页面空闲或使用的bitmap）是在放在内存中的，，在磁盘上每8个pages将消耗1byte的内存。</span><br><span class="line">     vm-pages 134217728</span><br><span class="line">26. 设置访问swap文件的线程数,最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的，可能会造成比较长时间的延迟。</span><br><span class="line">    默认值为4</span><br><span class="line">     vm-max-threads 4</span><br><span class="line">27. 设置在向客户端应答时，是否把较小的包合并为一个包发送，默认为开启</span><br><span class="line">    glueoutputbuf yes</span><br><span class="line">28. 指定在超过一定的数量或者最大的元素超过某一临界值时，采用一种特殊的哈希算法</span><br><span class="line">    hash-max-zipmap-entries 64</span><br><span class="line">    hash-max-zipmap-value 512</span><br><span class="line">29. 指定是否激活重置哈希，默认为开启（后面在介绍Redis的哈希算法时具体介绍）</span><br><span class="line">    activerehashing yes</span><br><span class="line">30. 指定包含其它的配置文件，可以在同一主机上多个Redis实例之间使用同一份配置文件，而同时各个实例又拥有自己的特定配置文件</span><br><span class="line">    include /path/to/local.conf</span><br></pre></td></tr></table></figure></p>
+<p>持续中。。。。。。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/数据库/">数据库</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/数据库/">数据库</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/11/Redis/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:sirxy.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/HTTP/">HTTP</a><small>3</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>3</small></li>
+  
+    <li><a href="/categories/Python基础/">Python基础</a><small>1</small></li>
+  
+    <li><a href="/categories/Python面向对象/">Python面向对象</a><small>2</small></li>
+  
+    <li><a href="/categories/nginx/">nginx</a><small>3</small></li>
+  
+    <li><a href="/categories/web前端/">web前端</a><small>1</small></li>
+  
+    <li><a href="/categories/Python/内置模块/">内置模块</a><small>3</small></li>
+  
+    <li><a href="/categories/多线程编程/">多线程编程</a><small>2</small></li>
+  
+    <li><a href="/categories/数据库/">数据库</a><small>1</small></li>
+  
+    <li><a href="/categories/爬虫/">爬虫</a><small>1</small></li>
+  
+    <li><a href="/categories/版本控制/">版本控制</a><small>1</small></li>
+  
+    <li><a href="/categories/网络协议/">网络协议</a><small>1</small></li>
+  
+    <li><a href="/categories/网络通信/">网络通信</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/HTML5-CSS3/">HTML5/CSS3</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP学习/">HTTP学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx学习/">Nginx学习</a><small>3</small></li>
+  
+    <li><a href="/tags/Python基础/">Python基础</a><small>2</small></li>
+  
+    <li><a href="/tags/Python模块/">Python模块</a><small>2</small></li>
+  
+    <li><a href="/tags/Python爬虫/">Python爬虫</a><small>1</small></li>
+  
+    <li><a href="/tags/Python线程与进程/">Python线程与进程</a><small>2</small></li>
+  
+    <li><a href="/tags/Python面向对象/">Python面向对象</a><small>2</small></li>
+  
+    <li><a href="/tags/git版本控制/">git版本控制</a><small>1</small></li>
+  
+    <li><a href="/tags/数据库/">数据库</a><small>1</small></li>
+  
+    <li><a href="/tags/网络协议学习/">网络协议学习</a><small>1</small></li>
+  
+    <li><a href="/tags/网络通信学习/">网络通信学习</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2019 Sirxy
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
