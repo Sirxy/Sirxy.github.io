@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Python操作redis | 沐雨橙风</title>
+  <title>MongoDB简介与安装 | 沐雨橙风</title>
   <meta name="author" content="Sirxy">
   
   <meta name="description" content="Python, web后端，web前端，数据库，Linux等编程技术博客总结">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Python操作redis"/>
+  <meta property="og:title" content="MongoDB简介与安装"/>
   <meta property="og:site_name" content="沐雨橙风"/>
 
   
@@ -51,19 +51,24 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2019-04-11T05:07:35.000Z"><a href="/2019/04/11/Python操作redis/">2019-04-11</a></time>
+        <time datetime="2019-04-11T05:16:17.000Z"><a href="/2019/04/11/MongoDB简介与安装/">2019-04-11</a></time>
       
       
   
-    <h1 class="title">Python操作redis</h1>
+    <h1 class="title">MongoDB简介与安装</h1>
   
 
     </header>
     <div class="entry">
       
-        <h3 id="Python-访问-Redis"><a href="#Python-访问-Redis" class="headerlink" title="Python 访问 Redis"></a>Python 访问 Redis</h3><p>对于使用 Python 访问 Redis，我们需要先安装 <code>redis-py</code> 软件包，该包实现了 Python 的 Redis 驱动。通过以下命令建立工作环境，安装软件包：<a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo  pip3 install redis</span><br></pre></td></tr></table></figure></p>
-<h3 id="Python-操作-Redis"><a href="#Python-操作-Redis" class="headerlink" title="Python 操作 Redis"></a>Python 操作 Redis</h3><p>Python 中访问 Redis 可以通过redis-py软件包进行。类似于 PyMongo, 也是需要先创建一个 Redis 客户端，如下代码基本操作:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import redis</span><br><span class="line">r = redis.Redis(host=&apos;127.0.0.1&apos;, port=6379,decode_responses=True)</span><br><span class="line">r.set(&apos;name&apos;, &apos;OK&apos;)</span><br><span class="line">print(r.get(&apos;name&apos;))</span><br></pre></td></tr></table></figure></p>
-
+        <h3 id="什么是MongoDB"><a href="#什么是MongoDB" class="headerlink" title="什么是MongoDB ?"></a>什么是MongoDB ?</h3><p>MongoDB 是一个基于分布式文件存储的开源数据库系统。由 C++ 语言编写。旨在为 WEB 应用提供可扩展的高性能数据存储解决方案。<a id="more"></a><br><img src="/2019/04/11/MongoDB简介与安装/mongodb.jpg" alt="logo"><br>MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。</p>
+<p>在高负载的情况下，添加更多的节点，可以保证服务器性能。</p>
+<p>MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
+<p>MongoDB 将数据存储为一个文档，数据结构由键值(key=&gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。<br><img src="/2019/04/11/MongoDB简介与安装/crud-annotated-document.jpg" alt="dataframe"></p>
+<ul>
+<li>主要特点<br>MongoDB的提供了一个面向文档存储，操作起来比较简单和容易。<br>你可以在MongoDB记录中设置任何属性的索引 (如：FirstName=”Sameer”,Address=”8 Gandhi Road”)来实现更快的排序。<br>你可以通过本地或者网络创建数据镜像，这使得MongoDB有更强的扩展性。<br>如果负载的增加（需要更多的存储空间和更强的处理能力） ，它可以分布在计算机网络中的其他节点上这就是所谓的分片。<br>Mongo支持丰富的查询表达式。查询指令使用JSON形式的标记，可轻易查询文档中内嵌的对象及数组。<br>MongoDb 使用update()命令可以实现替换完成的文档（数据）或者一些指定的数据字段 。<br>Mongodb中的Map/reduce主要是用来对数据进行批量处理和聚合操作。<br>Map和Reduce。Map函数调用emit(key,value)遍历集合中所有的记录，将key与value传给Reduce函数进行处理。<br>Map函数和Reduce函数是使用Javascript编写的，并可以通过db.runCommand或mapreduce命令来执行MapReduce操作。<br>GridFS是MongoDB中的一个内置功能，可以用于存放大量小文件。<br>MongoDB允许在服务端执行脚本，可以用Javascript编写某个函数，直接在服务端执行，也可以把函数的定义存储在服务端，下次直接调用即可。<br>MongoDB支持各种编程语言:RUBY，PYTHON，JAVA，C++，PHP，C#等多种语言。<br>MongoDB安装简单。</li>
+</ul>
+<h3 id="ubuntu16-04通过apt-get方式安装MongoDB"><a href="#ubuntu16-04通过apt-get方式安装MongoDB" class="headerlink" title="ubuntu16.04通过apt-get方式安装MongoDB"></a>ubuntu16.04通过apt-get方式安装MongoDB</h3>
       
     </div>
     <footer>
@@ -120,7 +125,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/11/Python操作redis/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://sirxy.github.io/2019/04/11/MongoDB简介与安装/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
